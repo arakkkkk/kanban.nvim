@@ -1,7 +1,8 @@
 local Markdown = {}
 
 function Markdown.parse(ops)
-	Markdown.list = {
+	local md = {}
+	md.list = {
 		a = {
 		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
 		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
@@ -22,12 +23,8 @@ function Markdown.parse(ops)
 		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
 		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
 		},
-		e = {
-		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
-		},
 	}
+	return md
 end
 
 return Markdown
