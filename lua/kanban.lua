@@ -24,10 +24,13 @@ function M.main()
 		local list = md.lists[i]
 		for j in pairs(list.tasks) do
 			local task = list.tasks[j]
-			local is_open_target = j <= M.state.max_task_show_int
-			M.fn.tasks.add(M, list.title, task, is_open_target)
+			M.fn.tasks.add(M, list.title, task)
+			if j <= M.state.max_task_show_int then
+				M.fn.tasks.open(M, task)
+			end
 		end
 	end
+
 end
 
 return M
