@@ -21,12 +21,4 @@ function Utils.tablelength(T)
 	return count
 end
 
-function Utils.get_show_task_int(kanban)
-	local list_heihgt = kanban.items.lists[1].buf_conf.height
-	local task_area_height = list_heihgt - 4 - 2
-	local task_height = kanban.ops.layout.task_height + 2
-  local show_task_height = task_area_height / task_height
-	return show_task_height
-end
-
 return Utils

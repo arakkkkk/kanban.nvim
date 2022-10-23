@@ -3,7 +3,7 @@ local M = {}
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.fn = require("kanban.fn")
-	M.state = require("kanban.state").init()
+	M.state = require("kanban.state").init(M)
 	vim.api.nvim_create_user_command("Kanban", M.main, {})
 end
 
@@ -19,18 +19,13 @@ function M.main()
 		M.fn.lists.add(M, md.lists[i].title)
 	end
 
-	M.state.max_task_show_int = require("kanban.utils").get_show_task_int(M)
-
 	-- create task panel
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
 		for j in pairs(list.tasks) do
-			if j <= M.state.max_task_show_int then
-				local task = list.tasks[j]
-				M.fn.tasks.add(M, list.title, task)
-			else
-				break
-			end
+			local task = list.tasks[j]
+			local is_open_target = j <= M.state.max_task_show_int
+			M.fn.tasks.add(M, list.title, task, is_open_target)
 		end
 	end
 end

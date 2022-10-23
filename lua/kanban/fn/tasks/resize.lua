@@ -1,14 +1,16 @@
 local M = {}
 function M.resize(kanban)
-	local a
-	-- local lists = kanban.items.lists
-	-- local count_list = require("kanban.utils").tablelength(lists)
-	-- for i in pairs(lists) do
-	--   lists[i].buf_conf.row = kanban.ops.layout.y_margin + 4
-	--   lists[i].buf_conf.col = kanban.ops.layout.x_margin + ((kanban.items.kwindow.buf_conf.width / count_list) * (i - 1)) + 2
-	--   lists[i].buf_conf.width = (kanban.items.kwindow.buf_conf.width / count_list) - 4
-	--   vim.api.nvim_win_set_config(lists[i].win_id, lists[i].buf_conf)
-	-- end
+	for i in pairs(kanban.items.lists) do
+		local list = kanban.items.lists[i]
+		for j in pairs(list.tasks) do
+			local task = list.tasks[j]
+			if task.win_id ~= nil then
+	  		task.buf_conf.row = (list.buf_conf.row + 4) + (kanban.ops.layout.task_height + 2)*(j-1)
+	  		task.buf_conf.col = list.buf_conf.col + 2
+	  		task.buf_conf.width = list.buf_conf.width - 4
+	  		vim.api.nvim_win_set_config(task.win_id, task.buf_conf)
+	  	end
+		end
+	end
 end
 return M
-

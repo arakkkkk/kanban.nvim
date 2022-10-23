@@ -1,6 +1,6 @@
 local M = {}
 
-function M.move()
+function M.move_up()
   local task_int = M.state.selection.task_int
   local task_cursor_pos_int =  M.state.selection.task_cursor_pos_int
   vim.api.win_gotoid()

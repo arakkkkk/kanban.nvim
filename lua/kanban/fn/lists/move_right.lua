@@ -1,6 +1,6 @@
 local M = {}
 
-function M.move()
+function M.move_right()
 end
 
 return M

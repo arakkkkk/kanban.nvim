@@ -16,13 +16,6 @@ function M.add(kanban)
 		zindex = 1
 	}
 	vim.api.nvim_open_win(kanban.items.kwindow.buf_nr, true, kanban.items.kwindow.buf_conf)
-  vim.api.nvim_create_autocmd("BufWinLeave", {
-    once = true,
-    callback = function()
-      kanban.fn.kwindow.close(kanban)
-    end,
-  })
-
 end
 return M
 

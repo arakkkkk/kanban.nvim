@@ -4,7 +4,7 @@ function M.get_ops_laytout(options)
 	return {
 		x_margin = options.x_margin or 5,
 		y_margin = options.y_margin or 3,
-		task_height = options.task_height or 5,
+		task_height = options.task_height or 3,
 	}
 end
 

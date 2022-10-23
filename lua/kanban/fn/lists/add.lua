@@ -22,15 +22,9 @@ function M.add(kanban, title)
 	}
 
 	lists[#lists].win_id = vim.api.nvim_open_win(lists[#lists].buf_nr, true, lists[#lists].buf_conf)
+	kanban.fn.lists.map(kanban, lists[#lists])
 
   kanban.fn.lists.resize(kanban)
-
-  vim.api.nvim_create_autocmd("BufWinLeave", {
-    once = true,
-    callback = function()
-      kanban.fn.lists.close(kanban)
-    end,
-  })
 end
 return M
 
