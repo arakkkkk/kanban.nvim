@@ -1,8 +1,8 @@
-local Markdown = {}
+local M = {}
 
-function Markdown.parse(ops)
-	local md = {}
-	md.list = {
+function M.parser(ops)
+	local lists = {}
+	lists = {
 		a = {
 		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
 		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
@@ -24,8 +24,9 @@ function Markdown.parse(ops)
 		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
 		},
 	}
-	return md
+	return lists
 end
 
 
-return Markdown
+return M
+
