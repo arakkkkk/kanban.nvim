@@ -1,7 +1,7 @@
 local Utils = {}
 
 function Utils.buf_delete(kanban)
-  local list = kanban.panels.list
+  local list = kanban.items.list
 
   local function bd(n)
     vim.cmd.bdelete(n)
@@ -10,7 +10,7 @@ function Utils.buf_delete(kanban)
   for i = 1 , #list do
     pcall(bd, list[i])
   end
-  pcall(vim.cmd.bdelete, kanban.panels.kanban)
+  pcall(vim.cmd.bdelete, kanban.items.kwindow)
 end
 
 function Utils.tablelength(T)

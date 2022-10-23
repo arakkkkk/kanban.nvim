@@ -1,29 +1,13 @@
 local Markdown = {}
 
-function Markdown.parse(ops)
+function Markdown.parser(ops)
 	local md = {}
-	md.list = {
-		a = {
-		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
-		},
-		b = {
-		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
-		},
-		c = {
-		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
-		},
-		d = {
-		  { title = "1", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "2", desc = "desc", due = "yyyy/mm/dd" },
-		  { title = "3", desc = "desc", due = "yyyy/mm/dd" },
-		},
-	}
+	md.lists = require("kanban.parser.lists_parser").parser(ops)
+	for i in pairs(md.lists) do
+		local task = require("kanban.parser.tasks_parser").parser(ops, md.lists[i])
+		md.lists[#md.lists].tasks = {}
+		md.lists[#md.lists].tasks[#md.lists[#md.lists].tasks] = task
+	end
 	return md
 end
 
