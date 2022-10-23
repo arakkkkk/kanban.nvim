@@ -5,9 +5,10 @@ function M.add(kanban, title)
 
 	lists[#lists+1] = {
 	  title = title,
+	  tasks = {}
 	}
 	lists[#lists].buf_nr = vim.api.nvim_create_buf(false, "nomodeline")
-	vim.api.nvim_buf_set_lines(lists[#lists].buf_nr, 0, -1, true, {title})
+	vim.api.nvim_buf_set_lines(lists[#lists].buf_nr, 0, -1, true, {"","  "..title})
 
 	lists[#lists].buf_conf = {
 		relative = "editor",
@@ -17,7 +18,7 @@ function M.add(kanban, title)
 		height = kanban.items.kwindow.buf_conf.height - 6,
 		border = "rounded",
 		style = "minimal",
-		zindex = 2 + #lists
+		zindex = 20
 	}
 
 	lists[#lists].win_id = vim.api.nvim_open_win(lists[#lists].buf_nr, true, lists[#lists].buf_conf)
