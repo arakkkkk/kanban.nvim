@@ -1,7 +1,6 @@
 local M = {}
 
 function M.map(kanban, list)
-
 	vim.keymap.set("n", ":q<cr>", function()
 		kanban.fn.kwindow.close(kanban)
 		kanban.fn.lists.close_all(kanban)

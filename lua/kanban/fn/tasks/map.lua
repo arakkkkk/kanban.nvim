@@ -1,6 +1,8 @@
 local M = {}
 
 function M.map(kanban, task)
+	vim.g.mapleader = " "
+
 	-- Swich mode
 	vim.keymap.set("i", "<C-c>", "<esc>", { silent = true, buffer = task.buf_nr })
 	vim.keymap.set("n", ":w<cr>", function()
@@ -67,11 +69,11 @@ function M.map(kanban, task)
 		kanban.fn.tasks.close_all(kanban)
 	end, { silent = true, buffer = task.buf_nr })
 
-	-- edit task
-	-- vim.keymap.set("i", "<er>", function()
-	-- 	kanban.fn.tasks.take.right(kanban)
-	-- end, { silent = true, buffer = task.buf_nr })
-	--
+	-- List function
+	vim.keymap.set("n", "<leader>lr", function()
+		kanban.fn.lists.rename(kanban, task)
+	end, { silent = true, buffer = task.buf_nr })
+
 	-- delete
 	vim.keymap.set("n", "<C-o>", "k", { silent = true, buffer = task.buf_nr })
 end
