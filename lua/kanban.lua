@@ -14,10 +14,10 @@ function M.kanban_open()
 	for i in pairs(M.ops.kanban_md_path) do
 		print("[" .. i .. "] " .. M.ops.kanban_md_path[i])
 	end
-	local md_path_index = vim.fn.input("Select -> ")
-	if not M.ops.kanban_md_path[md_path_index] then
-		md_path_index = 1
-	end
+	local md_path_index = tonumber(vim.fn.input("Select -> "))
+	-- if not M.ops.kanban_md_path[md_path_index] then
+	-- 	md_path_index = 1
+	-- end
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 
