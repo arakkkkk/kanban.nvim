@@ -5,6 +5,7 @@ function M.map(kanban, task)
 	vim.keymap.set("i", "<C-c>", "<esc>", { silent = true, buffer = task.buf_nr })
 	vim.keymap.set("n", ":w<cr>", function()
 		kanban.fn.tasks.save(kanban)
+		kanban.markdown.writer.write(kanban, kanban.kanban_md_path)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- Task movement

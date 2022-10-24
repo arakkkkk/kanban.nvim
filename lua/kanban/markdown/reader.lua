@@ -23,7 +23,7 @@ function M.read(kanban, md_path)
 		local pat_head = list_head .. "(.*)"
 		local pat_title = regexp(title_head) .. regexp(title_style)
 		local pat_due = regexp(due_head) .. regexp(due_style)
-		local pat_tag = regexp(due_head) .. regexp(tag_style)
+		local pat_tag = regexp(tag_head) .. regexp(tag_style)
 
 		-- List
 		if string.match(line, "^" .. pat_head .. "$") then

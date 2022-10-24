@@ -1,88 +1,84 @@
-
 ## list1
+- [ ] [[aaaaaaaaa]]
+#tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
-
-- [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
-#tagtag
 
 ## list2
+- [ ] [[aaaaaaaaa]]
+#tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
-
-- [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
-#tagtag
 
 ## list3
+- [ ] [[aaaaaaaaa]]
+#tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
-
-- [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
-#tagtag
 
 ## list4
+- [ ] [[aaaaaaaaa]]
+#tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
 - [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
 #tagtag
+@{yyyy/mm/dd}
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag

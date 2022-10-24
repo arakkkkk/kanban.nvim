@@ -4,7 +4,6 @@ function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.state = require("kanban.state").init(M)
 	M.fn = require("kanban.fn")
-	M.parser = require("kanban.parser")
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
 
@@ -20,7 +19,8 @@ function M.kanban_open()
 	-- 	md_path_index = 1
 	-- end
 	local md_path_index = 1
-	local md = M.markdown.reader.read(M, M.ops.kanban_md_path[md_path_index])
+	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
+	local md = M.markdown.reader.read(M, M.kanban_md_path)
 
 	-- create window panel
 	M.fn.kwindow.add(M)
@@ -40,7 +40,9 @@ function M.kanban_open()
 			M.fn.tasks.add(M, i, task, "bottom", open_bool)
 		end
 	end
-	vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
+	-- if #M.items.lists > 0 then
+		-- vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
+	-- end
 end
 
 return M
