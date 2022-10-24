@@ -27,7 +27,7 @@ function M.kanban_open()
 	-- create list panel
 	M.items.lists = {}
 	for i in pairs(md.lists) do
-		M.fn.lists.add(M, md.lists[i].title)
+		M.fn.lists.add(M, md.lists[i].title, false)
 	end
 
 	-- create task panel

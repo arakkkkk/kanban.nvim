@@ -73,6 +73,9 @@ function M.map(kanban, task)
 	vim.keymap.set("n", "<leader>lr", function()
 		kanban.fn.lists.rename(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
+	vim.keymap.set("n", "<leader>la", function()
+		kanban.fn.lists.add(kanban, "List", true)
+	end, { silent = true, buffer = task.buf_nr })
 
 	-- delete
 	vim.keymap.set("n", "<C-o>", "k", { silent = true, buffer = task.buf_nr })
