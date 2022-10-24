@@ -1,18 +1,25 @@
 local M = {}
 
 function M.get_ops_laytout(options)
+	if options.layout == nil then
+		options.layout = {}
+	end
 	return {
-		x_margin = options.x_margin or 5,
-		y_margin = options.y_margin or 3,
-		task_height = options.task_height or 3,
+		x_margin = options.layout.x_margin or 5,
+		y_margin = options.layout.y_margin or 3,
+		task_height = options.layout.task_height or 3,
 	}
 end
 
 function M.get_ops_markdown(options)
+	if options.markdown == nil then
+		options.markdown = {}
+	end
 	return {
-		-- x_margin = options.x_margin or 10,
-		-- y_margin = options.y_margin or 6,
-		-- list_width = options.list_width or 40,
+		list = options.markdown.list or "## <list>",
+		title = options.markdown.title or "- [ ] [[<title>]]",
+		due = options.markdown.due or "@{<due>}",
+		tag = options.markdown.tag or "#<tag>",
 	}
 end
 

@@ -2,11 +2,16 @@ local M = {}
 -- Absolute path
 function M.add(kanban, list_num, task, add_position, open_bool)
 	local target_list
-	if list_num == nil then	
+	if list_num == nil then
 		local focus = kanban.fn.tasks.utils.get_focus(kanban)
 		target_list = kanban.items.lists[focus.list_num]
 	else
 		target_list = kanban.items.lists[list_num]
+	end
+
+	-- Create new task by template (option.markdown)
+	if task == nil then
+		task = kanban.fn.tasks.utils.create_blank_task(kanban)
 	end
 
 	local tasks = target_list.tasks
@@ -27,7 +32,7 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 	if add_position == "top" then
 		table.insert(tasks, 1, task)
 	elseif add_position == "bottom" then
-		table.insert(tasks, #tasks+1, task)
+		table.insert(tasks, #tasks + 1, task)
 	else
 		assert(false)
 	end
@@ -36,8 +41,12 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 		return
 	end
 	kanban.fn.tasks.open(kanban, task)
-	kanban.fn.tasks.move.bottom(kanban)
+	vim.fn.win_gotoid(task.win_id)
 
-
+	if add_position == "top" then
+		kanban.fn.tasks.move.top(kanban)
+	elseif add_position == "bottom" then
+		kanban.fn.tasks.move.bottom(kanban)
+	end
 end
 return M

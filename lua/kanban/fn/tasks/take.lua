@@ -5,10 +5,11 @@ function M.left(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
 	if focus.list_num == 1 then
-	  return
+		return
 	end
-	local previous_list = kanban.items.lists[focus.task_num-1]
-	M.fn.tasks.add(kanban, previous_list.title, task, "bottom")
+	local clone_task = require("kanban.utils").deepcopy(focused_task)
+	kanban.fn.tasks.delete(kanban, focused_task)
+	kanban.fn.tasks.add(kanban, focus.list_num - 1, clone_task, kanban.ops.move_position, true)
 end
 
 function M.right(kanban)
@@ -16,11 +17,10 @@ function M.right(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
 	if focus.list_num == #kanban.items.lists then
-	  return
+		return
 	end
-
+	local clone_task = require("kanban.utils").deepcopy(focused_task)
+	kanban.fn.tasks.delete(kanban, focused_task)
+	kanban.fn.tasks.add(kanban, focus.list_num + 1, clone_task, kanban.ops.move_position, true)
 end
 return M
-
-
-

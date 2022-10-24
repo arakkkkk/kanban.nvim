@@ -1,12 +1,12 @@
 local M = {}
 
-function M.task()
-	return {
-		title="",
-		tag="#",
-		due="@",
-	}
-end
+-- function M.task()
+-- 	return {
+-- 		"- [ ] [[test]]",
+-- 		"    # ",
+-- 		"    @ ",
+-- 	}
+-- end
 
 
 return M

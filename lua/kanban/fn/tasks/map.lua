@@ -30,13 +30,16 @@ function M.map(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- delete task
-	vim.keymap.set("n", "d", function()
+	vim.keymap.set("n", "D", function()
 		kanban.fn.tasks.delete(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- create task
 	vim.keymap.set("n", "o", function()
-		kanban.fn.tasks.add(kanban, nil, task, "bottom", true)
+		kanban.fn.tasks.add(kanban, nil, nil, "bottom", true)
+	end, { silent = true, buffer = task.buf_nr })
+	vim.keymap.set("n", "O", function()
+		kanban.fn.tasks.add(kanban, nil, nil, "top", true)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- close window
@@ -50,6 +53,15 @@ function M.map(kanban, task)
 		kanban.fn.lists.close_all(kanban)
 		kanban.fn.tasks.close_all(kanban)
 	end, { silent = true, buffer = task.buf_nr })
+
+	-- edit task
+	-- vim.keymap.set("i", "<er>", function()
+	-- 	kanban.fn.tasks.take.right(kanban)
+	-- end, { silent = true, buffer = task.buf_nr })
+	--
+	-- delete
+	vim.keymap.set("n", "<C-o>", "k", { silent = true, buffer = task.buf_nr })
+
 end
 
 return M

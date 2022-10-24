@@ -12,6 +12,8 @@ M.take = require(ap .. "tasks.take")
 M.delete = require(ap .. "tasks.delete").delete
 M.resize = require(ap .. "tasks.resize").resize
 M.map = require(ap .. "tasks.map").map
+M.save = require(ap .. "tasks.map").save
+M.edit = require(ap .. "tasks.map").edit
 M.utils = require(ap .. "tasks.utils")
 return M
 
