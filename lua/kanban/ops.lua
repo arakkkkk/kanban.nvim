@@ -25,6 +25,14 @@ function M.get_ops_markdown(options)
 		due_style = options.markdown.due_style or "{<due>}",
 		tag_head = options.markdown.tag_head or "#",
 		tag_style = options.markdown.tag_style or "<tag>",
+		header = {
+			"---",
+			"",
+			"kanban-plugin: basic",
+			"",
+			"---",
+		},
+		footer = {},
 	}
 end
 

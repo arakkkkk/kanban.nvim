@@ -12,6 +12,11 @@ function M.write(kanban, md_path)
 	local tag_head = kanban.ops.markdown.tag_head
 	local tag_style = kanban.ops.markdown.tag_style
 
+	-- Header
+	for i in pairs(kanban.ops.markdown.header) do
+		f:write(kanban.ops.markdown.header[i] .. "\n")
+	end
+
 	-- List
 	for i in pairs(kanban.items.lists) do
 		local list = kanban.items.lists[i]
@@ -37,6 +42,12 @@ function M.write(kanban, md_path)
 			end
 		end
 	end
+
+	-- Footer
+	for i in pairs(kanban.ops.markdown.footer) do
+		f:write(kanban.ops.markdown.footer[i] .. "\n")
+	end
+
 end
 
 return M

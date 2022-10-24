@@ -1,3 +1,8 @@
+---
+
+kanban-plugin: basic
+
+---
 
 ## list1
 
