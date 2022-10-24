@@ -11,14 +11,13 @@ function M.kanban_open()
 	M.items = {}
 	M.items.kwindow = {}
 	M.markdown = require("kanban.markdown")
-	-- for i in pairs(M.ops.kanban_md_path) do
-	-- 	print("[" .. i .. "] " .. M.ops.kanban_md_path[i])
-	-- end
-	-- local md_path_index = vim.fn.input("Select -> ")
-	-- if not M.ops.kanban_md_path[md_path_index] then
-	-- 	md_path_index = 1
-	-- end
-	local md_path_index = 1
+	for i in pairs(M.ops.kanban_md_path) do
+		print("[" .. i .. "] " .. M.ops.kanban_md_path[i])
+	end
+	local md_path_index = vim.fn.input("Select -> ")
+	if not M.ops.kanban_md_path[md_path_index] then
+		md_path_index = 1
+	end
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 
@@ -34,15 +33,19 @@ function M.kanban_open()
 	-- create task panel
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
-		for j in pairs(list.tasks) do
-			local task = list.tasks[j]
-			local open_bool = j <= M.state.max_task_show_int
-			M.fn.tasks.add(M, i, task, "bottom", open_bool)
+		if #list.tasks == 0 then
+			M.fn.tasks.add(M, i, nil, "bottom", true)
+		else
+			for j in pairs(list.tasks) do
+				local task = list.tasks[j]
+				local open_bool = j <= M.state.max_task_show_int
+				M.fn.tasks.add(M, i, task, "bottom", open_bool)
+			end
 		end
 	end
-	-- if #M.items.lists > 0 then
-		-- vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
-	-- end
+	if #M.items.lists > 0 then
+		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
+	end
 end
 
 return M

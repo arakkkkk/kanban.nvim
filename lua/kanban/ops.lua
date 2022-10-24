@@ -39,9 +39,9 @@ end
 function M.get_ops(options)
 	local ops = {}
 	ops.kanban_md_path = {
-		"/Users/Kouiti/local_file/practice/kanban.nvim/test.md",
-		"/Users/Kouiti/local_file/practice/kanban.nvim/test.md",
-		"/Users/Kouiti/local_file/practice/kanban.nvim/test.md",
+		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
+		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
+		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
 	}
 	ops.layout = M.get_ops_laytout(options)
 	ops.markdown = M.get_ops_markdown(options)
