@@ -1,14 +1,8 @@
 local M = {}
 -- Absolute path
-function M.add(kanban, list_title, task)
-	local target_list
-	for i in pairs(kanban.items.lists) do
-		local list = kanban.items.lists[i]
-		if list.title == list_title then
-			target_list = list
-			break
-		end
-	end
+function M.add(kanban, list_num, task, add_position)
+	assert(add_position == "top" or add_position == "bottom")
+	local target_list = kanban.items.lists[list_num]
 
 	local tasks = target_list.tasks
 	tasks[#tasks + 1] = task

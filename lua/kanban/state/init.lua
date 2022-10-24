@@ -10,11 +10,6 @@ function M.init(kanban)
 	end
 
 	return {
-		selection = {
-			row_int = 1,
-			col_int = 1,
-		},
-		top_task_list = { 0, 0, 0, 0, 0, 0, 0 },
 		max_task_show_int = get_max_task_show_int(kanban),
 	}
 end

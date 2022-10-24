@@ -1,6 +1,5 @@
 local M = {}
 
-
 function M.delete(kanban, target_task)
   -- local focus_win_id
   -- local remove_task_index
@@ -37,7 +36,7 @@ function M.delete(kanban, target_task)
   -- Create blank task if no task in list
   if #focused_list.tasks == 0 then
     local blank_task = {title="", desc="", due=""}
-		kanban.fn.tasks.add(kanban, focused_list.title, blank_task)
+		kanban.fn.tasks.add(kanban, focus.list_num, blank_task)
 		kanban.fn.tasks.open(kanban, blank_task)
   end
 

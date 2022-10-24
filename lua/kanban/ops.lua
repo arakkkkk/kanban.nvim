@@ -20,6 +20,8 @@ function M.get_ops(options)
 	local ops = {}
 	ops.layout = M.get_ops_laytout(options)
 	ops.markdown = M.get_ops_markdown(options)
+	ops.add_position = options.add_position or "bottom"
+	ops.move_position = options.move_position or "top"
 	return ops
 end
 

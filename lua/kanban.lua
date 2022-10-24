@@ -24,7 +24,7 @@ function M.main()
 		local list = md.lists[i]
 		for j in pairs(list.tasks) do
 			local task = list.tasks[j]
-			M.fn.tasks.add(M, list.title, task)
+			M.fn.tasks.add(M, i, task, "bottom")
 			if j <= M.state.max_task_show_int then
 				M.fn.tasks.open(M, task)
 			end
