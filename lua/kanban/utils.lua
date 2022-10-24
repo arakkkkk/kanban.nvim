@@ -1,5 +1,12 @@
 local Utils = {}
 
+function Utils.to_regexp(regrep)
+	regrep = string.gsub(regrep, "%[", "%%[")
+	regrep = string.gsub(regrep, "%]", "%%]")
+	regrep = string.gsub(regrep, "<.*>", "(.*)")
+	return regrep
+end
+
 function Utils.buf_delete(kanban)
 	local list = kanban.items.list
 

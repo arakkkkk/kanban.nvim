@@ -5,22 +5,29 @@ function M.setup(options)
 	M.state = require("kanban.state").init(M)
 	M.fn = require("kanban.fn")
 	M.parser = require("kanban.parser")
-	vim.api.nvim_create_user_command("Kanban", M.main, {})
+	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
 
-function M.main()
+function M.kanban_open()
 	M.items = {}
 	M.items.kwindow = {}
-	-- M.markdown = require("kanban.markdown")
-	-- local md = M.markdown.reader.read(M)
-	local md = M.parser.parse(M.ops)
-	M.items = md
+	M.markdown = require("kanban.markdown")
+	-- for i in pairs(M.ops.kanban_md_path) do
+	-- 	print("[" .. i .. "] " .. M.ops.kanban_md_path[i])
+	-- end
+	-- local md_path_index = vim.fn.input("Select -> ")
+	-- if not M.ops.kanban_md_path[md_path_index] then
+	-- 	md_path_index = 1
+	-- end
+	local md_path_index = 1
+	local md = M.markdown.reader.read(M, M.ops.kanban_md_path[md_path_index])
 
+	-- create window panel
 	M.fn.kwindow.add(M)
 
 	-- create list panel
-	-- M.items.lists = {}
-	for i in pairs(M.items.lists) do
+	M.items.lists = {}
+	for i in pairs(md.lists) do
 		M.fn.lists.add(M, md.lists[i].title)
 	end
 
@@ -34,8 +41,6 @@ function M.main()
 		end
 	end
 	vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
-
-
 end
 
 return M
