@@ -19,8 +19,10 @@ function M.move_right(kanban, task)
               if notnil_count == selected_row_int or
                 k == next_list.tasks then
                 vim.fn.win_gotoid(next_list.tasks[k].win_id)
+                break
               end
             end
+            vim.fn.win_gotoid(next_list.tasks[#next_list.tasks].win_id)
           end
         end
       end

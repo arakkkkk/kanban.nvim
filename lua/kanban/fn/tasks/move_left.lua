@@ -1,6 +1,5 @@
 local M = {}
 
-
 function M.move_left(kanban, task)
   local selected_row_int
   for i in pairs(kanban.items.lists) do
@@ -20,8 +19,10 @@ function M.move_left(kanban, task)
               if notnil_count == selected_row_int or
                 k == prev_list.tasks then
                 vim.fn.win_gotoid(prev_list.tasks[k].win_id)
+                break
               end
             end
+            vim.fn.win_gotoid(prev_list.tasks[#prev_list.tasks].win_id)
           end
         end
       end

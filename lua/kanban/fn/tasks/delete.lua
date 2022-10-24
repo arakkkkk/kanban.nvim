@@ -1,36 +1,56 @@
 local M = {}
 
-function M.delete(kanban, task)
-  local focus_win_id
-  local remove_task_index
-  for i in pairs(kanban.items.lists) do
-    local is_focused_list = false
-    local list = kanban.items.lists[i]
-    for j in pairs(list.tasks) do
-      if list.tasks[j].win_id == task.win_id then
-        kanban.fn.tasks.close(list.tasks[j])
-        remove_task_index = j
-        if j > 1 then
-          focus_win_id = list.tasks[j-1].win_id
-        else
-          focus_win_id = list.tasks[1].win_id
-        end
-        is_focused_list = true
-      end
-      if is_focused_list
-        and j > 1
-        and j ~= remove_task_index
-        and list.tasks[j-1].win_id ~= nil
-        and list.tasks[j].win_id == nil then
-        kanban.fn.tasks.open(kanban, list.tasks[j])
+
+function M.delete(kanban, target_task)
+  -- local focus_win_id
+  -- local remove_task_index
+  local focus = kanban.fn.tasks.utils.get_focus(kanban)
+  local focused_list = kanban.items.lists[focus.list_num]
+  local focused_tasks = focused_list.tasks
+  kanban.fn.tasks.close(target_task)
+  table.remove(focused_tasks, focus.task_num);
+
+  -- Open new teak in blank area
+  local is_opend = false
+  for i = focus.task_num, #focused_tasks do
+    if focused_tasks[i].win_id == nil then
+      kanban.fn.tasks.open(kanban, focused_tasks[i])
+      is_opend = true
+      break
+    end
+  end
+  if not is_opend then
+    for i in pairs(focused_list.tasks) do
+      if focused_list.tasks[i].win_id ~= nil and i == 1 then
+        break
+      elseif focused_list.tasks[i].win_id then
+        kanban.fn.tasks.open(kanban, focused_list.tasks[i-1])
+        is_opend = true
         break
       end
     end
-    if remove_task_index ~= nil then
-      vim.fn.win_gotoid(focus_win_id)
-      table.remove(list.tasks, remove_task_index);
-      break
-    end
+  end
+  if not is_opend then
+    kanban.fn.tasks.resize(kanban, focus.list_num)
+  end
+
+  -- Create blank task if no task in list
+  if #focused_list.tasks == 0 then
+    local blank_task = {title="", desc="", due=""}
+		kanban.fn.tasks.add(kanban, focused_list.title, blank_task)
+		kanban.fn.tasks.open(kanban, blank_task)
+  end
+
+  -- Swich focus window
+  if #focused_tasks == 1 then
+    -- only one task
+    vim.fn.win_gotoid(focused_tasks[1].win_id)
+  elseif focus.task_num -1 == #focused_tasks then
+    -- in bottom
+    vim.fn.win_gotoid(focused_tasks[focus.task_num-1].win_id)
+  else
+    -- else
+    vim.fn.win_gotoid(focused_tasks[focus.task_num].win_id)
   end
 end
 
