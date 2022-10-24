@@ -4,16 +4,42 @@ function M.top(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_tasks = focused_list.tasks
-	local top_task = focused_tasks[1]
-	vim.fn.win_gotoid(top_task)
+	-- close all task window
+	for i in pairs(focused_tasks) do
+		local task = focused_tasks[i]
+		if task.win_id ~= nil then
+			kanban.fn.tasks.close(task)
+		end
+	end
+	-- reopen task window
+	for i in pairs(focused_tasks) do
+		if i >= kanban.state.max_task_show_int then break end
+		local open_task_index = i
+		kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
+	end
+	-- focus top task
+	vim.fn.win_gotoid(focused_tasks[1].win_id)
 end
 
 function M.bottom(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_tasks = focused_list.tasks
-	local top_task = focused_tasks[#focused_tasks]
-	vim.fn.win_gotoid(top_task)
+	-- close all task window
+	for i in pairs(focused_tasks) do
+		local task = focused_tasks[i]
+		if task.win_id ~= nil then
+			kanban.fn.tasks.close(task)
+		end
+	end
+	-- reopen task window
+	for i in pairs(focused_tasks) do
+		if i >= kanban.state.max_task_show_int then break end
+		local open_task_index = #focused_tasks - i + 1
+		kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
+	end
+	-- focus top task
+	vim.fn.win_gotoid(focused_tasks[#focused_tasks].win_id)
 end
 
 function M.up(kanban)

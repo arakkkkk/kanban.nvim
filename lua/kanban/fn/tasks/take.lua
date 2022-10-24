@@ -8,7 +8,6 @@ function M.left(kanban)
 	  return
 	end
 	local previous_list = kanban.items.lists[focus.task_num-1]
-
 	M.fn.tasks.add(kanban, previous_list.title, task, "bottom")
 end
 

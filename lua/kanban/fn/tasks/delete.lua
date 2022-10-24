@@ -35,9 +35,9 @@ function M.delete(kanban, target_task)
 
   -- Create blank task if no task in list
   if #focused_list.tasks == 0 then
-    local blank_task = {title="", desc="", due=""}
-		kanban.fn.tasks.add(kanban, focus.list_num, blank_task)
-		kanban.fn.tasks.open(kanban, blank_task)
+    local blank_task = kanban.parser.template.task()
+		kanban.fn.tasks.add(kanban, focus.list_num, blank_task, "top", true)
+		-- kanban.fn.tasks.open(kanban, blank_task)
   end
 
   -- Swich focus window

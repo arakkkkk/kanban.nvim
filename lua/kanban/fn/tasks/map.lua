@@ -1,7 +1,6 @@
 local M = {}
 
 function M.map(kanban, task)
-
 	-- Task movement
 	vim.keymap.set("n", "L", function()
 		kanban.fn.tasks.take.right(kanban)
@@ -24,15 +23,20 @@ function M.map(kanban, task)
 		kanban.fn.tasks.move.left(kanban)
 	end, { silent = true, buffer = task.buf_nr })
 	vim.keymap.set("n", "gg", function()
-		kanban.fn.tasks.utils.move_top(kanban, task)
+		kanban.fn.tasks.move.top(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
 	vim.keymap.set("n", "G", function()
-		kanban.fn.tasks.utils.move_bottom(kanban, task)
+		kanban.fn.tasks.move.bottom(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- delete task
 	vim.keymap.set("n", "d", function()
 		kanban.fn.tasks.delete(kanban, task)
+	end, { silent = true, buffer = task.buf_nr })
+
+	-- create task
+	vim.keymap.set("n", "o", function()
+		kanban.fn.tasks.add(kanban, nil, task, "bottom", true)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- close window
@@ -46,7 +50,6 @@ function M.map(kanban, task)
 		kanban.fn.lists.close_all(kanban)
 		kanban.fn.tasks.close_all(kanban)
 	end, { silent = true, buffer = task.buf_nr })
-
 end
 
 return M
