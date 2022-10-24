@@ -11,12 +11,16 @@ end
 function M.main()
 	M.items = {}
 	M.items.kwindow = {}
+	-- M.markdown = require("kanban.markdown")
+	-- local md = M.markdown.reader.read(M)
 	local md = M.parser.parse(M.ops)
+	M.items = md
+
 	M.fn.kwindow.add(M)
 
 	-- create list panel
-	M.items.lists = {}
-	for i in pairs(md.lists) do
+	-- M.items.lists = {}
+	for i in pairs(M.items.lists) do
 		M.fn.lists.add(M, md.lists[i].title)
 	end
 

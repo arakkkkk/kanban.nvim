@@ -16,15 +16,23 @@ function M.get_ops_markdown(options)
 		options.markdown = {}
 	end
 	return {
+		header_path = "~/local_file/practice/kanban.nvim/lua/kanban/templates/header.md",
+		footer_path = "~/local_file/practice/kanban.nvim/lua/kanban/templates/footer.md",
 		list = options.markdown.list or "## <list>",
-		title = options.markdown.title or "- [ ] [[<title>]]",
-		due = options.markdown.due or "@{<due>}",
-		tag = options.markdown.tag or "#<tag>",
+		title_head = options.markdown.title_head or "- [ ]",
+		title_style = options.markdown.title_style or "[[<title>]]",
+		due_head = options.markdown.due_head or "@",
+		due_style = options.markdown.due_style or "{<due>}",
+		tag_head = options.markdown.tag_head or "#",
+		tag_style = options.markdown.tag_style or "<tag>",
 	}
 end
 
 function M.get_ops(options)
 	local ops = {}
+	ops.kanban_md_path = {
+		"~/local_file/practice/kanban.nvim/test.md"
+	}
 	ops.layout = M.get_ops_laytout(options)
 	ops.markdown = M.get_ops_markdown(options)
 	-- ops.add_position = options.add_position or "bottom"
