@@ -8,6 +8,12 @@ function M.map(kanban, task)
 	vim.keymap.set("n", "H", function()
 		kanban.fn.tasks.take.left(kanban)
 	end, { silent = true, buffer = task.buf_nr })
+	vim.keymap.set("n", "K", function()
+		kanban.fn.tasks.take.up(kanban)
+	end, { silent = true, buffer = task.buf_nr })
+	vim.keymap.set("n", "J", function()
+		kanban.fn.tasks.take.down(kanban)
+	end, { silent = true, buffer = task.buf_nr })
 
 	-- Navigatiion task
 	vim.keymap.set("n", "<C-j>", function()
