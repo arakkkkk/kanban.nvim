@@ -15,7 +15,13 @@ using packer
 ```
 use  'arakkkkk/kanban.nvim'
 
-require('kanban').setup({})
+require('kanban').setup({
+  kanban_md_path = {
+    "/path/to/kanban/markdown/path.md",
+    "/path/to/kanban/markdown/path.md",
+    "/path/to/kanban/markdown/path.md",
+  }
+})
 ```
 
 ## Setup
@@ -66,4 +72,6 @@ require("kanban").setup({
 | <space>lr   | Rename list.                         |
 | o           | Add task to bottom.                  |
 | O           | Add task to top.                     |
+| :w<CR>      | Save kanban.                         |
+| q           | Quit.                                |
 
