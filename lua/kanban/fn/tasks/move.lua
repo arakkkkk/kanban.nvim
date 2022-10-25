@@ -13,8 +13,9 @@ function M.top(kanban)
 		end
 	end
 	-- reopen task window
+	local max_task_show_int = kanban.fn.tasks.utils.get_max_task_show_int(kanban)
 	for i in pairs(focused_tasks) do
-		if i >= kanban.state.max_task_show_int then
+		if i >= max_task_show_int then
 			break
 		end
 		local open_task_index = i
@@ -37,8 +38,9 @@ function M.bottom(kanban)
 		end
 	end
 	-- reopen task window
+	local max_task_show_int = kanban.fn.tasks.utils.get_max_task_show_int(kanban)
 	for i in pairs(focused_tasks) do
-		if i >= kanban.state.max_task_show_int then
+		if i >= max_task_show_int then
 			break
 		end
 		local open_task_index = #focused_tasks - i + 1

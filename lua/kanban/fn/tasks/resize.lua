@@ -35,13 +35,13 @@ function M.resize(kanban, list_int)
 		for j in pairs(list.tasks) do
 			local task = list.tasks[j]
 			if task.win_id ~= nil then
-				task.buf_conf.width = list.buf_conf.width - 4
 				local end_row = (list.buf_conf.row + 4) + (kanban.ops.layout.task_height + 2) * task_show_count
 				local end_col = list.buf_conf.col + 2
-				-- animation(kanban, task, task.buf_conf.row, task.buf_conf.col, end_row, end_col)
+				task.buf_conf.width = list.buf_conf.width - 4
 				task.buf_conf.row = end_row
 				task.buf_conf.col = end_col
 				vim.api.nvim_win_set_config(task.win_id, task.buf_conf)
+				-- animation(kanban, task, task.buf_conf.row, task.buf_conf.col, end_row, end_col)
 				task_show_count = task_show_count + 1
 			end
 		end

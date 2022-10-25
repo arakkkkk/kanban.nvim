@@ -24,7 +24,7 @@ function M.create_blank_task(kanban)
 end
 
 function M.create_window_text(task)
-	local contents = {task.title}
+	local contents = { task.title }
 	for i in pairs(task.due) do
 		table.insert(contents, task.due[i])
 	end
@@ -32,6 +32,14 @@ function M.create_window_text(task)
 		table.insert(contents, task.tag[i])
 	end
 	return contents
+end
+
+function M.get_max_task_show_int(kanban)
+	local list_heihgt = kanban.items.lists[1].buf_conf.height
+	local task_area_height = list_heihgt - 4 - 2
+	local task_height = kanban.ops.layout.task_height + kanban.ops.layout.task_y_margin
+	local show_task_height = task_area_height / task_height
+	return show_task_height + 1
 end
 
 return M

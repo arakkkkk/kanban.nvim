@@ -7,6 +7,8 @@ function M.get_ops_laytout(options)
 	return {
 		x_margin = options.layout.x_margin or 5,
 		y_margin = options.layout.y_margin or 3,
+		list_x_margin = options.layout.list_x_margin or 2,
+		task_y_margin = options.layout.task_y_margin or 2,
 		task_height = options.layout.task_height or 3,
 	}
 end
@@ -38,8 +40,7 @@ function M.get_ops(options)
 	local ops = {}
 	ops.kanban_md_path = options.kanban_md_path or {
 		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
-		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
-		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
+		"/Users/kouiti/localfile/plug-nvim/kanban.nvim/template.md",
 	}
 	ops.layout = M.get_ops_laytout(options)
 	ops.markdown = M.get_ops_markdown(options)

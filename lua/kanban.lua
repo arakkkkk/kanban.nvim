@@ -2,7 +2,6 @@ local M = {}
 
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
-	M.state = require("kanban.state").init(M)
 	M.fn = require("kanban.fn")
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
@@ -33,6 +32,7 @@ function M.kanban_open()
 	-- create task panel
 	local animation = M.ops.animation
 	M.ops.animation = false
+	local max_task_show_int = M.fn.tasks.utils.get_max_task_show_int(M)
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
 		if #list.tasks == 0 then
@@ -40,7 +40,7 @@ function M.kanban_open()
 		else
 			for j in pairs(list.tasks) do
 				local task = list.tasks[j]
-				local open_bool = j <= M.state.max_task_show_int
+				local open_bool = j <= max_task_show_int
 				M.fn.tasks.add(M, i, task, "bottom", open_bool)
 			end
 		end
