@@ -8,7 +8,7 @@ Compatible with obsidian kanban.
 
 ## screenshots
 ![img_select_file](./doc/img_select_file.png)
-![img_kanban](./doc/img_kanban.png)
+![img_kanban2](./doc/img_kanban.png)
 
 ## Instration
 using packer
