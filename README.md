@@ -11,10 +11,14 @@ Compatible with obsidian kanban.
 ![img_kanban2](./doc/img_kanban.png)
 
 ## Instration
-using packer
+Using packer
 ```
 use  'arakkkkk/kanban.nvim'
 
+```
+Set up
+Please use [template](./template.md) for first kanban project.
+```
 require('kanban').setup({
   kanban_md_path = {
     "/path/to/kanban/markdown/path.md",

@@ -4,7 +4,7 @@ kanban-plugin: basic
 
 ---
 
-## list1
+## TODO
 
 - [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
@@ -26,7 +26,7 @@ kanban-plugin: basic
 @{yyyy/mm/dd}
 #tagtag
 
-## list2
+## Work in progress
 
 - [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
@@ -48,7 +48,7 @@ kanban-plugin: basic
 @{yyyy/mm/dd}
 #tagtag
 
-## list3
+## Done
 
 - [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
@@ -70,7 +70,7 @@ kanban-plugin: basic
 @{yyyy/mm/dd}
 #tagtag
 
-## list4
+## Archive
 
 - [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
