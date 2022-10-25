@@ -3,6 +3,8 @@ local M = {}
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.fn = require("kanban.fn")
+	M.theme = require("kanban.theme")
+	M.theme.init()
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
 
@@ -49,18 +51,6 @@ function M.kanban_open()
 		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
 	end
 	M.ops.animation = animation
-
-
-	-- vim.cmd 'hi KanbanBackground term=reverse cterm=reverse gui=reverse'
-	-- vim.fn.matchadd("KanbanBackground", "^@%{.+%}")
-	-- vim.cmd 'hi KanbanTitle term=reverse cterm=reverse gui=reverse'
-	vim.api.nvim_set_hl(0, "KanbanTitle", {fg="black", bg="black"})
-	vim.fn.matchadd("KanbanTitie", "aaaa")
-	vim.cmd 'hi KanbanDue term=reverse cterm=reverse gui=reverse'
-	vim.fn.matchadd("KanbanDue", "^@%{.+%}")
-	vim.cmd 'hi KanbanTag term=reverse cterm=reverse gui=reverse'
-	vim.fn.matchadd("KanbanTag", "^@%{.+%}")
-	-- vim.fn.matchdelete()
 end
 
 return M
