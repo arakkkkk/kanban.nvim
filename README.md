@@ -1,5 +1,6 @@
 # kanban.nvim
 > This is a project in development, if you have any requests, please add them to the issue
+
 Neovim kanban plugin.
 Manage task as a kanban boad in neovim.
 Task information is import and export by markdown file.
