@@ -7,6 +7,7 @@ function M.init()
 		local hc = hi_config[i]
 		vim.fn.matchadd(hc.name, hc.pattern)
 		vim.api.nvim_set_hl(0, hc.name, { fg = hc.fg, bg = hc.bg })
+		print(hc.name)
 	end
 end
 

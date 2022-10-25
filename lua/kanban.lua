@@ -3,8 +3,7 @@ local M = {}
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.fn = require("kanban.fn")
-	M.theme = require("kanban.theme")
-	M.theme.init()
+	-- M.theme = require("kanban.theme")
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
 
