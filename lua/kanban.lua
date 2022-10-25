@@ -31,6 +31,8 @@ function M.kanban_open()
 	end
 
 	-- create task panel
+	local animation = M.ops.animation
+	M.ops.animation = false
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
 		if #list.tasks == 0 then
@@ -46,6 +48,19 @@ function M.kanban_open()
 	if #M.items.lists > 0 then
 		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
 	end
+	M.ops.animation = animation
+
+
+	-- vim.cmd 'hi KanbanBackground term=reverse cterm=reverse gui=reverse'
+	-- vim.fn.matchadd("KanbanBackground", "^@%{.+%}")
+	-- vim.cmd 'hi KanbanTitle term=reverse cterm=reverse gui=reverse'
+	vim.api.nvim_set_hl(0, "KanbanTitle", {fg="black", bg="black"})
+	vim.fn.matchadd("KanbanTitie", "aaaa")
+	vim.cmd 'hi KanbanDue term=reverse cterm=reverse gui=reverse'
+	vim.fn.matchadd("KanbanDue", "^@%{.+%}")
+	vim.cmd 'hi KanbanTag term=reverse cterm=reverse gui=reverse'
+	vim.fn.matchadd("KanbanTag", "^@%{.+%}")
+	-- vim.fn.matchdelete()
 end
 
 return M

@@ -1,7 +1,7 @@
 local M = {}
 
 function M.top(kanban)
-  kanban.fn.tasks.save(kanban)
+	kanban.fn.tasks.save(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_tasks = focused_list.tasks
@@ -14,7 +14,9 @@ function M.top(kanban)
 	end
 	-- reopen task window
 	for i in pairs(focused_tasks) do
-		if i >= kanban.state.max_task_show_int then break end
+		if i >= kanban.state.max_task_show_int then
+			break
+		end
 		local open_task_index = i
 		kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
 	end
@@ -23,7 +25,7 @@ function M.top(kanban)
 end
 
 function M.bottom(kanban)
-  kanban.fn.tasks.save(kanban)
+	kanban.fn.tasks.save(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_tasks = focused_list.tasks
@@ -36,7 +38,9 @@ function M.bottom(kanban)
 	end
 	-- reopen task window
 	for i in pairs(focused_tasks) do
-		if i >= kanban.state.max_task_show_int then break end
+		if i >= kanban.state.max_task_show_int then
+			break
+		end
 		local open_task_index = #focused_tasks - i + 1
 		kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
 	end
@@ -45,7 +49,7 @@ function M.bottom(kanban)
 end
 
 function M.up(kanban)
-  kanban.fn.tasks.save(kanban)
+	kanban.fn.tasks.save(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
@@ -77,7 +81,7 @@ function M.up(kanban)
 end
 
 function M.down(kanban)
-  kanban.fn.tasks.save(kanban)
+	kanban.fn.tasks.save(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
@@ -109,7 +113,7 @@ function M.down(kanban)
 end
 
 function M.left(kanban)
-  kanban.fn.tasks.save(kanban)
+	kanban.fn.tasks.save(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
@@ -143,7 +147,7 @@ function M.left(kanban)
 end
 
 function M.right(kanban)
-  kanban.fn.tasks.save(kanban)
+	kanban.fn.tasks.save(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]

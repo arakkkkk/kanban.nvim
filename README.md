@@ -54,3 +54,13 @@ require("kanban").setup({
 })
 ```
 
+## Kaymaps
+
+| Key         | Action                               |
+|-------------|--------------------------------------|
+| <C-h/j/k/l> | Focus left/below/above/right task.   |
+| <S-h/j/k/l> | Move task to left/below/above/right. |
+| gg          | Focus top task in the list.          |
+| g           | Focus borrom task in the list.       |
+| <space>lr   | Edit list title                      |
+

@@ -45,6 +45,7 @@ function M.get_ops(options)
 	ops.markdown = M.get_ops_markdown(options)
 	-- ops.add_position = options.add_position or "bottom"
 	ops.move_position = options.move_position or "top"
+	ops.animation = options.animation or false
 	return ops
 end
 
