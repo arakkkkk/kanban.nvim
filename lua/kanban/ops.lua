@@ -36,19 +36,76 @@ function M.get_ops_markdown(options)
 	}
 end
 
+function M.get_ops_hl(options)
+	if options.hl == nil then
+		options.hl = {}
+	end
+	local C = require("kanban.theme.colors")
+	return {
+		{
+			name = "KanbanTitle",
+			ops = {
+				bg = "None",
+				fg = "None",
+				ctermbg = "None",
+				ctermfg = "None",
+				bold = true,
+			},
+		},
+		{
+			name = "ListTitle",
+			ops = {
+				bg = "None",
+				fg = "None",
+				ctermbg = "None",
+				ctermfg = "None",
+				bold = true,
+			},
+		},
+		{
+			name = "TaskTitle",
+			ops = {
+				bg = "None",
+				fg = "None",
+				ctermbg = "None",
+				ctermfg = "None",
+				bold = true,
+			},
+		},
+		{
+			name = "TaskDue",
+			ops = {
+				bg = "None",
+				fg = C.blue_4,
+				ctermbg = "None",
+				ctermfg = 25,
+			},
+		},
+		{
+			name = "TaskTag",
+			ops = {
+				bg = "None",
+				fg = C.gold,
+				ctermbg = "None",
+				ctermfg = 221,
+			},
+		},
+	}
+end
+
 function M.get_ops(options)
 	local ops = {}
-	ops.kanban_md_path = options.kanban_md_path or {
-		"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
-		"/Users/kouiti/localfile/plug-nvim/kanban.nvim/template.md",
-	}
+	ops.kanban_md_path = options.kanban_md_path
+		or {
+			"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
+			"/Users/kouiti/localfile/plug-nvim/kanban.nvim/template.md",
+		}
 	ops.layout = M.get_ops_laytout(options)
 	ops.markdown = M.get_ops_markdown(options)
-	-- ops.add_position = options.add_position or "bottom"
+	ops.hl = M.get_ops_hl(options)
 	ops.move_position = options.move_position or "top"
 	ops.animation = options.animation or false
 	return ops
 end
-
 
 return M

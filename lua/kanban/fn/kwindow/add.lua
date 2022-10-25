@@ -15,6 +15,8 @@ function M.add(kanban)
 		style = "minimal",
 		zindex = 1
 	}
+	local hi = vim.api.nvim_buf_add_highlight
+	hi(kanban.items.kwindow.buf_nr, 0, "ListTitle", 1, 0, -1)
 	vim.api.nvim_open_win(kanban.items.kwindow.buf_nr, true, kanban.items.kwindow.buf_conf)
 end
 return M

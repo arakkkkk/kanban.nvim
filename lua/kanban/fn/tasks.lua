@@ -15,6 +15,7 @@ M.map = require(ap .. "tasks.map").map
 M.save = require(ap .. "tasks.save").save
 M.edit = require(ap .. "tasks.edit").edit
 M.autocmd = require(ap .. "tasks.autocmd").autocmd
+M.highlight = require(ap .. "tasks.highlight").highlight
 M.utils = require(ap .. "tasks.utils")
 return M
 

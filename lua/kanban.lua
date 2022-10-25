@@ -3,7 +3,8 @@ local M = {}
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.fn = require("kanban.fn")
-	-- M.theme = require("kanban.theme")
+	M.theme = require("kanban.theme")
+	M.theme.init(M)
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
 
@@ -15,9 +16,9 @@ function M.kanban_open()
 		print("[" .. i .. "] " .. M.ops.kanban_md_path[i])
 	end
 	local md_path_index = tonumber(vim.fn.input("Select -> "))
-	-- if not M.ops.kanban_md_path[md_path_index] then
-	-- 	md_path_index = 1
-	-- end
+	if not M.ops.kanban_md_path[md_path_index] then
+		md_path_index = 1
+	end
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 
