@@ -43,6 +43,18 @@ function M.get_ops_hl(options)
 	local C = require("kanban.theme.colors")
 	return {
 		{
+			name = "KanbanFloat",
+			ops = {},
+		},
+		{
+			name = "ListFloat",
+			ops = {},
+		},
+		{
+			name = "TaskFloat",
+			ops = {},
+		},
+		{
 			name = "KanbanTitle",
 			ops = {
 				bg = "None",
@@ -78,7 +90,7 @@ function M.get_ops_hl(options)
 				bg = "None",
 				fg = C.blue_4,
 				ctermbg = "None",
-				-- ctermfg = 25,
+				ctermfg = 25,
 			},
 		},
 		{
@@ -97,6 +109,7 @@ function M.get_ops(options)
 	local ops = {}
 	ops.kanban_md_path = options.kanban_md_path
 		or {
+			"~/local_file/practice/kanban.nvim/template.md",
 			"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",
 			"/Users/kouiti/localfile/plug-nvim/kanban.nvim/template.md",
 		}

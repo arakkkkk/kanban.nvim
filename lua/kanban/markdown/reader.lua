@@ -1,6 +1,7 @@
 local M = {}
 
 function M.read(kanban, md_path)
+	md_path = string.gsub(md_path, "^~", os.getenv("HOME"))
 	io.input(md_path)
 	local md = {}
 	md.lists = {}

@@ -28,8 +28,7 @@ function M.add(kanban, title, with_blank_task_bool)
 		local task = kanban.fn.tasks.add(kanban, #lists, nil, "top", true)
 		lists[#lists].tasks[1] = task
 	end
-	local hi = vim.api.nvim_buf_add_highlight
-	hi(lists[#lists].buf_nr, 0, "ListTitle", 1, 0, -1)
+	kanban.fn.lists.highlight(kanban, lists[#lists])
 	kanban.fn.lists.resize(kanban)
 end
 return M
