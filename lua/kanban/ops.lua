@@ -78,7 +78,7 @@ function M.get_ops_hl(options)
 				bg = "None",
 				fg = C.blue_4,
 				ctermbg = "None",
-				ctermfg = 25,
+				-- ctermfg = 25,
 			},
 		},
 		{
