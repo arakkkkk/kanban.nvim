@@ -72,7 +72,9 @@ require("kanban").setup({
 | <S-h/j/k/l> | Move task to left/below/above/right. |
 | gg          | Focus top task in the list.          |
 | g           | Focus borrom task in the list.       |
-| <space>lr   | Rename list.                         |
+| <leader>lr  | Rename list.                         |
+| <leader>la  | Add list.                            |
+| <leader>ld  | Delete list.                         |
 | o           | Add task to bottom.                  |
 | O           | Add task to top.                     |
 | :w<CR>      | Save kanban.                         |
