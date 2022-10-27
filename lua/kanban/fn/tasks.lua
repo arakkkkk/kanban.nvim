@@ -11,11 +11,12 @@ M.move = require(ap .. "tasks.move")
 M.take = require(ap .. "tasks.take")
 M.delete = require(ap .. "tasks.delete").delete
 M.resize = require(ap .. "tasks.resize").resize
-M.map = require(ap .. "tasks.map").map
 M.save = require(ap .. "tasks.save").save
 M.edit = require(ap .. "tasks.edit").edit
 M.autocmd = require(ap .. "tasks.autocmd").autocmd
 M.highlight = require(ap .. "tasks.highlight").highlight
+M.sort = require(ap .. "tasks.sort").sort
+M.filter = require(ap .. "tasks.filter").filter
 M.utils = require(ap .. "tasks.utils")
 return M
 

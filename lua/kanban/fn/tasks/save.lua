@@ -13,6 +13,8 @@ function M.save(kanban)
 			table.insert(due, lines[i])
 		elseif string.match(lines[i], "^"..kanban.ops.markdown.tag_head .. ".*$") then
 			table.insert(tag, lines[i])
+		elseif lines[i] == "" then
+			-- continue
 		else
 			vim.api.nvim_command("echohl WarningMsg")
       vim.api.nvim_command("echo 'Format error!'")

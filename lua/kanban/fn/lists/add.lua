@@ -1,5 +1,5 @@
 local M = {}
--- Absolute path
+
 function M.add(kanban, title, with_blank_task_bool)
 	local lists = kanban.items.lists
 
@@ -16,7 +16,9 @@ function M.add(kanban, title, with_blank_task_bool)
 		col = 12 + #lists,
 		width = 10,
 		height = kanban.items.kwindow.buf_conf.height - 6,
-		border = "rounded",
+		-- border = "rounded",
+		-- border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+		border = { "x", "─", "x", "│", "x", "─", "x", "│" },
 		style = "minimal",
 		zindex = 20,
 	}

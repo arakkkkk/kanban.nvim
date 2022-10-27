@@ -28,21 +28,23 @@ function M.write(kanban, md_path)
 		-- Task
 		for j in pairs(list.tasks) do
 			local task = list.tasks[j]
-			local title = title_head .. string.gsub(title_style, "<title>", task.title)
-			f:write("\n" .. title .. "\n")
-			-- Due
-			for k in pairs(task.due) do
-				local due = task.due[k]
-				due = string.gsub(due, due_head, "")
-				due = due_head .. string.gsub(due_style, "<due>", due)
-				f:write(due .. "\n")
-			end
-			-- Tag
-			for k in pairs(task.tag) do
-				local tag = task.tag[k]
-				tag = string.gsub(tag, tag_head, "")
-				tag = tag_head .. string.gsub(tag_style, "<tag>", tag)
-				f:write(tag .. "\n")
+			if task.title ~= "" then
+				local title = title_head .. string.gsub(title_style, "<title>", task.title)
+				f:write("\n" .. title .. "\n")
+				-- Due
+				for k in pairs(task.due) do
+					local due = task.due[k]
+					due = string.gsub(due, due_head, "")
+					due = due_head .. string.gsub(due_style, "<due>", due)
+					f:write(due .. "\n")
+				end
+				-- Tag
+				for k in pairs(task.tag) do
+					local tag = task.tag[k]
+					tag = string.gsub(tag, tag_head, "")
+					tag = tag_head .. string.gsub(tag_style, "<tag>", tag)
+					f:write(tag .. "\n")
+				end
 			end
 		end
 	end

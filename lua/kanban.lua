@@ -1,15 +1,17 @@
 local M = {}
 
+M.ops = require("kanban.ops").get_ops({})
+M.fn = require("kanban.fn")
+M.theme = require("kanban.theme")
+M.active = false
+
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
-	M.fn = require("kanban.fn")
-	M.theme = require("kanban.theme")
-	M.theme.init(M)
-	M.keymap = require("kanban.keymap").keymap
 	require("kanban.create_command").create_command(M)
+	M.keymap = require("kanban.keymap").keymap
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
+	M.theme.init(M)
 end
-M.fn = require("kanban.fn")
 
 function M.kanban_open()
 	M.active = true

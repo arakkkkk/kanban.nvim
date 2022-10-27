@@ -82,6 +82,12 @@ function M.create_command(kanban, buf)
 	end, {})
 
 	-- create task
+	vim.api.nvim_create_user_command("KanbanTaskAdd", function()
+		if not kanban.active then
+			return
+		end
+		kanban.fn.tasks.add(kanban, nil, nil, kanban.ops.add_position, true)
+	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskAddBottom", function()
 		if not kanban.active then
 			return

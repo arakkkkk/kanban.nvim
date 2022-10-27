@@ -4,6 +4,7 @@ function M.get_ops(options)
 	local C = require("kanban.theme.colors")
 	local ops = {
 		move_position = "top", -- top or bottom
+		add_position = "bottom", -- top or bottom
 		kanban_md_path = {
 			"~/local_file/practice/kanban.nvim/template.md",
 			"/Users/Kouiti/local_file/practice/kanban.nvim/template.md",

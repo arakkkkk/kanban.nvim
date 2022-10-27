@@ -16,7 +16,7 @@ end
 
 function M.create_blank_task(kanban)
 	local blank_task = {
-		title = "NoTitle",
+		title = "",
 		due = {},
 		tag = {},
 	}
