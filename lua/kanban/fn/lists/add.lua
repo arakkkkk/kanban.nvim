@@ -25,10 +25,11 @@ function M.add(kanban, title, with_blank_task_bool)
 	kanban.fn.lists.map(kanban, lists[#lists])
 
 	if with_blank_task_bool then
-		local task = kanban.fn.tasks.add(kanban, #lists, nil, "top", true)
+		local task = kanban.fn.tasks.add(kanban, #lists, nil, "bottom", true)
 		lists[#lists].tasks[1] = task
 	end
 	kanban.fn.lists.highlight(kanban, lists[#lists])
 	kanban.fn.lists.resize(kanban)
+	kanban.fn.tasks.resize(kanban)
 end
 return M

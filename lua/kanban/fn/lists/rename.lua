@@ -1,6 +1,6 @@
 local M = {}
 
-function M.rename(kanban, task)
+function M.rename(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 

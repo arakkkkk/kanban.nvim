@@ -48,5 +48,6 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 	elseif add_position == "bottom" then
 		kanban.fn.tasks.move.bottom(kanban)
 	end
+	return task
 end
 return M
