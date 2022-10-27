@@ -80,6 +80,11 @@ function M.map(kanban, task)
 		kanban.fn.lists.add(kanban, "List", true)
 	end, { silent = true, buffer = task.buf_nr })
 
+	-- Description note
+	vim.keymap.set("n", "<CR>", function()
+		kanban.fn.description.add(kanban)
+	end, { silent = true, buffer = task.buf_nr })
+
 	-- delete
 	vim.keymap.set("n", "<C-o>", "k", { silent = true, buffer = task.buf_nr })
 end
