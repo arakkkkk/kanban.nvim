@@ -28,6 +28,7 @@ require('kanban').setup({
 All setup options are [here](./lua/kanban/ops.lua)
 
 ## Kaymaps
+All keymap are [here](./lua/kanban/keymap.lua)
 
 | Key         | Action                               |
 |-------------|--------------------------------------|
