@@ -18,6 +18,5 @@ function M.highlight(kanban, task)
 			return
 		end
 	end
-	vim.api.nvim_win_set_option(task.win_id, 'winhighlight', 'NormalFloat:TaskFloat')
 end
 return M

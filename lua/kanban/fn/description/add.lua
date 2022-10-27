@@ -14,9 +14,6 @@ function M.add(kanban)
 		style = "minimal",
 		zindex = 40,
 	}
-	local win = vim.api.nvim_open_win(kanban.items.description.buf_nr, true, kanban.items.description.buf_conf)
-	vim.api.nvim_win_set_option(win, "winhighlight", "NormalFloat:KanbanFloat")
-
 	local task_title = vim.fn.getbufline(0, 1, "$")
 	local current_md_dir = string.gsub(kanban.kanban_md_path, "/[^/]+$", "")
 	local file_path = current_md_dir .."/".. kanban.ops.markdown.description_folder .. task_title[1] .. ".md"

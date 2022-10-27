@@ -36,25 +36,6 @@ function M.get_ops(options)
 		},
 		hl = {
 			{
-				name = "KanbanFloat",
-				ops = {},
-			},
-			{
-				name = "ListFloat",
-				ops = {},
-			},
-			{
-				name = "TaskFloat",
-				ops = {},
-			},
-			{
-				name = "TaskSelected",
-				ops = {
-					fg = C.blue,
-					ctermfg = 25,
-				},
-			},
-			{
 				name = "KanbanTitle",
 				ops = {
 					bg = "None",
