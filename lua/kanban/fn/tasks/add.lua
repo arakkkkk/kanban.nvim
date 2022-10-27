@@ -22,7 +22,7 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 		width = target_list.buf_conf.width - 4,
 		height = kanban.ops.layout.task_height,
 		border = "rounded",
-		-- style = "minimal",
+		style = "minimal",
 		zindex = 30,
 	}
 
