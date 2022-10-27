@@ -36,6 +36,18 @@ function M.get_ops(options)
 		},
 		hl = {
 			{
+				name = "KanbanFloat",
+				ops = {},
+			},
+			{
+				name = "ListFloat",
+				ops = {},
+			},
+			{
+				name = "TaskFloat",
+				ops = {},
+			},
+			{
 				name = "KanbanTitle",
 				ops = {
 					bg = "None",
