@@ -1,8 +1,12 @@
 local M = {}
 
 function M.write(kanban, md_path)
+	md_path = string.gsub(md_path, "^~", os.getenv("HOME"))
 	local f = io.open(md_path, "w")
-	assert(f)
+	if f == nil then
+		vim.api.nvim_err_writeln("Error: can't open file!!    " .. md_path)
+		return
+	end
 
 	local list_head = kanban.ops.markdown.list_head
 	local title_head = kanban.ops.markdown.title_head
@@ -47,7 +51,6 @@ function M.write(kanban, md_path)
 	for i in pairs(kanban.ops.markdown.footer) do
 		f:write(kanban.ops.markdown.footer[i] .. "\n")
 	end
-
 end
 
 return M
