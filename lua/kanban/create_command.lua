@@ -122,7 +122,7 @@ function M.create_command(kanban, buf)
 
 	-- Description note
 	vim.api.nvim_create_user_command("KanbanTaskDescription", function()
-		kanban.fn.lists.add(kanban)
+		kanban.fn.description.add(kanban)
 	end, {})
 end
 return M

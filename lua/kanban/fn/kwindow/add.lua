@@ -5,14 +5,14 @@ function M.add(kanban)
 	kanban.items.kwindow.buf_nr = vim.api.nvim_create_buf(false, "nomodeline")
 	vim.api.nvim_buf_set_lines(kanban.items.kwindow.buf_nr, 0, -1, true, { "", "  Kanban.nvim" })
 	kanban.items.kwindow.buf_conf = {
-		relative = "win",
+		relative = "editor",
 		row = kanban.ops.layout.y_margin,
 		col = kanban.ops.layout.x_margin,
 		width = vim.fn.winwidth(0) - kanban.ops.layout.x_margin * 2,
 		height = vim.fn.winheight(0) - kanban.ops.layout.y_margin * 2,
 		border = "rounded",
 		style = "minimal",
-		zindex = 1,
+		zindex = 10,
 	}
 	local hi = vim.api.nvim_buf_add_highlight
 	hi(kanban.items.kwindow.buf_nr, 0, "ListTitle", 1, 0, -1)
