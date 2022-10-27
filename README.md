@@ -13,7 +13,6 @@ Compatible with obsidian kanban.
 Using packer
 ```
 use  'arakkkkk/kanban.nvim'
-
 ```
 Set up
 Please use [template](./template.md) for first kanban project.

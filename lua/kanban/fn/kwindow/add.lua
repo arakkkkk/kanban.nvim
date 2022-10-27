@@ -17,6 +17,7 @@ function M.add(kanban)
 	local hi = vim.api.nvim_buf_add_highlight
 	hi(kanban.items.kwindow.buf_nr, 0, "ListTitle", 1, 0, -1)
 	local win = vim.api.nvim_open_win(kanban.items.kwindow.buf_nr, true, kanban.items.kwindow.buf_conf)
+	kanban.fn.kwindow.autocmd(kanban)
 	vim.api.nvim_win_set_option(win, "winhighlight", "NormalFloat:KanbanFloat")
 end
 return M

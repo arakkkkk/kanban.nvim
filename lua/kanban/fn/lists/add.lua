@@ -22,7 +22,6 @@ function M.add(kanban, title, with_blank_task_bool)
 	}
 
 	lists[#lists].win_id = vim.api.nvim_open_win(lists[#lists].buf_nr, true, lists[#lists].buf_conf)
-	kanban.fn.lists.map(kanban, lists[#lists])
 
 	if with_blank_task_bool then
 		local task = kanban.fn.tasks.add(kanban, #lists, nil, "bottom", true)

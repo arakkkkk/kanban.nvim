@@ -5,10 +5,14 @@ function M.setup(options)
 	M.fn = require("kanban.fn")
 	M.theme = require("kanban.theme")
 	M.theme.init(M)
+	M.keymap = require("kanban.keymap").keymap
+	require("kanban.create_command").create_command(M)
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 end
+M.fn = require("kanban.fn")
 
 function M.kanban_open()
+	M.active = true
 	M.items = {}
 	M.items.kwindow = {}
 	M.markdown = require("kanban.markdown")

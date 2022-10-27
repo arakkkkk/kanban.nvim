@@ -8,7 +8,7 @@ function M.open(kanban, task)
 	task.win_id = vim.api.nvim_open_win(task.buf_nr, 1, task.buf_conf)
 
 	kanban.fn.tasks.highlight(kanban, task)
-	kanban.fn.tasks.map(kanban, task)
+	kanban.keymap(task.buf_nr)
 	kanban.fn.tasks.resize(kanban, 0)
 	kanban.fn.tasks.autocmd(kanban, task)
 end

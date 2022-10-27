@@ -45,9 +45,10 @@ function M.map(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- delete task
-	vim.keymap.set("n", "D", function()
-		kanban.fn.tasks.delete(kanban, task)
-	end, { silent = true, buffer = task.buf_nr })
+	-- vim.keymap.set("n", "D", function()
+	-- 	kanban.fn.tasks.delete(kanban, task)
+	-- end, { silent = true, buffer = task.buf_nr })
+	vim.keymap.set("n", "d", "<cmd>KanbanTaskDelete<cr>", { silent = true, buffer = task.buf_nr })
 
 	-- create task
 	vim.keymap.set("n", "o", function()

@@ -1,12 +1,12 @@
 local M = {}
 
-function M.delete(kanban, target_task)
+function M.delete(kanban)
   -- local focus_win_id
   -- local remove_task_index
   local focus = kanban.fn.tasks.utils.get_focus(kanban)
   local focused_list = kanban.items.lists[focus.list_num]
   local focused_tasks = focused_list.tasks
-  kanban.fn.tasks.close(target_task)
+  kanban.fn.tasks.close(focused_tasks[focus.task_num])
   table.remove(focused_tasks, focus.task_num);
 
   -- Open new teak in blank area
