@@ -70,6 +70,9 @@ function M.map(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })
 
 	-- List function
+	vim.keymap.set("n", "<leader>ld", function()
+		kanban.fn.lists.delete(kanban)
+	end, { silent = true, buffer = task.buf_nr })
 	vim.keymap.set("n", "<leader>lr", function()
 		kanban.fn.lists.rename(kanban, task)
 	end, { silent = true, buffer = task.buf_nr })

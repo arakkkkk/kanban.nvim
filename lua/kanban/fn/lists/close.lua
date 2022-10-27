@@ -1,8 +1,5 @@
 local M = {}
-function M.close(kanban)
-	local lists = kanban.items.lists
-	for i = 1, #lists do
-		pcall(vim.cmd.bdelete, lists[i].buf_nr)
-	end
+function M.close(list)
+	pcall(vim.cmd.bdelete, list.buf_nr)
 end
 return M
