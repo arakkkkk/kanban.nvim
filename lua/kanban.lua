@@ -25,6 +25,9 @@ function M.kanban_open()
 	end
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
+	if #md.lists == 0 then
+		return
+	end
 
 	-- create window panel
 	M.fn.kwindow.add(M)

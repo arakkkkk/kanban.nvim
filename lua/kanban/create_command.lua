@@ -103,10 +103,9 @@ function M.create_command(kanban, buf)
 		if not kanban.active then
 			return
 		end
-		kanban.fn.kwindow.close(kanban)
+		kanban.fn.tasks.close_all(kanban)
 		kanban.fn.lists.close_all(kanban)
-		kanban.fn.tasks.close_all(kanban)
-		kanban.fn.tasks.close_all(kanban)
+		kanban.fn.kwindow.close(kanban)
 	end, {})
 
 	-- List function
