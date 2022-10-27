@@ -35,8 +35,7 @@ function M.delete(kanban)
 
   -- Create blank task if no task in list
   if #focused_list.tasks == 0 then
-    local blank_task = kanban.parser.template.task()
-		kanban.fn.tasks.add(kanban, focus.list_num, blank_task, "top", true)
+		kanban.fn.tasks.add(kanban, focus.list_num, nil, "top", true)
 		-- kanban.fn.tasks.open(kanban, blank_task)
   end
 
