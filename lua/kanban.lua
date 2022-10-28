@@ -26,6 +26,7 @@ function M.kanban_open()
 		M.active = true
 	end
 	M.items = {}
+	M.items.snip = {}
 	M.items.kwindow = {}
 	M.markdown = require("kanban.markdown")
 	for i in pairs(M.ops.kanban_md_path) do

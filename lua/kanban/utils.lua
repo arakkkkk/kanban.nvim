@@ -3,8 +3,6 @@ local Utils = {}
 function Utils.to_regexp(regrep)
 	regrep = string.gsub(regrep, "%[", "%%[")
 	regrep = string.gsub(regrep, "%]", "%%]")
-	-- regrep = string.gsub(regrep, "%}", "%%}")
-	-- regrep = string.gsub(regrep, "%{", "%%}")
 	regrep = string.gsub(regrep, "<.*>", "(.*)")
 	return regrep
 end
@@ -39,6 +37,13 @@ function Utils.tableMerge(t1, t2)
 		end
 	end
 	return t1
+end
+
+function Utils.TableConcat(t1,t2)
+    for i=1,#t2 do
+        t1[#t1+1] = t2[i]
+    end
+    return t1
 end
 
 
