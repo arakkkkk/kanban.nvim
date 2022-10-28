@@ -9,15 +9,6 @@ function M.highlight(kanban, task)
 			hi(task.buf_nr, 0, "TaskDue", i - 1, 0, -1)
 		elseif string.match(lines[i], "^" .. kanban.ops.markdown.tag_head .. ".*$") then
 			hi(task.buf_nr, 0, "TaskTag", i - 1, 0, -1)
-		elseif lines[i] == "" then
-			-- continue
-		else
-			vim.api.nvim_command("echohl WarningMsg")
-			vim.api.nvim_command("echo 'Format error!'")
-			vim.api.nvim_command("echohl None")
-			kanban.fn.tasks.close(task)
-			kanban.fn.tasks.open(kanban, task)
-			return
 		end
 	end
 	vim.api.nvim_win_set_option(task.win_id, 'winhighlight', 'NormalFloat:TaskFloat')

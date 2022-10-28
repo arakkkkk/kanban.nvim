@@ -17,7 +17,6 @@ M.autocmd = require(ap .. "tasks.autocmd").autocmd
 M.highlight = require(ap .. "tasks.highlight").highlight
 M.sort = require(ap .. "tasks.sort").sort
 M.filter = require(ap .. "tasks.filter").filter
-M.snip = require(ap .. "tasks.snip").snip
 M.utils = require(ap .. "tasks.utils")
 return M
 
