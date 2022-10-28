@@ -43,6 +43,7 @@ function M.read(kanban, md_path)
 			table.insert(task.tag, tag)
 		end
 	end
+	io.close()
 	return md
 end
 
