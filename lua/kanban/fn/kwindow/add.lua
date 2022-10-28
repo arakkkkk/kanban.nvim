@@ -19,5 +19,6 @@ function M.add(kanban)
 	local win = vim.api.nvim_open_win(kanban.items.kwindow.buf_nr, true, kanban.items.kwindow.buf_conf)
 	kanban.fn.kwindow.autocmd(kanban)
 	vim.api.nvim_win_set_option(win, "winhighlight", "NormalFloat:KanbanFloat")
+	vim.keymap.set("n", ":q<cr>", "<cmd>KanbanClose<cr>", { silent = true, buffer = kanban.items.kwindow.buf_nr })
 end
 return M
