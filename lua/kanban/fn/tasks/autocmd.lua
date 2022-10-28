@@ -22,6 +22,7 @@ function M.autocmd(kanban, task)
 	vim.api.nvim_create_autocmd("InsertLeave", {
 		pattern = "<buffer=" .. task.buf_nr .. ">",
 		callback = function()
+			vim.api.nvim_win_set_cursor(0, { 1, 0 })
 			kanban.fn.snip.delete(kanban)
 		end,
 	})

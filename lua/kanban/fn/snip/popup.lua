@@ -26,7 +26,9 @@ function M.popup(kanban)
 	vim.keymap.set("i", "<cr>", function()
 		local l = vim.fn.line(".")
 		vim.fn.setline(l, snip.cmp)
-		vim.api.nvim_win_set_cursor(0, { l, #snip.cmp })
+		vim.api.nvim_win_set_cursor(0, {l, #snip.cmp})
+		-- vim.fn.append(l, "")
+		-- vim.api.nvim_win_set_cursor(0, { l+1, 0 })
 	end, { silent = true, buffer = vim.api.nvim_get_current_buf() })
 end
 return M
