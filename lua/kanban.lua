@@ -14,7 +14,11 @@ function M.setup(options)
 end
 
 function M.kanban_open()
-	M.active = true
+	if M.active then
+		return
+	else
+		M.active = true
+	end
 	M.items = {}
 	M.items.kwindow = {}
 	M.markdown = require("kanban.markdown")
