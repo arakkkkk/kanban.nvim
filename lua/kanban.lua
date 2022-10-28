@@ -11,6 +11,11 @@ function M.setup(options)
 	M.keymap = require("kanban.keymap").keymap
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
 	M.theme.init(M)
+	require("cmp").setup.filetype({ "kanban" }, {
+		completion = {
+			autocomplete = true,
+		},
+	})
 end
 
 function M.kanban_open()

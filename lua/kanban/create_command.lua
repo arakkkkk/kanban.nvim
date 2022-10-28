@@ -8,15 +8,6 @@ function M.create_command(kanban, buf)
 		kanban.fn.tasks.delete(kanban)
 	end, {})
 
-	-- Swich mode
-	-- vim.api.nvim_create_user_command("KanbanSave", function()
-	-- 	if not kanban.active then
-	-- 		return
-	-- 	end
-	-- 	kanban.fn.tasks.save(kanban)
-	-- 	kanban.markdown.writer.write(kanban, kanban.kanban_md_path)
-	-- end, {})
-
 	-- Task movement
 	vim.api.nvim_create_user_command("KanbanTakeRight", function()
 		if not kanban.active then

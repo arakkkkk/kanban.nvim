@@ -1,41 +1,10 @@
 local M = {}
-local function list_snip_due(kanban, line)
-	local list_snip = { line }
-	return list_snip
-end
-local function list_snip_tag(kanban, line)
-	local list_snip = { line }
-	return list_snip
-end
-function M.snip(kanban)
-	local r, _ = unpack(vim.api.nvim_win_get_cursor(0))
-	local line = vim.fn.getline(r)
-	local snip = kanban.items.snip
-	if snip == nil then
-		snip = {}
-	else
-		pcall(vim.cmd.bdelete, kanban.items.snip.buf_nr)
-	end
+-- Absolute path
+local ap = "kanban.fn."
 
-	if string.match(line, "^@.+") then
-		snip.list = list_snip_due(kanban, line)
-	elseif string.match(line, "^#.+") then
-		snip.list = list_snip_tag(kanban, line)
-	else
-		return
-	end
-	snip.buf_nr = vim.api.nvim_create_buf(false, "nomodeline")
-	vim.api.nvim_buf_set_lines(snip.buf_nr, r-1, -1, true, snip.list)
-
-	local buf_conf = {
-		relative = "cursor",
-		row = 0,
-		col = 0,
-		width = 10,
-		height = 5,
-		style = "minimal",
-		zindex = 40,
-	}
-	vim.api.nvim_open_win(snip.buf_nr, false, buf_conf)
-end
+M.delete = require(ap .. "snip.delete").delete
+M.popup = require(ap .. "snip.popup").popup
+M.list_snip = require(ap .. "snip.list_snip").list_snip
 return M
+
+
