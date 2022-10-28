@@ -111,6 +111,7 @@ function M.create_command(kanban, buf)
 		kanban.fn.tasks.close_all(kanban)
 		kanban.fn.lists.close_all(kanban)
 		kanban.fn.kwindow.close(kanban)
+		vim.o.eventignore = "all"
 		kanban.active = false
 	end, {})
 

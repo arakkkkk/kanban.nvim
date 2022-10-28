@@ -1,6 +1,7 @@
 local M = {}
 
 function M.autocmd(kanban, task)
+	vim.o.eventignore = "all"
 	vim.api.nvim_create_autocmd({"TextChanged", "TextChangedI", "TextChangedP"}, {
 		pattern = "<buffer=" .. task.buf_nr .. ">",
 		callback = function()
