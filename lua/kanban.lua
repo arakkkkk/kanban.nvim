@@ -34,7 +34,7 @@ function M.kanban_open()
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 	if #md.lists == 0 then
 		vim.api.nvim_err_writeln("No task data ..")
-		M.active = true
+		M.active = false
 		return
 	end
 
