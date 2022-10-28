@@ -15,6 +15,7 @@ end
 
 function M.kanban_open()
 	if M.active then
+		vim.api.nvim_err_writeln("kanban is already active!!")
 		return
 	else
 		M.active = true
