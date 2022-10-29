@@ -51,48 +51,46 @@ function M.get_ops(options)
 			{
 				name = "KanbanTitle",
 				ops = {
-					bg = "None",
-					fg = "None",
-					ctermbg = "None",
-					ctermfg = "None",
 					bold = true,
 				},
 			},
 			{
 				name = "ListTitle",
 				ops = {
-					bg = "None",
-					fg = "None",
-					ctermbg = "None",
-					ctermfg = "None",
 					bold = true,
 				},
 			},
 			{
 				name = "TaskTitle",
 				ops = {
-					bg = "None",
-					fg = "None",
-					ctermbg = "None",
-					ctermfg = "None",
 					bold = true,
 				},
 			},
 			{
 				name = "TaskDue",
 				ops = {
-					bg = "None",
 					fg = C.blue_4,
-					ctermbg = "None",
 					ctermfg = 25,
+				},
+			},
+			{
+				name = "TaskDueToday",
+				ops = {
+					bg = C.white,
+					ctermbg = 7,
+				},
+			},
+			{
+				name = "TaskDueDead",
+				ops = {
+					bg = C.blue_3,
+					ctermbg = 26,
 				},
 			},
 			{
 				name = "TaskTag",
 				ops = {
-					bg = "None",
 					fg = C.gold,
-					ctermbg = "None",
 					ctermfg = 221,
 				},
 			},
