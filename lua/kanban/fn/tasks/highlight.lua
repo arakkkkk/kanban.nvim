@@ -1,4 +1,4 @@
-local M = {}
+ghlocal M = {}
 
 function M.highlight(kanban, task)
 	local lines = vim.fn.getbufline(task.buf_nr, 1, "$")
