@@ -1,18 +1,22 @@
 local M = {}
 
 local function get_cmp_due(kanban, line)
+	-- today
 	if string.match(line, "^@to?$") or string.match(line, "^@toda?$") or string.match(line, "^@today$") then
 		return os.date("@%Y/%m/%d")
+	-- 2d
 	elseif string.match(line, "^@%d+d$") then
 		local t = os.time()
 		local d = string.gsub(line, "^@(%d+)d", "%1")
 		t = t + d * 24 * 60 * 60
 		return os.date("@%Y/%m/%d", t)
+	-- 2w
 	elseif string.match(line, "^@%d+w$") then
 		local t = os.time()
 		local d = string.gsub(line, "^@(%d+)w$", "%1")
 		t = t + d * 7 * 24 * 60 * 60
 		return os.date("@%Y/%m/%d", t)
+	-- 2m
 	elseif string.match(line, "^@%d+m$") then
 		local t = os.date("*t")
 		local m = string.gsub(line, "^@(%d+)m$", "%1")
@@ -24,11 +28,22 @@ local function get_cmp_due(kanban, line)
 			end
 		end
 		return "@" .. t.year .. "/" .. t.month .. "/" .. t.day
+	-- 2y
 	elseif string.match(line, "^@%d+y$") then
 		local t = os.date("*t")
 		local y = string.gsub(line, "^@(%d+)y$", "%1")
 		t.year = t.year + y
 		return "@" .. t.year .. "/" .. t.month .. "/" .. t.day
+	-- from month
+	elseif string.match(line, "^@/%d%d/%d%d$") then
+		local t = os.date("*t")
+		local m = string.gsub(line, "^@/(%d%d)/%d%d$", "%1")
+		local d = string.gsub(line, "^@/%d%d/(%d%d)$", "%1")
+		return "@" .. t.year .. "/" .. m .. "/" .. d
+	elseif string.match(line, "^@//%d%d$") then
+		local t = os.date("*t")
+		local d = string.gsub(line, "^@//%d%d$", "%1")
+		return "@" .. t.year .. "/" .. t.month .. "/" .. d
 	else
 		return nil
 	end

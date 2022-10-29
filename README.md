@@ -42,3 +42,16 @@ All keymap are [here](./lua/kanban/keymap.lua)
 | q           | Quit.                                          |
 | <CR>        | Add task description in another markdown file. |
 
+## Functions
+### Tag complemention
+- Tag is complement by exsisting tag
+### Due complemention
+If it is `2022/11/01`
+- date calculation
+  - `@today` -> `@2022/11/01`
+  - `@2d` -> `@2022/11/03`
+  - `@2w` -> `@2022/11/15`
+  - `@2m` -> `@2022/12/01`
+- yeaer/month omitation
+  - `@/12/03` -> `@2022/12/03`
+  - `@//03` -> `@2022/11/03`
