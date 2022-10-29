@@ -35,12 +35,14 @@ local function get_cmp_due(kanban, line)
 end
 
 local function get_cmp_tag(kanban, line)
+	line = string.lower(line)
 	for i in pairs(kanban.items.lists) do
 		local list = kanban.items.lists[i]
 		for j in pairs(list.tasks) do
 			for k in pairs(list.tasks[j].tag) do
 				local tag = list.tasks[j].tag[k]
-				if string.match(tag, "^" .. line .. ".+") then
+				local tag_lower = string.lower(tag)
+				if string.match(tag_lower, "^" .. line .. ".+") then
 					return tag
 				end
 			end
