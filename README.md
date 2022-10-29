@@ -23,6 +23,7 @@ require('kanban').setup({
   }
 })
 ```
+and open kanban to enter `:KanbanOpen`
 All setup options are [here](./lua/kanban/ops.lua)
 
 ## Kaymaps

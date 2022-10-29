@@ -76,8 +76,8 @@ function M.get_ops(options)
 			{
 				name = "TaskDueToday",
 				ops = {
-					bg = C.white,
-					ctermbg = 7,
+					bg = C.blue_3,
+					ctermbg = 67,
 				},
 			},
 			{
