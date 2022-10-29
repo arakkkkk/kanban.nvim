@@ -33,15 +33,7 @@ function M.get_ops(options)
 				"",
 				"---",
 			},
-			footer = {
-				"",
-				"",
-				"%% kanban:settings",
-				"```",
-				"{'kanban-plugin':'basic'}",
-				"```",
-				"%%",
-			},
+			footer = {},
 		},
 		hl = {
 			{

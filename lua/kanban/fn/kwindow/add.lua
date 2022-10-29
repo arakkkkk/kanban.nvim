@@ -10,7 +10,9 @@ function M.add(kanban)
 		col = kanban.ops.layout.x_margin,
 		width = vim.fn.winwidth(0) - kanban.ops.layout.x_margin * 2,
 		height = vim.fn.winheight(0) - kanban.ops.layout.y_margin * 2,
-		border = "rounded",
+		-- border = "rounded",
+		-- border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
+		border = { "x", "═", "x", "║", "x", "═", "x", "║" },
 		style = "minimal",
 		zindex = 10,
 	}
