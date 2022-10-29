@@ -66,6 +66,8 @@ local function get_cmp_due(kanban, line)
 			t = t + (5 * 24 * 60 * 60)
 		elseif week_name == "sa" then
 			t = t + (6 * 24 * 60 * 60)
+		else
+			return nil
 		end
 		return os.date("@%Y/%m/%d", t)
 	end
