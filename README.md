@@ -55,3 +55,9 @@ If it is `2022/11/01`
 - yeaer/month omitation
   - `@/12/03` -> `@2022/12/03`
   - `@//03` -> `@2022/11/03`
+- set by week
+  - `@su` -> this Sunday
+  - `@nmo` -> next Monday
+  - `@nntu` -> next after next Tuesday
+  - `@nnnwe` -> next after next after next Wednesday
+  - `@nnnn...Th` -> ... Thursday

@@ -45,8 +45,29 @@ local function get_cmp_due(kanban, line)
 		local t = os.date("*t")
 		local d = string.gsub(line, "^@//(%d%d)$", "%1")
 		return "@" .. t.year .. "/" .. t.month .. "/" .. d
-	else
-		return nil
+	-- by week
+	elseif string.match(line, "^@n*[a-z][a-z]$") then
+		local week_name = string.gsub(line, "^@n*([a-z][a-z])$", "%1")
+		local step_week_num = #string.gsub(line, "^@(n*)[a-z][a-z]$", "%1")
+		local t = os.time()
+		t = t - ((os.date("*t").wday - 1) * 24 * 60 * 60) -- return to day of this sunday
+		t = t + ((step_week_num * 7) * 24 * 60 * 60) -- step week by count of "n"
+		if week_name == "su" then
+			t = t
+		elseif week_name == "mo" then
+			t = t + (1 * 24 * 60 * 60)
+		elseif week_name == "tu" then
+			t = t + (2 * 24 * 60 * 60)
+		elseif week_name == "we" then
+			t = t + (3 * 24 * 60 * 60)
+		elseif week_name == "th" then
+			t = t + (4 * 24 * 60 * 60)
+		elseif week_name == "fr" then
+			t = t + (5 * 24 * 60 * 60)
+		elseif week_name == "sa" then
+			t = t + (6 * 24 * 60 * 60)
+		end
+		return os.date("@%Y/%m/%d", t)
 	end
 end
 
