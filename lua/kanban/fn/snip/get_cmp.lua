@@ -40,9 +40,10 @@ local function get_cmp_due(kanban, line)
 		local m = string.gsub(line, "^@/(%d%d)/%d%d$", "%1")
 		local d = string.gsub(line, "^@/%d%d/(%d%d)$", "%1")
 		return "@" .. t.year .. "/" .. m .. "/" .. d
+	-- from day
 	elseif string.match(line, "^@//%d%d$") then
 		local t = os.date("*t")
-		local d = string.gsub(line, "^@//%d%d$", "%1")
+		local d = string.gsub(line, "^@//(%d%d)$", "%1")
 		return "@" .. t.year .. "/" .. t.month .. "/" .. d
 	else
 		return nil
