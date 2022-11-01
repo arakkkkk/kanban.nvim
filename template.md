@@ -28,26 +28,6 @@ kanban-plugin: basic
 
 ## Work in progress
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
 ## Done
 
 - [ ] [[aaaaaaaaa]]

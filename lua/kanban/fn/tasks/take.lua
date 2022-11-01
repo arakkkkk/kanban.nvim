@@ -8,7 +8,7 @@ function M.left(kanban)
 		return
 	end
 	local clone_task = require("kanban.utils").deepcopy(focused_task)
-	kanban.fn.tasks.delete(kanban, focused_task)
+	kanban.fn.tasks.delete(kanban)
 	kanban.fn.tasks.add(kanban, focus.list_num - 1, clone_task, kanban.ops.move_position, true)
 end
 
@@ -20,7 +20,7 @@ function M.right(kanban)
 		return
 	end
 	local clone_task = require("kanban.utils").deepcopy(focused_task)
-	kanban.fn.tasks.delete(kanban, focused_task)
+	kanban.fn.tasks.delete(kanban)
 	kanban.fn.tasks.add(kanban, focus.list_num + 1, clone_task, kanban.ops.move_position, true)
 end
 

@@ -54,8 +54,6 @@ function M.kanban_open()
 	end
 
 	-- create task panel
-	local animation = M.ops.animation
-	M.ops.animation = false
 	local max_task_show_int = M.fn.tasks.utils.get_max_task_show_int(M)
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
@@ -72,7 +70,6 @@ function M.kanban_open()
 	if #M.items.lists > 0 then
 		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
 	end
-	M.ops.animation = animation
 end
 
 return M

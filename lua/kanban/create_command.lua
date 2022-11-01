@@ -78,18 +78,21 @@ function M.create_command(kanban, buf)
 			return
 		end
 		kanban.fn.tasks.add(kanban, nil, nil, kanban.ops.add_position, true)
+		vim.cmd[[startinsert]]
 	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskAddBottom", function()
 		if not kanban.active then
 			return
 		end
 		kanban.fn.tasks.add(kanban, nil, nil, "bottom", true)
+		vim.cmd[[startinsert]]
 	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskAddTop", function()
 		if not kanban.active then
 			return
 		end
 		kanban.fn.tasks.add(kanban, nil, nil, "top", true)
+		vim.cmd[[startinsert]]
 	end, {})
 
 	-- close window
