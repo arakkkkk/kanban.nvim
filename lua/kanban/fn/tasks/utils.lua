@@ -42,4 +42,16 @@ function M.get_max_task_show_int(kanban)
 	return show_task_height + 1
 end
 
+function M.count_due(line)
+	local t = os.date("*t")
+	local y = string.gsub(line, "^@(%d%d%d%d)/%d%d/%d%d$", "%1")
+	local m = string.gsub(line, "^@%d%d%d%d/(%d%d)/%d%d$", "%1")
+	local d = string.gsub(line, "^@%d%d%d%d/%d%d/(%d%d)$", "%1")
+	local due_time = os.time({ year = y, month = m, day = d, hour = 0, min = 0, sec = 0 })
+	local due_days = due_time / (60 * 60 * 24)
+	local now_time = os.time() - t.hour * 3600 - t.min * 60 - t.sec
+	local now_days = now_time / (60 * 60 * 24)
+	return due_days - now_days
+end
+
 return M

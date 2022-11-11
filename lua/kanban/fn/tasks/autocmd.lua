@@ -23,6 +23,7 @@ function M.autocmd(kanban, task)
 		pattern = "<buffer=" .. task.buf_nr .. ">",
 		callback = function()
 			vim.api.nvim_win_set_cursor(0, { 1, 0 })
+			kanban.fn.tasks.highlight(kanban, task)
 			kanban.fn.snip.delete(kanban)
 		end,
 	})

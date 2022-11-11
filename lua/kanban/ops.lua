@@ -83,8 +83,16 @@ function M.get_ops(options)
 			{
 				name = "TaskDueDead",
 				ops = {
-					bg = C.blue_3,
-					ctermbg = 26,
+					bg = C.lock,
+					ctermbg = 226,
+				},
+			},
+			{
+				name = "TaskDueSoon",
+				ops = {
+					fg = C.blue_4,
+					ctermfg = 25,
+					bold = true,
 				},
 			},
 			{
