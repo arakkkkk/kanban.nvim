@@ -53,7 +53,7 @@ function M.write(kanban, md_path)
 	for i in pairs(kanban.ops.markdown.footer) do
 		f:write(kanban.ops.markdown.footer[i] .. "\n")
 	end
-	vim.api.nvim_err_writeln("file saved !!")
+	vim.api.nvim_echo({{"kanban saved!!", "None"}}, false, {})
 	f:close()
 end
 
