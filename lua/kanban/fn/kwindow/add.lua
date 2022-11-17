@@ -8,7 +8,7 @@ function M.add(kanban)
 		relative = "editor",
 		row = kanban.ops.layout.y_margin,
 		col = kanban.ops.layout.x_margin,
-		width = vim.fn.winwidth(0) - kanban.ops.layout.x_margin * 2,
+		width = vim.cmd("&columns") - kanban.ops.layout.x_margin * 2,
 		height = vim.fn.winheight(0) - kanban.ops.layout.y_margin * 2,
 		-- border = "rounded",
 		-- border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
