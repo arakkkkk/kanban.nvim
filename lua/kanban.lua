@@ -18,6 +18,16 @@ function M.setup(options)
 	})
 end
 
+function M.kanban_close(err, message)
+	if message then
+		print(message)
+	end
+	if err then
+		vim.api.nvim_err_writeln(err)
+	end
+		M.active = false
+end
+
 function M.kanban_open()
 	if M.active then
 		vim.api.nvim_err_writeln("kanban is already active!!")
@@ -29,18 +39,24 @@ function M.kanban_open()
 	M.items.snip = {}
 	M.items.kwindow = {}
 	M.markdown = require("kanban.markdown")
+	local text = ""
 	for i in pairs(M.ops.kanban_md_path) do
-		print("[" .. i .. "] " .. M.ops.kanban_md_path[i])
+		text = text .. "[" .. i .. "] " .. M.ops.kanban_md_path[i] .. "\n"
+
 	end
-	local md_path_index = tonumber(vim.fn.input("Select -> "))
+	local ok, md_path = pcall(vim.fn.input, text .. "Select -> ")
+	if not ok then
+		M.kanban_close()
+		return
+	end
+	local md_path_index = tonumber(md_path)
 	if not M.ops.kanban_md_path[md_path_index] then
 		md_path_index = 1
 	end
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 	if #md.lists == 0 then
-		vim.api.nvim_err_writeln("No task data ..")
-		M.active = false
+		M.kanban_close("No task data ..")
 		return
 	end
 
