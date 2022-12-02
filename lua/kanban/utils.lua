@@ -39,25 +39,28 @@ function Utils.tableMerge(t1, t2)
 	return t1
 end
 
-function Utils.TableConcat(t1,t2)
-    for i=1,#t2 do
-        t1[#t1+1] = t2[i]
-    end
-    return t1
+function Utils.TableConcat(t1, t2)
+	for i = 1, #t2 do
+		t1[#t1 + 1] = t2[i]
+	end
+	return t1
 end
 
-function Utils.split(str, ts)
-  if ts == nil then return {} end
-  local t = {} ; 
-  local i=1
-  for s in string.gmatch(str, "([^"..ts.."]+)") do
-    t[i] = s
-    i = i + 1
-  end
-  return t
+function Utils.split(str, delim)
+	-- Eliminate bad cases...
+	if string.find(str, delim) == nil then
+		return { str }
+	end
+
+	local result = {}
+	local pat = "(.-)" .. delim .. "()"
+	local lastPos
+	for part, pos in string.gfind(str, pat) do
+		table.insert(result, part)
+		lastPos = pos
+	end
+	table.insert(result, string.sub(str, lastPos))
+	return result
 end
-
-
-
 
 return Utils
