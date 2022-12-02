@@ -26,7 +26,7 @@ kanban-plugin: basic
 @{yyyy/mm/dd}
 #tagtag
 
-## Wo
+## Work in progress
 
 - [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
@@ -70,7 +70,7 @@ kanban-plugin: basic
 @{yyyy/mm/dd}
 #tagtag
 
-## A
+## Archive
 
 - [ ] [[aaaaaaaaa]]
 @{yyyy/mm/dd}
