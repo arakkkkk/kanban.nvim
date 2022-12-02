@@ -9,12 +9,12 @@ function M.read(kanban, md_path)
 	local list
 	local task
 	while true do
-		local bef_line = io.read()
-		if bef_line	== nil then
+		local lines = io.read()
+		if lines == nil then
 			break
 		end
-		local lines = utils.split(bef_line, "<br>")
-		for _, line in pairs(lines) do
+
+		for _, line in pairs(utils.split(lines, "<br>")) do
 			local regexp = require("kanban.utils").to_regexp
 			local list_head = kanban.ops.markdown.list_head
 			local title_head = kanban.ops.markdown.title_head

@@ -6,7 +6,7 @@ kanban-plugin: basic
 
 ## TODO
 
-- [ ] [[aaaaaaaaa]]
+- [ ] [[aaaaraaaaa]]
 @{2022/01/01}
 #tagtag
 
