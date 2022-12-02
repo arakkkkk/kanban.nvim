@@ -90,6 +90,4 @@ kanban-plugin: basic
 
 - [ ] [[aaaaaaaaaa]]
 @{yyyy/mm/dd}
-@{yyyy/mm/dd}
-#tagtag
 #tagtag

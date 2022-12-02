@@ -28,6 +28,7 @@ function M.read(kanban, md_path)
 			local pat_due = regexp(due_head) .. regexp(due_style)
 			local pat_tag = regexp(tag_head) .. regexp(tag_style)
 
+			print(line)
 			-- List
 			if string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
