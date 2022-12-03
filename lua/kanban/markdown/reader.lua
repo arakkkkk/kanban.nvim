@@ -53,6 +53,7 @@ function M.read(kanban, md_path)
 				local _ = 1
 			else
 				vim.api.nvim_err_writeln("Unrecognized line!!     \n" .. line)
+				return false
 			end
 		end
 	end
