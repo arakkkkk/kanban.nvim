@@ -17,9 +17,9 @@ Please use [template](./template.md) for first kanban project.
 ```
 require('kanban').setup({
   kanban_md_path = {
-    "/path/to/kanban/markdown/path.md",
-    "/path/to/kanban/markdown/path.md",
-    "/path/to/kanban/markdown/path.md",
+    "/path/to/kanban/markdown.md",
+    "/path/to/kanban/markdown.md",
+    "/path/to/kanban/markdown.md",
   }
 })
 ```
@@ -53,7 +53,7 @@ If it is `2022/11/01`
   - `@2d` -> `@2022/11/03`
   - `@2w` -> `@2022/11/15`
   - `@2m` -> `@2022/12/01`
-- yeaer/month omitation
+- year/month omitation
   - `@/12/03` -> `@2022/12/03`
   - `@//03` -> `@2022/11/03`
 - set by week
