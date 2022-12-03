@@ -28,7 +28,6 @@ function M.read(kanban, md_path)
 			local pat_due = regexp(due_head) .. regexp(due_style)
 			local pat_tag = regexp(tag_head) .. regexp(tag_style)
 
-			print(line)
 			-- List
 			if string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
@@ -42,8 +41,13 @@ function M.read(kanban, md_path)
 				local due = string.gsub(line, pat_due, due_head .. "%1")
 				table.insert(task.tag, due)
 			elseif string.match(line, "^" .. pat_tag .. "$") then
+				print(line)
 				local tag = string.gsub(line, pat_tag, tag_head .. "%1")
 				table.insert(task.tag, tag)
+			elseif line == "" then
+				local _ = 1
+			else
+				vim.api.nvim_err_writeln("Unrecognized line!!\n" .. line)
 			end
 		end
 	end
