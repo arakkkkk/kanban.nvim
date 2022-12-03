@@ -25,7 +25,7 @@ function M.kanban_close(err, message)
 	if err then
 		vim.api.nvim_err_writeln(err)
 	end
-		M.active = false
+	M.active = false
 end
 
 function M.kanban_open()
@@ -42,7 +42,6 @@ function M.kanban_open()
 	local text = ""
 	for i in pairs(M.ops.kanban_md_path) do
 		text = text .. "[" .. i .. "] " .. M.ops.kanban_md_path[i] .. "\n"
-
 	end
 	local ok, md_path = pcall(vim.fn.input, text .. "Select -> ")
 	if not ok then
@@ -55,8 +54,7 @@ function M.kanban_open()
 	end
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
-	if #md.lists == 0 then
-		M.kanban_close("No task data ..")
+	if not md then
 		return
 	end
 

@@ -6,6 +6,7 @@ function M.read(kanban, md_path)
 	pcall(io.input, md_path)
 	local md = {}
 	md.lists = {}
+	local comments_area = false
 	local list
 	local task
 	while true do
@@ -27,9 +28,17 @@ function M.read(kanban, md_path)
 			local pat_title = regexp(title_head) .. regexp(title_style)
 			local pat_due = regexp(due_head) .. regexp(due_style)
 			local pat_tag = regexp(tag_head) .. regexp(tag_style)
+			line = string.gsub(line, "^%s+", "")
+			line = string.gsub(line, "%s+$", "")
 
 			-- List
-			if string.match(line, "^" .. pat_head .. "$") then
+			if line == "---" and comments_area then
+				comments_area = false
+			elseif line == "---" and not comments_area then
+				comments_area = true
+			elseif comments_area then
+				local _ = 1
+			elseif string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }
 				table.insert(md.lists, list)
@@ -39,17 +48,21 @@ function M.read(kanban, md_path)
 				table.insert(list.tasks, task)
 			elseif string.match(line, "^" .. pat_due .. "$") then
 				local due = string.gsub(line, pat_due, due_head .. "%1")
-				table.insert(task.tag, due)
+				table.insert(task.due, due)
 			elseif string.match(line, "^" .. pat_tag .. "$") then
-				print(line)
 				local tag = string.gsub(line, pat_tag, tag_head .. "%1")
 				table.insert(task.tag, tag)
 			elseif line == "" then
 				local _ = 1
 			else
-				vim.api.nvim_err_writeln("Unrecognized line!!\n" .. line)
+				vim.api.nvim_err_writeln("Unrecognized line!!     " .. line)
+				return false
 			end
 		end
+	end
+	if #md.lists == 0 then
+		M.kanban_close("No task data ..")
+		return
 	end
 	io.close()
 	return md
