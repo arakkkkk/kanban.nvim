@@ -39,11 +39,11 @@ function Utils.tableMerge(t1, t2)
 	return t1
 end
 
-function Utils.TableConcat(t1,t2)
-    for i=1,#t2 do
-        t1[#t1+1] = t2[i]
-    end
-    return t1
+function Utils.TableConcat(t1, t2)
+	for i = 1, #t2 do
+		t1[#t1 + 1] = t2[i]
+	end
+	return t1
 end
 
 function Utils.split(str, seq)
@@ -51,7 +51,7 @@ function Utils.split(str, seq)
 	while str ~= "" do
 		local fc = string.find(str, seq)
 		if fc == nil then
-		  table.insert(tab, str)
+			table.insert(tab, str)
 			break
 		end
 		table.insert(tab, str.sub(str, 1, fc - 1))
@@ -60,6 +60,13 @@ function Utils.split(str, seq)
 	return tab
 end
 
-
+function Utils.includes(tab, str)
+	for i in pairs(tab) do
+		if tab[i] == str then
+			return true
+		end
+	end
+	return false
+end
 
 return Utils

@@ -6,7 +6,6 @@ function M.read(kanban, md_path)
 	pcall(io.input, md_path)
 	local md = {}
 	md.lists = {}
-	local comments_area = false
 	local list
 	local task
 	while true do
@@ -32,17 +31,7 @@ function M.read(kanban, md_path)
 			line = string.gsub(line, "%s+$", "")
 
 			-- List
-			if line == "---" and comments_area then
-				comments_area = false
-			elseif line == "---" and not comments_area then
-				comments_area = true
-			elseif string.match(line, "^%% .+") and comments_area then
-				comments_area = false
-			elseif string.match(line, "^%% .+") and not comments_area then
-				comments_area = true
-			elseif comments_area then
-				local _ = 1
-			elseif string.match(line, "^" .. pat_head .. "$") then
+			if string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }
 				table.insert(md.lists, list)
@@ -58,9 +47,12 @@ function M.read(kanban, md_path)
 				table.insert(task.tag, tag)
 			elseif line == "" then
 				local _ = 1
+			elseif utils.includes(kanban.ops.markdown.header, line) then
+				local _ = 1
+			elseif utils.includes(kanban.ops.markdown.footer, line) then
+				local _ = 1
 			else
-				vim.api.nvim_err_writeln("Unrecognized line!!     " .. line)
-				return false
+				vim.api.nvim_err_writeln("Unrecognized line!!     \n" .. line)
 			end
 		end
 	end
