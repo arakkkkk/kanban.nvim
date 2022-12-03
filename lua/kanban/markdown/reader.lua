@@ -36,6 +36,10 @@ function M.read(kanban, md_path)
 				comments_area = false
 			elseif line == "---" and not comments_area then
 				comments_area = true
+			elseif string.match(line, "^%% .+") and comments_area then
+				comments_area = false
+			elseif string.match(line, "^%% .+") and not comments_area then
+				comments_area = true
 			elseif comments_area then
 				local _ = 1
 			elseif string.match(line, "^" .. pat_head .. "$") then
