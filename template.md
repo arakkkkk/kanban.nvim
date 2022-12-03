@@ -91,3 +91,10 @@ kanban-plugin: basic
 - [ ] [[aaaaaaaaaa]]
 @{yyyy/mm/dd}
 #tagtag
+
+
+%% kanban:settings
+```
+{"kanban-plugin":"basic"}
+```
+%%
