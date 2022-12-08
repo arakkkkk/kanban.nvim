@@ -2,7 +2,7 @@
 Neovim kanban plugin.
 Manage task as a kanban board in neovim.
 Task information is import and export by markdown file.
-Compatible with obsidian kanban.
+Compatible with [obsidian kanban](https://github.com/mgmeyers/obsidian-kanban).
 
 ## screenshots
 ![img_kanban](./doc/img_kanban2.png)
@@ -10,21 +10,20 @@ Compatible with obsidian kanban.
 ## Instration
 Using packer
 ```
-use  'arakkkkk/kanban.nvim'
+use 'arakkkkk/kanban.nvim'
+-- Optional
+use 'nvim-telescope/telescope.nvim'
 ```
-Set up
+
+## Usage
 Please use [template](./template.md) for first kanban project.
-```
-require('kanban').setup({
-  kanban_md_path = {
-    "/path/to/kanban/markdown.md",
-    "/path/to/kanban/markdown.md",
-    "/path/to/kanban/markdown.md",
-  }
-})
-```
-and open kanban to enter `:KanbanOpen`
+and open kanban to enter `:KanbanOpen <file_path>`
 All setup options are [here](./lua/kanban/ops.lua)
+### Optional telescope search
+If you installed telescope.nvim, you can search kanban project files by `KanbanOpen telescope` command.
+
+This command search markdown files by `kanban-plugin: .+` which is same options to Obsidian kanban.
+
 
 ## Kaymaps
 All keymap are [here](./lua/kanban/keymap.lua)

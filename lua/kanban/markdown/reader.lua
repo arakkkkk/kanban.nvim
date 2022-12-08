@@ -3,7 +3,12 @@ local M = {}
 function M.read(kanban, md_path)
 	local utils = require("kanban.utils")
 	md_path = string.gsub(md_path, "^~", os.getenv("HOME"))
-	pcall(io.input, md_path)
+	local file_is_found = pcall(io.input, md_path)
+	if not file_is_found then
+		kanban.kanban_close(md_path .. " is not found ..")
+		return
+	end
+
 	local md = {}
 	md.lists = {}
 	local list
@@ -63,7 +68,7 @@ function M.read(kanban, md_path)
 		end
 	end
 	if #md.lists == 0 then
-		M.kanban_close("No task data ..")
+		kanban.kanban_close("No task data ..")
 		return
 	end
 	io.close()

@@ -9,7 +9,7 @@ function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	require("kanban.create_command").create_command(M)
 	M.keymap = require("kanban.keymap").keymap
-	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {})
+	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, { nargs = "?" })
 	M.theme.init(M)
 	require("cmp").setup.filetype({ "kanban" }, {
 		completion = {
@@ -28,7 +28,26 @@ function M.kanban_close(err, message)
 	M.active = false
 end
 
-function M.kanban_open()
+function M.kanban_open(ops)
+	local arg = ops.args
+	if string.match(arg, "^%s*$") or arg == nil then
+		vim.api.nvim_echo({ { "Please set argment [telescope or kanban file path]", "None" } }, false, {})
+		return
+	end
+
+	if arg == "telescope" then
+		local is_telescope_installed = pcall(require, "telescope")
+		if not is_telescope_installed then
+			vim.api.nvim_err_writeln("Telescope.nvim is not installed!!")
+			return
+		end
+		local kanban_telescope = require("kanban.integrations.telescope").kanban_telescope
+		kanban_telescope()
+		return
+	else
+		M.kanban_md_path = arg
+	end
+
 	-- Check kanban activation
 	if M.active then
 		vim.api.nvim_err_writeln("kanban is already active!!")
@@ -37,28 +56,10 @@ function M.kanban_open()
 		M.active = true
 	end
 
-	-------------------------
-	-- Kanban file selection
-	-------------------------
-	M.markdown = require("kanban.markdown")
-	local text = ""
-	for i in pairs(M.ops.kanban_md_path) do
-		text = text .. "[" .. i .. "] " .. M.ops.kanban_md_path[i] .. "\n"
-	end
-	local ok, md_path = pcall(vim.fn.input, text .. "Select -> ")
-	if not ok then
-		M.kanban_close()
-		return
-	end
-	local md_path_index = tonumber(md_path)
-	if not M.ops.kanban_md_path[md_path_index] then
-		md_path_index = 1
-	end
-
 	----------------------
 	-- Read markdown
 	----------------------
-	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
+	M.markdown = require("kanban.markdown")
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 	if not md then
 		return

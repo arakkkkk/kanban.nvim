@@ -6,6 +6,7 @@ set rtp^=../
 runtime plugin/plenary.vim
 
 lua require('plenary.busted')
+lua require('telescope').setup({})
 lua require('matcher_combinators.luassert')
 lua require('cmp').setup({})
 
