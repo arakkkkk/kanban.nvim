@@ -31,19 +31,19 @@ This command search markdown files by `kanban-plugin: .+` which is same options 
 ## Kaymaps
 All keymap are [here](./lua/kanban/keymap.lua).
 
-| Key         | Action                                         |
-|-------------|------------------------------------------------|
-| <C-h/j/k/l> | Focus left/below/above/right task.             |
-| <S-h/j/k/l> | Move task to left/below/above/right.           |
-| gg          | Focus top task in the list.                    |
-| g           | Focus borrom task in the list.                 |
-| \<leader\>lr  | Rename list.                                   |
-| \<leader\>la  | Add list.                                      |
-| \<leader\>ld  | Delete list.                                   |
-| \<C-o\>       | Add task.                                      |
-| :w\<CR\>      | Save kanban.                                   |
-| q           | Quit.                                          |
-| \<CR\>        | Add task description in another markdown file. |
+| Key          | Action                                         |
+|--------------|------------------------------------------------|
+| <C-h/j/k/l>  | Focus left/below/above/right task.             |
+| <S-h/j/k/l>  | Move task to left/below/above/right.           |
+| gg           | Focus top task in the list.                    |
+| g            | Focus borrom task in the list.                 |
+| \<leader\>lr | Rename list.                                   |
+| \<leader\>la | Add list.                                      |
+| \<leader\>ld | Delete list.                                   |
+| \<C-o\>      | Add task.                                      |
+| :w\<CR\>     | Save kanban.                                   |
+| q            | Quit.                                          |
+| \<CR\>       | Add task description in another markdown file. |
 
 ## Functions
 ### Tag complemention
