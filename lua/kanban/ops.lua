@@ -19,6 +19,7 @@ function M.get_ops(options)
 		},
 		markdown = {
 			description_folder = "./kanban/", -- "./"
+			kanban_title_style = "# <title>",
 			list_head = "## ",
 			title_head = "- [ ] ",
 			title_style = "[[<title>]]",
@@ -32,6 +33,7 @@ function M.get_ops(options)
 				"kanban-plugin: basic",
 				"",
 				"---",
+				"",
 			},
 			footer = {
 				"",

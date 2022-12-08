@@ -29,15 +29,17 @@ function M.kanban_close(err, message)
 end
 
 function M.kanban_open()
+	-- Check kanban activation
 	if M.active then
 		vim.api.nvim_err_writeln("kanban is already active!!")
 		return
 	else
 		M.active = true
 	end
-	M.items = {}
-	M.items.snip = {}
-	M.items.kwindow = {}
+
+	-------------------------
+	-- Kanban file selection
+	-------------------------
 	M.markdown = require("kanban.markdown")
 	local text = ""
 	for i in pairs(M.ops.kanban_md_path) do
@@ -52,22 +54,32 @@ function M.kanban_open()
 	if not M.ops.kanban_md_path[md_path_index] then
 		md_path_index = 1
 	end
+
+	----------------------
+	-- Read markdown
+	----------------------
 	M.kanban_md_path = M.ops.kanban_md_path[md_path_index]
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 	if not md then
 		return
 	end
 
-	-- create window panel
-	M.fn.kwindow.add(M)
-
-	-- create list panel
+	-----------------------
+	-- md to kanban
+	-----------------------
+	-- init
+	M.title = md.title
+	M.items = {}
+	M.items.snip = {}
+	M.items.kwindow = {}
+	M.fn.kwindow.add(M) -- create window panel
+	---- create list panel
 	M.items.lists = {}
 	for i in pairs(md.lists) do
 		M.fn.lists.add(M, md.lists[i].title, false)
 	end
 
-	-- create task panel
+	---- create task panel
 	local max_task_show_int = M.fn.tasks.utils.get_max_task_show_int(M)
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
@@ -81,6 +93,7 @@ function M.kanban_open()
 			end
 		end
 	end
+	---- Set default cursor position
 	if #M.items.lists > 0 then
 		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
 	end

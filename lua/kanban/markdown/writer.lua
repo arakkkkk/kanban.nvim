@@ -8,6 +8,7 @@ function M.write(kanban, md_path)
 		return
 	end
 
+	local kanban_title_style = kanban.ops.markdown.kanban_title_style
 	local list_head = kanban.ops.markdown.list_head
 	local title_head = kanban.ops.markdown.title_head
 	local title_style = kanban.ops.markdown.title_style
@@ -20,6 +21,7 @@ function M.write(kanban, md_path)
 	for i in pairs(kanban.ops.markdown.header) do
 		f:write(kanban.ops.markdown.header[i] .. "\n")
 	end
+	f:write(string.gsub(kanban_title_style, "<title>", kanban.title) .. "\n\n")
 
 	-- List
 	for i in pairs(kanban.items.lists) do
