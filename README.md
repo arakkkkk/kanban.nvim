@@ -17,8 +17,11 @@ use 'nvim-telescope/telescope.nvim'
 
 ## Usage
 Please use [template](./template.md) for first kanban project.
+
 and open kanban to enter `:KanbanOpen <file_path>`
-All setup options are [here](./lua/kanban/ops.lua)
+
+All setup options are [here](./lua/kanban/ops.lua).
+
 ### Optional telescope search
 If you installed telescope.nvim, you can search kanban project files by `KanbanOpen telescope` command.
 
@@ -26,7 +29,7 @@ This command search markdown files by `kanban-plugin: .+` which is same options 
 
 
 ## Kaymaps
-All keymap are [here](./lua/kanban/keymap.lua)
+All keymap are [here](./lua/kanban/keymap.lua).
 
 | Key         | Action                                         |
 |-------------|------------------------------------------------|
@@ -34,13 +37,13 @@ All keymap are [here](./lua/kanban/keymap.lua)
 | <S-h/j/k/l> | Move task to left/below/above/right.           |
 | gg          | Focus top task in the list.                    |
 | g           | Focus borrom task in the list.                 |
-| <leader>lr  | Rename list.                                   |
-| <leader>la  | Add list.                                      |
-| <leader>ld  | Delete list.                                   |
-| <C-o>       | Add task.                                      |
-| :w<CR>      | Save kanban.                                   |
+| <\leader\>lr  | Rename list.                                   |
+| <\leader\>la  | Add list.                                      |
+| <\leader\>ld  | Delete list.                                   |
+| \<C-o\>       | Add task.                                      |
+| :w\<CR\>      | Save kanban.                                   |
 | q           | Quit.                                          |
-| <CR>        | Add task description in another markdown file. |
+| \<CR\>        | Add task description in another markdown file. |
 
 ## Functions
 ### Tag complemention
