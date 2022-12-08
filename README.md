@@ -5,7 +5,7 @@ Task information is import and export by markdown file.
 Compatible with [obsidian kanban](https://github.com/mgmeyers/obsidian-kanban).
 
 ## screenshots
-![demo](./doc/demo.mov)
+![demo](./doc/demo1.gif)
 
 ## Instration
 Using packer
