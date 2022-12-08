@@ -37,9 +37,9 @@ All keymap are [here](./lua/kanban/keymap.lua).
 | <S-h/j/k/l> | Move task to left/below/above/right.           |
 | gg          | Focus top task in the list.                    |
 | g           | Focus borrom task in the list.                 |
-| <\leader\>lr  | Rename list.                                   |
-| <\leader\>la  | Add list.                                      |
-| <\leader\>ld  | Delete list.                                   |
+| \<leader\>lr  | Rename list.                                   |
+| \<leader\>la  | Add list.                                      |
+| \<leader\>ld  | Delete list.                                   |
 | \<C-o\>       | Add task.                                      |
 | :w\<CR\>      | Save kanban.                                   |
 | q           | Quit.                                          |
