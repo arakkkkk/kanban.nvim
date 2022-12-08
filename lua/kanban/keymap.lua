@@ -8,7 +8,6 @@ function M.keymap(buf)
 	-- Default
 	vim.keymap.set("i", "<C-c>", "<esc>", ops)
 	vim.keymap.set("n", "<C-o>", "k", ops)
-	-- vim.keymap.set("n", ":w<cr>", "<cmd>KanbanSave<cr>", ops)
 	vim.keymap.set("n", ":q<cr>", "<cmd>KanbanClose<cr>", ops)
 	vim.keymap.set("n", "q", "<cmd>KanbanClose<cr>", ops)
 

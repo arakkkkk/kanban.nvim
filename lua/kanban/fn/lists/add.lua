@@ -32,7 +32,5 @@ function M.add(kanban, title, with_blank_task_bool)
 	kanban.fn.lists.highlight(kanban, lists[#lists])
 	kanban.fn.lists.resize(kanban)
 	kanban.fn.tasks.resize(kanban)
-	vim.keymap.set("n", ":q<cr>", "<cmd>KanbanClose<cr>", { silent = true, buffer = lists[#lists].buf_nr })
-	vim.keymap.set("n", "q<cr>", "<cmd>KanbanClose<cr>", { silent = true, buffer = lists[#lists].buf_nr })
 end
 return M

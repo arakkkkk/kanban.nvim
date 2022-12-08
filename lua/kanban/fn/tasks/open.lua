@@ -11,6 +11,9 @@ function M.open(kanban, task)
 	kanban.fn.tasks.resize(kanban, 0)
 
 	kanban.keymap(task.buf_nr)
+	vim.keymap.set("n", ":q!<cr>", "<cmd>KanbanClose<cr>", { silent = true, buffer = kanban.items.kwindow.buf_nr })
+	vim.keymap.set("n", ":q<cr>", "<cmd>KanbanClose<cr>", { silent = true, buffer = kanban.items.kwindow.buf_nr })
+	vim.keymap.set("n", "q<cr>", "<cmd>KanbanClose<cr>", { silent = true, buffer = kanban.items.kwindow.buf_nr })
 	kanban.fn.tasks.highlight(kanban, task)
 	kanban.fn.tasks.autocmd(kanban, task)
 end
