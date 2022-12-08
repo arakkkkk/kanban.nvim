@@ -3,7 +3,7 @@ local M = {}
 function M.add(kanban)
 	-- create kanban panel
 	kanban.items.kwindow.buf_nr = vim.api.nvim_create_buf(false, "nomodeline")
-	local kanban_title = kanban.title or "Kanban.nvim"
+	local kanban_title = kanban.title
 	vim.api.nvim_buf_set_lines(kanban.items.kwindow.buf_nr, 0, -1, true, { "", "  " .. kanban_title })
 	kanban.items.kwindow.buf_conf = {
 		relative = "editor",

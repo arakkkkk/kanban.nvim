@@ -72,6 +72,7 @@ function M.read(kanban, md_path)
 		return
 	end
 	io.close()
+	md.kanban_title = md.kanban_title or "Kanban.nvim"
 	return md
 end
 
