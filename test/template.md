@@ -4,7 +4,7 @@ kanban-plugin: basic
 
 ---
 
-# Template kanban
+# temp.nvim
 
 
 ## TODO

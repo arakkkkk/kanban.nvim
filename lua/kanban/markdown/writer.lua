@@ -21,7 +21,7 @@ function M.write(kanban, md_path)
 	for i in pairs(kanban.ops.markdown.header) do
 		f:write(kanban.ops.markdown.header[i] .. "\n")
 	end
-	f:write(string.gsub(kanban_title_style, "<title>", kanban.title) .. "\n\n")
+	f:write(string.gsub(kanban_title_style, "<title>", kanban.kanban_title) .. "\n\n")
 
 	-- List
 	for i in pairs(kanban.items.lists) do

@@ -40,7 +40,7 @@ function M.read(kanban, md_path)
 			-- List
 			if string.match(line, "^# .+$") then
 				local kanban_title = string.gsub(line, pat_kanban_title, "%1")
-				md.title = kanban_title
+				md.kanban_title = kanban_title
 			elseif string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }
