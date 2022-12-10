@@ -1,11 +1,14 @@
 local M = {}
 -- Absolute path
 function M.add(kanban)
-	-- create kanban panel
-	local taskwinid = vim.fn.win_getid()
-	kanban.items.description = {}
+	local focus = kanban.fn.tasks.utils.get_focus(kanban)
+	local focused_list = kanban.items.lists[focus.list_num]
+	local task = focused_list.tasks[focus.task_num]
+	kanban.items.description = { task = task }
 
-	kanban.items.description.buf_nr = vim.api.nvim_create_buf(false, "nomodeline")
+	-- create kanban panel
+	kanban.items.description.buf_nr = vim.api.nvim_create_buf(false, "throwaway")
+
 	kanban.items.description.buf_conf = {
 		relative = "editor",
 		row = kanban.ops.layout.y_margin,
@@ -18,17 +21,18 @@ function M.add(kanban)
 	}
 	local win = vim.api.nvim_open_win(kanban.items.description.buf_nr, true, kanban.items.description.buf_conf)
 	vim.api.nvim_win_set_option(win, "winhighlight", "NormalFloat:KanbanFloat")
-
-	local task_title = vim.fn.getbufline(0, 1, "$")
 	local current_md_dir = string.gsub(kanban.kanban_md_path, "/[^/]+$", "")
-	local file_path = current_md_dir .."/".. kanban.ops.markdown.description_folder .. task_title[1] .. ".md"
+	local file_path = current_md_dir .. "/" .. kanban.ops.markdown.description_folder .. task.title .. ".md"
 	vim.cmd(":e " .. file_path)
+
+	kanban.fn.description.set_header(kanban)
 
 	vim.api.nvim_create_autocmd("BufWinLeave", {
 		once = true,
 		pattern = "<buffer=" .. kanban.items.description.buf_nr .. ">",
 		callback = function()
-			vim.fn.win_gotoid(taskwinid)
+			kanban.items.description = {}
+			vim.fn.win_gotoid(task.win_id)
 		end,
 	})
 end

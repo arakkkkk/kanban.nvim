@@ -1,6 +1,18 @@
 local M = {}
 M.utils = {}
 
+-- function M.get_by_bufnr(kanban, bufnr)
+-- 	for i in pairs(kanban.items.lists) do
+-- 		local list = kanban.items.lists[i]
+-- 		for j in pairs(list.tasks) do
+-- 			local task = list.tasks[j]
+-- 			if bufnr == task.buf_nr then
+-- 				return task
+-- 			end
+-- 		end
+-- 	end
+-- end
+
 function M.get_focus(kanban)
 	for i in pairs(kanban.items.lists) do
 		local list = kanban.items.lists[i]

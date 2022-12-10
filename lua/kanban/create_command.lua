@@ -123,5 +123,8 @@ function M.create_command(kanban, buf)
 	vim.api.nvim_create_user_command("KanbanTaskDescription", function()
 		kanban.fn.description.add(kanban)
 	end, {})
+	vim.api.nvim_create_user_command("KanbanTaskDescriptionSetHeader", function()
+		kanban.fn.description.set_header(kanban)
+	end, {})
 end
 return M
