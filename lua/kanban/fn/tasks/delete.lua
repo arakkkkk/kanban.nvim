@@ -9,34 +9,29 @@ function M.delete(kanban)
   kanban.fn.tasks.close(focused_tasks[focus.task_num])
   table.remove(focused_tasks, focus.task_num);
 
-  -- Open new teak in blank area
+  -- Open bellow unvisible task in unoccupied area
   local is_opend = false
   for i = focus.task_num, #focused_tasks do
-    if focused_tasks[i].win_id == nil then
+    if focused_tasks[i].win_id == nil and kanban.fn.tasks.filter.is_visible(kanban, focused_tasks[i]) then
       kanban.fn.tasks.open(kanban, focused_tasks[i])
       is_opend = true
       break
     end
   end
+  -- Open above unvisible task in unoccupied area
   if not is_opend then
-    for i in pairs(focused_list.tasks) do
-      if focused_list.tasks[i].win_id ~= nil and i == 1 then
-        break
-      elseif focused_list.tasks[i].win_id then
-        kanban.fn.tasks.open(kanban, focused_list.tasks[i-1])
+    for i = focus.task_num, 1, -1 do
+      if focused_tasks[i].win_id == nil and kanban.fn.tasks.filter.is_visible(kanban, focused_tasks[i]) then
+        kanban.fn.tasks.open(kanban, focused_tasks[i])
         is_opend = true
         break
       end
     end
   end
+  -- Resize
   if not is_opend then
-    kanban.fn.tasks.resize(kanban, focus.list_num)
-  end
-
-  -- Create blank task if no task in list
-  if #focused_list.tasks == 0 then
 		kanban.fn.tasks.add(kanban, focus.list_num, nil, "top", true)
-		-- kanban.fn.tasks.open(kanban, blank_task)
+    kanban.fn.tasks.resize(kanban, focus.list_num)
   end
 
   -- Swich focus window

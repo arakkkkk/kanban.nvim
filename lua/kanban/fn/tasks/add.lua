@@ -1,6 +1,6 @@
 local M = {}
 -- Absolute path
-function M.add(kanban, list_num, task, add_position, open_bool)
+function M.add(kanban, list_num, task, add_position)
 	local target_list
 	if list_num == nil then
 		local focus = kanban.fn.tasks.utils.get_focus(kanban)
@@ -10,11 +10,12 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 	end
 
 	-- Create new task by template (option.markdown)
+	local is_empty_task = false
 	if task == nil then
+		is_empty_task = true
 		task = kanban.fn.tasks.utils.create_blank_task(kanban)
 	end
 
-	local tasks = target_list.tasks
 	task.buf_conf = {
 		relative = "editor",
 		row = 10,
@@ -29,6 +30,7 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 	task.buf_nr = nil
 	task.win_id = nil
 
+	local tasks = target_list.tasks
 	if add_position == "top" then
 		table.insert(tasks, 1, task)
 	elseif add_position == "bottom" then
@@ -37,17 +39,16 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 		assert(false)
 	end
 
-	if not open_bool then
-		return
+	local max_task_show_int = kanban.fn.tasks.utils.get_max_task_show_int(kanban)
+	if not kanban.fn.tasks.filter.is_visible(kanban, task) then
+		return task
+	elseif kanban.fn.tasks.utils.count_visible_tasks_in_list(kanban, list_num) > max_task_show_int then
+		return task
 	end
+
 	kanban.fn.tasks.open(kanban, task)
 	vim.fn.win_gotoid(task.win_id)
 
-	if add_position == "top" then
-		kanban.fn.tasks.move.top(kanban)
-	elseif add_position == "bottom" then
-		kanban.fn.tasks.move.bottom(kanban)
-	end
 	return task
 end
 return M

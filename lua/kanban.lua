@@ -81,22 +81,23 @@ function M.kanban_open(ops)
 	end
 
 	---- create task panel
-	local max_task_show_int = M.fn.tasks.utils.get_max_task_show_int(M)
 	for i in pairs(md.lists) do
 		local list = md.lists[i]
-		if #list.tasks == 0 then
+		for j in pairs(list.tasks) do
+			local task = list.tasks[j]
+			M.fn.tasks.add(M, i, task, "bottom")
+		end
+		if M.fn.tasks.utils.count_visible_tasks_in_list(M, i) == 0 then
 			M.fn.tasks.add(M, i, nil, "bottom", true)
-		else
-			for j in pairs(list.tasks) do
-				local task = list.tasks[j]
-				local open_bool = j <= max_task_show_int
-				M.fn.tasks.add(M, i, task, "bottom", open_bool)
-			end
 		end
 	end
 	---- Set default cursor position
 	if #M.items.lists > 0 then
-		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
+		for _, task in pairs(M.items.lists[1].tasks) do
+			if task.win_id ~= nil then
+				vim.fn.win_gotoid(task.win_id)
+			end
+		end
 	end
 end
 

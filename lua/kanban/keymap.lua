@@ -36,6 +36,9 @@ function M.keymap(buf)
 
 	-- Description note
 	vim.keymap.set("n", "<CR>", "<cmd>KanbanTaskDescription<cr>", ops)
+
+	-- Filter
+	vim.keymap.set("n", "<CR>", "<cmd>KanbanFilterByTag<cr>", ops)
 end
 
 return M

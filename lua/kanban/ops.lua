@@ -3,6 +3,9 @@ local M = {}
 function M.get_ops(options)
 	local C = require("kanban.theme.colors")
 	local ops = {
+		filter_tag = "",
+		filter_due = "",
+		filter_title = "",
 		move_position = "top", -- top or bottom
 		add_position = "bottom", -- top or bottom
 		layout = {

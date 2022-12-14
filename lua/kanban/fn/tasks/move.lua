@@ -8,7 +8,7 @@ function M.top(kanban)
 	-- close all task window
 	for i in pairs(focused_tasks) do
 		local task = focused_tasks[i]
-		if task.win_id ~= nil then
+		if task.win_id ~= nil and kanban.fn.tasks.filter.is_visible(kanban, task) then
 			kanban.fn.tasks.close(task)
 		end
 	end
@@ -19,7 +19,9 @@ function M.top(kanban)
 			break
 		end
 		local open_task_index = i
-		kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
+		if kanban.fn.tasks.filter.is_visible(kanban, focused_tasks[open_task_index]) then
+			kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
+		end
 	end
 	-- focus top task
 	vim.fn.win_gotoid(focused_tasks[1].win_id)
@@ -33,7 +35,7 @@ function M.bottom(kanban)
 	-- close all task window
 	for i in pairs(focused_tasks) do
 		local task = focused_tasks[i]
-		if task.win_id ~= nil then
+		if task.win_id ~= nil and kanban.fn.tasks.filter.is_visible(kanban, task) then
 			kanban.fn.tasks.close(task)
 		end
 	end
@@ -44,7 +46,9 @@ function M.bottom(kanban)
 			break
 		end
 		local open_task_index = #focused_tasks - i + 1
-		kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
+		if kanban.fn.tasks.filter.is_visible(kanban, focused_tasks[open_task_index]) then
+			kanban.fn.tasks.open(kanban, focused_tasks[open_task_index])
+		end
 	end
 	-- focus top task
 	vim.fn.win_gotoid(focused_tasks[#focused_tasks].win_id)
@@ -56,27 +60,28 @@ function M.up(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
 	for i in pairs(kanban.items.lists) do
-		local list = kanban.items.lists[i]
-		for j in pairs(list.tasks) do
-			if list.tasks[j].win_id == focused_task.win_id then
-				local above_task = list.tasks[j - 1]
+		if i == focus.list_num then
+			local list = kanban.items.lists[i]
+			for j = focus.task_num -1, 1, -1 do
+				local above_task = list.tasks[j]
 				-- Up without scroll
-				if j > 1 and above_task.win_id ~= nil then
+				if above_task.win_id ~= nil and kanban.fn.tasks.filter.is_visible(kanban, above_task) then
 					vim.fn.win_gotoid(above_task.win_id)
+					return
 				-- Up with scroll
-				elseif j > 1 and above_task.win_id == nil then
+				elseif above_task.win_id == nil and kanban.fn.tasks.filter.is_visible(kanban, above_task) then
 					-- Close foot task window (above nil window)
-					for k = j, #list.tasks do
-						if list.tasks[k].win_id == nil or k == #list.tasks then
-							kanban.fn.tasks.close(list.tasks[k - 1])
+					for k = #list.tasks, 1, -1 do
+						if list.tasks[k].win_id ~= nil then
+							kanban.fn.tasks.close(list.tasks[k])
 							break
 						end
 					end
 					-- Open bellow task window
 					kanban.fn.tasks.open(kanban, above_task)
 					vim.fn.win_gotoid(above_task.win_id)
+					return
 				end
-				break
 			end
 		end
 	end
@@ -88,27 +93,28 @@ function M.down(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local focused_task = focused_list.tasks[focus.task_num]
 	for i in pairs(kanban.items.lists) do
-		local list = kanban.items.lists[i]
-		for j in pairs(list.tasks) do
-			if list.tasks[j].win_id == focused_task.win_id then
-				local below_task = list.tasks[j + 1]
+		if i == focus.list_num then
+			local list = kanban.items.lists[i]
+			for j = focus.task_num + 1, #focused_list.tasks do
+				local bellow_task = list.tasks[j]
 				-- Up without scroll
-				if j < #list.tasks and below_task.win_id ~= nil then
-					vim.fn.win_gotoid(below_task.win_id)
+				if bellow_task.win_id ~= nil and kanban.fn.tasks.filter.is_visible(kanban, bellow_task) then
+					vim.fn.win_gotoid(bellow_task.win_id)
+					return
 				-- Up with scroll
-				elseif j < #list.tasks and below_task.win_id == nil then
-					-- Close head task window
-					for k in pairs(list.tasks) do
+				elseif bellow_task.win_id == nil and kanban.fn.tasks.filter.is_visible(kanban, bellow_task) then
+					-- Close foot task window (above nil window)
+					for k = 1, #focused_list.tasks do
 						if list.tasks[k].win_id ~= nil then
 							kanban.fn.tasks.close(list.tasks[k])
 							break
 						end
 					end
 					-- Open bellow task window
-					kanban.fn.tasks.open(kanban, below_task)
-					vim.fn.win_gotoid(below_task.win_id)
+					kanban.fn.tasks.open(kanban, bellow_task)
+					vim.fn.win_gotoid(bellow_task.win_id)
+					return
 				end
-				break
 			end
 		end
 	end

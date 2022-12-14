@@ -77,7 +77,7 @@ function M.create_command(kanban, buf)
 		if not kanban.active then
 			return
 		end
-		kanban.fn.tasks.add(kanban, nil, nil, kanban.ops.add_position, true)
+		kanban.fn.tasks.add(kanban, nil, nil, kanban.ops.add_position)
 		vim.cmd[[startinsert]]
 	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskAddBottom", function()
@@ -125,6 +125,10 @@ function M.create_command(kanban, buf)
 	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskDescriptionSetHeader", function()
 		kanban.fn.description.set_header(kanban)
+	end, {})
+
+	vim.api.nvim_create_user_command("KanbanFilterByTag", function()
+		kanban.fn.tasks.filter.filter_by_tag(kanban)
 	end, {})
 end
 return M

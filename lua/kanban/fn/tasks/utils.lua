@@ -66,4 +66,15 @@ function M.count_due(line)
 	return due_days - now_days
 end
 
+function M.count_visible_tasks_in_list(kanban, list_num)
+	local list = kanban.items.lists[list_num]
+	local res_count = 0
+	for _, task in pairs(list.tasks) do
+		if kanban.fn.tasks.filter.is_visible(kanban, task) then
+			res_count = res_count + 1
+		end
+	end
+	return res_count
+end
+
 return M

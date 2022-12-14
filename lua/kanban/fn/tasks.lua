@@ -16,7 +16,7 @@ M.edit = require(ap .. "tasks.edit").edit
 M.autocmd = require(ap .. "tasks.autocmd").autocmd
 M.highlight = require(ap .. "tasks.highlight").highlight
 M.sort = require(ap .. "tasks.sort").sort
-M.filter = require(ap .. "tasks.filter").filter
+M.filter = require(ap .. "tasks.filter")
 M.utils = require(ap .. "tasks.utils")
 return M
 
