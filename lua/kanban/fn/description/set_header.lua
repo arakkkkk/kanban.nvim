@@ -11,6 +11,9 @@ local function write_tag(task, insert)
   vim.fn.setline(2, "tag:" .. tags)
 end
 local function write_due(task, insert)
+  if #task.due == 0 then
+    return
+  end
   vim.fn.setline(3, "due: " .. task.due[1])
 end
 local function write_created(task, insert)
