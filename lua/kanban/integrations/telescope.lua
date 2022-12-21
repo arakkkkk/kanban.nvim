@@ -6,13 +6,13 @@ local conf = require("telescope.config").values
 local action_state = require("telescope.actions.state")
 
 M.kanban_telescope = function(opts)
-	local handle = io.popen("rg 'kanban-plugin: .+' -l ")
+	local handle = io.popen("rg " .. vim.fn.getcwd() .. " 'kanban-plugin: .+' -l ")
 	assert(handle)
 	local io_output = handle:read("*a")
 	local paths = {}
 	for line in io_output:gmatch("([^\n]*)\n?") do
 		if line ~= "" then
-		  local path = string.gsub(line, vim.fn.getcwd(), "./")
+			local path = string.gsub(line, vim.fn.getcwd(), "./")
 			table.insert(paths, path)
 		end
 	end
@@ -23,7 +23,7 @@ M.kanban_telescope = function(opts)
 		.new(opts, {
 			prompt_title = "Kanban.nvim",
 			finder = finders.new_table({
-				results = paths
+				results = paths,
 			}),
 			attach_mappings = function(prompt_bufnr, map)
 				actions.select_default:replace(function()
