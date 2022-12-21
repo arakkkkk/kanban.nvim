@@ -6,7 +6,7 @@ local conf = require("telescope.config").values
 local action_state = require("telescope.actions.state")
 
 M.kanban_telescope = function(opts)
-	local handle = io.popen("rg " .. vim.fn.getcwd() .. " 'kanban-plugin: .+' -l ")
+	local handle = io.popen("rg '\\-+[\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU " .. vim.fn.getcwd())
 	assert(handle)
 	local io_output = handle:read("*a")
 	local paths = {}
