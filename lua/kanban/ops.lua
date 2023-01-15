@@ -13,7 +13,7 @@ function M.get_ops(options)
 			task_height = 3,
 		},
 		markdown = {
-			description_folder = "./kanban/", -- "./"
+			description_folder = "./", -- "./"
 			list_head = "## ",
 			title_head = "- [ ] ",
 			title_style = "<title>",
