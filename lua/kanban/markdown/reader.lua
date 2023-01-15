@@ -21,7 +21,6 @@ function M.read(kanban, md_path)
 
 		for _, line in pairs(utils.split(lines, "<br>")) do
 			local regexp = require("kanban.utils").to_regexp
-			local kanban_title_style = kanban.ops.markdown.kanban_title_style
 			local list_head = kanban.ops.markdown.list_head
 			local title_head = kanban.ops.markdown.title_head
 			local title_style = kanban.ops.markdown.title_style
@@ -30,7 +29,6 @@ function M.read(kanban, md_path)
 			local tag_head = kanban.ops.markdown.tag_head
 			local tag_style = kanban.ops.markdown.tag_style
 			local pat_head = list_head .. "(.*)"
-			local pat_kanban_title = regexp(kanban_title_style)
 			local pat_title = regexp(title_head) .. regexp(title_style)
 			local pat_due = regexp(due_head) .. regexp(due_style)
 			local pat_tag = regexp(tag_head) .. regexp(tag_style)
@@ -38,10 +36,7 @@ function M.read(kanban, md_path)
 			line = string.gsub(line, "%s+$", "")
 
 			-- List
-			if string.match(line, "^# .+$") then
-				local kanban_title = string.gsub(line, pat_kanban_title, "%1")
-				md.kanban_title = kanban_title
-			elseif string.match(line, "^" .. pat_head .. "$") then
+			if string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }
 				table.insert(md.lists, list)
@@ -72,7 +67,6 @@ function M.read(kanban, md_path)
 		return
 	end
 	io.close()
-	md.kanban_title = md.kanban_title or "Kanban.nvim"
 	return md
 end
 

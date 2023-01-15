@@ -69,7 +69,6 @@ function M.kanban_open(ops)
 	-- md to kanban
 	-----------------------
 	-- init
-	M.kanban_title = md.kanban_title
 	M.items = {}
 	M.items.snip = {}
 	M.items.kwindow = {}
