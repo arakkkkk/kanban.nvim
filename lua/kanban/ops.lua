@@ -16,7 +16,7 @@ function M.get_ops(options)
 			description_folder = "./kanban/", -- "./"
 			list_head = "## ",
 			title_head = "- [ ] ",
-			title_style = "[[<title>]]",
+			title_style = "<title>",
 			due_head = "@",
 			due_style = "{<due>}",
 			tag_head = "#",
