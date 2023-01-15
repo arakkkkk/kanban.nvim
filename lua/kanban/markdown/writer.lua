@@ -29,7 +29,7 @@ function M.write(kanban, md_path)
 		for j in pairs(list.tasks) do
 			local task = list.tasks[j]
 			if task.title ~= "" then
-				local title = title_head .. string.gsub(title_style, "<title>", task.title)
+				local title = title_head .. "[[" .. string.gsub(title_style, "<title>", task.title) .. "]]"
 				f:write("\n" .. title .. "\n")
 				-- Due
 				for k in pairs(task.due) do

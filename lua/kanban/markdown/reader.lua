@@ -42,6 +42,7 @@ function M.read(kanban, md_path)
 				table.insert(md.lists, list)
 			elseif string.match(line, "^" .. pat_title .. "$") then
 				local title = string.gsub(line, pat_title, "%1")
+				title = title:match("^%[%[(.+)%]%]") or title
 				task = { title = title, tag = {}, due = {} }
 				table.insert(list.tasks, task)
 			elseif string.match(line, "^" .. pat_due .. "$") then
