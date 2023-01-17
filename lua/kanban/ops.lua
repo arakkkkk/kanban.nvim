@@ -1,6 +1,7 @@
 local M = {}
 
 function M.get_ops(options)
+	options = options or {}
 	local C = require("kanban.theme.colors")
 	local ops = {
 		move_position = "top", -- top or bottom
