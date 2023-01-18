@@ -69,4 +69,11 @@ function Utils.includes(tab, str)
 	return false
 end
 
+function Utils.file_exists(path)
+	local fh = io.open(path, "rb")
+	if fh then
+		fh:close()
+	end
+	return fh ~= nil
+end
 return Utils

@@ -6,14 +6,13 @@ local conf = require("telescope.config").values
 local action_state = require("telescope.actions.state")
 
 M.kanban_telescope = function(opts)
-	local handle = io.popen("rg '\\-+[\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU " .. vim.fn.getcwd())
+	local handle = io.popen("rg '\\-+[\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU ./")
 	assert(handle)
 	local io_output = handle:read("*a")
 	local paths = {}
 	for line in io_output:gmatch("([^\n]*)\n?") do
 		if line ~= "" then
-			local path = string.gsub(line, vim.fn.getcwd(), "./")
-			table.insert(paths, path)
+			table.insert(paths, line)
 		end
 	end
 	handle:close()

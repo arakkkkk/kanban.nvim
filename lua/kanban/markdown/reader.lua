@@ -35,8 +35,9 @@ function M.read(kanban, md_path)
 			line = string.gsub(line, "^%s+", "")
 			line = string.gsub(line, "%s+$", "")
 
-			-- List
-			if string.match(line, "^" .. pat_head .. "$") then
+			if string.match(line, "^# .+$") then
+				-- Remove header1
+			elseif string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }
 				table.insert(md.lists, list)
@@ -64,8 +65,8 @@ function M.read(kanban, md_path)
 		end
 	end
 	if #md.lists == 0 then
-		kanban.kanban_close("No task data ..")
-		return
+		vim.api.nvim_err_writeln("No task data or Not kanban.vim file. \nPlease create kanban.nvim file by :KanbanCreate")
+		return false
 	end
 	io.close()
 	return md

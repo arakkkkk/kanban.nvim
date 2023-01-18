@@ -4,96 +4,38 @@ kanban-plugin: basic
 
 ---
 
-# Template kanban
-
 
 ## TODO
 
-- [ ] [[aaaaraaaaa]]
-@{2022/01/01}
-#tagtag
+- [ ] [[sample task3]]
+@{2023/01/20}
+#job
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
+- [ ] [[sample task4]]
+@{2023/02/01}
+#home
 
 ## Work in progress
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
+- [ ] [[sample task1]]
+@{2023/01/14}
+#study
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
+- [ ] [[sample task2]]
+@{2023/01/18}
+#study
 
 ## Done
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
+- [ ] [[sample task6]]
+@{2023/02/01}
+#home
 
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
+- [ ] [[sample sample]]
+@{2023/01/18}
+#study
 
 ## Archive
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
-
-- [ ] [[aaaaaaaaaa]]
-@{yyyy/mm/dd}
-#tagtag
 
 
 %% kanban:settings

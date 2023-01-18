@@ -8,7 +8,48 @@ M.active = false
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.keymap = require("kanban.keymap").keymap
-	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, { nargs = "?" })
+	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {
+		nargs = 1,
+		complete = function(arg, _, _)
+			local handle = io.popen("rg '\\-+[\\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU ./")
+			if not handle then
+				return {}
+			end
+			local io_output = handle:read("*a")
+			local paths = {}
+			for line in io_output:gmatch("([^\n]*)\n?") do
+				if line ~= "" then
+					table.insert(paths, line)
+				end
+			end
+			return paths
+		end,
+	})
+	vim.api.nvim_create_user_command("KanbanCreate", M.kanban_create, {
+		nargs = 1,
+		complete = function(arg, _, _)
+			local arg_path = arg:match("(.+)/[^/]*$") or ""
+			local arg_tail = arg:match("[^/]*$")
+			local handle = io.popen("find ./" .. arg_path .. " -name '" .. arg_tail .. "*' -type d")
+			print("find ./" .. arg_path .. " -name '" .. arg_tail .. "' -type d")
+			if not handle then
+				return {}
+			end
+			local io_output = handle:read("*a")
+			print(io_output)
+			local paths = {}
+			for line in io_output:gmatch("([^\n]*)\n?") do
+				if line and line ~= "" then
+					line = line:gsub("^[%./]+/", "")
+					if line ~= "" and not line:match("^%.") then
+						table.insert(paths, line)
+					end
+				end
+			end
+			return paths
+		end,
+	})
+
 	M.theme.init(M)
 	require("cmp").setup.filetype({ "kanban" }, {
 		completion = {
@@ -26,6 +67,24 @@ function M.kanban_close(err, message)
 	end
 	M.active = false
 	require("kanban.user_command").del()
+end
+
+function M.kanban_create(ops)
+	local path = ops.args
+	path = path:match("%.md$") and path or path .. ".md"
+	local markdown = require("kanban.markdown")
+	if require("kanban.utils").file_exists(path) then
+		vim.api.nvim_err_writeln(path .. " already exists!")
+		return
+	end
+	M.items = {}
+	M.items.lists = {
+		{ title = "TODO", tasks = {} },
+		{ title = "Work in progress", tasks = {} },
+		{ title = "Done", tasks = {} },
+		{ title = "Archive", tasks = {} },
+	}
+	markdown.writer.write(M, path)
 end
 
 function M.kanban_open(ops)
@@ -62,6 +121,7 @@ function M.kanban_open(ops)
 	M.markdown = require("kanban.markdown")
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
 	if not md then
+		M.active = false
 		return
 	end
 

@@ -7,6 +7,9 @@ Compatible with [obsidian kanban](https://github.com/mgmeyers/obsidian-kanban).
 ## screenshots
 ![demo](./doc/demo1.gif)
 
+## Requirements
+- ripgrep
+
 ## Instration
 Using packer
 ```
@@ -16,7 +19,9 @@ use 'nvim-telescope/telescope.nvim'
 ```
 
 ## Usage
-Please use [template](./template.md) for first kanban project.
+Create first kanban project.
+
+`:KanbanOpen <file_path>`
 
 and open kanban to enter `:KanbanOpen <file_path>`
 
