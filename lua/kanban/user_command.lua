@@ -1,5 +1,31 @@
 local M = {}
-function M.create_command(kanban, buf)
+function M.del()
+	-- Task
+	vim.api.nvim_del_user_command("KanbanTaskDelete")
+	-- Task movement
+	vim.api.nvim_del_user_command("KanbanTakeRight")
+	vim.api.nvim_del_user_command("KanbanTakeLeft")
+	vim.api.nvim_del_user_command("KanbanTakeUp")
+	vim.api.nvim_del_user_command("KanbanTakeDown")
+	vim.api.nvim_del_user_command("KanbanMoveDown")
+	vim.api.nvim_del_user_command("KanbanMoveUp")
+	vim.api.nvim_del_user_command("KanbanMoveRight")
+	vim.api.nvim_del_user_command("KanbanMoveLeft")
+	vim.api.nvim_del_user_command("KanbanMoveTop")
+	vim.api.nvim_del_user_command("KanbanMoveBottom")
+	vim.api.nvim_del_user_command("KanbanTaskAdd")
+	vim.api.nvim_del_user_command("KanbanTaskAddBottom")
+	vim.api.nvim_del_user_command("KanbanTaskAddTop")
+	vim.api.nvim_del_user_command("KanbanClose")
+	vim.api.nvim_del_user_command("KanbanListDelete")
+	vim.api.nvim_del_user_command("KanbanListRename")
+	vim.api.nvim_del_user_command("KanbanListAdd")
+	-- Description note
+	vim.api.nvim_del_user_command("KanbanTaskDescription")
+	vim.api.nvim_del_user_command("KanbanTaskDescriptionSetHeader")
+end
+
+function M.create(kanban)
 	-- Task
 	vim.api.nvim_create_user_command("KanbanTaskDelete", function()
 		if not kanban.active then
@@ -106,6 +132,7 @@ function M.create_command(kanban, buf)
 		kanban.fn.lists.close_all(kanban)
 		kanban.fn.kwindow.close(kanban)
 		kanban.active = false
+		require("kanban.user_command").del()
 	end, {})
 
 	-- List function

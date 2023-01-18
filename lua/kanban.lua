@@ -7,7 +7,6 @@ M.active = false
 
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
-	require("kanban.create_command").create_command(M)
 	M.keymap = require("kanban.keymap").keymap
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, { nargs = "?" })
 	M.theme.init(M)
@@ -26,6 +25,7 @@ function M.kanban_close(err, message)
 		vim.api.nvim_err_writeln(err)
 	end
 	M.active = false
+	require("kanban.user_command").del()
 end
 
 function M.kanban_open(ops)
@@ -97,6 +97,7 @@ function M.kanban_open(ops)
 	if #M.items.lists > 0 then
 		vim.fn.win_gotoid(M.items.lists[1].tasks[1].win_id)
 	end
+	require("kanban.user_command").create(M)
 end
 
 return M
