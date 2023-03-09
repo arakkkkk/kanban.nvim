@@ -17,6 +17,27 @@ use 'arakkkkk/kanban.nvim'
 -- Optional
 use 'nvim-telescope/telescope.nvim'
 ```
+and setup
+```
+require("kanban").setup({
+	markdown = {
+		description_folder = "./tasks/",  -- Path to save the file corresponding to the task.
+		list_head = "## ",
+	}
+})
+```
+
+With the above settings, you can manage tasks as follows
+
+```
+.
+└── kanban.md
+    └── tasks           # Configured by setup option (description_folder)
+        ├── task1.md    # Memo for task1
+        ├── task2.md    # Memo for task2
+        ├── task3.md    # Memo for task3
+        └── task4.md    # Memo for task4
+```
 
 ## Usage
 Create first kanban project.
