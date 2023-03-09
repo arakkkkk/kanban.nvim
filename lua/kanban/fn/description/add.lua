@@ -4,6 +4,10 @@ function M.add(kanban)
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local task = focused_list.tasks[focus.task_num]
+	if task.title == "" then
+		vim.api.nvim_err_writeln("Error: It is blank task.")
+		return
+	end
 	kanban.items.description = { task = task }
 
 	-- create kanban panel
@@ -22,8 +26,13 @@ function M.add(kanban)
 	local win = vim.api.nvim_open_win(kanban.items.description.buf_nr, true, kanban.items.description.buf_conf)
 	vim.api.nvim_win_set_option(win, "winhighlight", "NormalFloat:KanbanFloat")
 	local current_md_dir = string.gsub(kanban.kanban_md_path, "/[^/]+$", "")
+	if vim.fn.isdirectory(current_md_dir .. "/" .. kanban.ops.markdown.description_folder) == 0 then
+		vim.fn.mkdir(current_md_dir .. "/" .. kanban.ops.markdown.description_folder)
+	end
 	local file_path = current_md_dir .. "/" .. kanban.ops.markdown.description_folder .. task.title .. ".md"
 	vim.cmd(":e " .. file_path)
+	local bufnr = vim.api.nvim_win_get_buf(0)
+	vim.bo[bufnr]["bufhidden"] = "delete"
 
 	kanban.fn.description.set_header(kanban)
 
