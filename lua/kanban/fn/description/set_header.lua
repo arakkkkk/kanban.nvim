@@ -27,14 +27,15 @@ function M.set_header(kanban)
   local description = kanban.items.description
   local task = description.task
 
-	local doc_lines = vim.fn.getbufline(kanban.items.description.buf_nr, 1, "$")
+  local current_buf = vim.api.nvim_get_current_buf()
+	local doc_lines = vim.fn.getbufline(current_buf, 1, "$")
 
 	if #doc_lines == 1 and doc_lines[1] == "" then
 	  write_title(task, false)
 	  write_tag(task, false)
 	  write_due(task, false)
 	  write_created(task, false)
-	  write_updated(task, false)
+	  -- write_updated(task, false)
 	end
 end
 
