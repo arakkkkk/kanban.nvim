@@ -90,3 +90,14 @@ If it is `2022/11/01`
   - `@nntu` -> next after next Tuesday
   - `@nnnwe` -> next after next after next Wednesday
   - `@nnnn...Th` -> ... Thursday
+
+# Release notes
+- v1.0 
+- v1.1(2023/01/20)
+	- Support telescope.nvim
+	- Command completion by find kanban files
+	- :KanbanCreate command to new kanban project
+- v1.2(yet)
+	- Support completed cards
+	- Support Archived list
+
