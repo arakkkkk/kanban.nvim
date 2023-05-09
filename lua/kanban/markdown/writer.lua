@@ -9,8 +9,6 @@ function M.write(kanban, md_path)
 	end
 
 	local list_head = kanban.ops.markdown.list_head
-	local title_head = kanban.ops.markdown.title_head
-	local title_style = kanban.ops.markdown.title_style
 	local due_head = kanban.ops.markdown.due_head
 	local due_style = kanban.ops.markdown.due_style
 	local tag_head = kanban.ops.markdown.tag_head
@@ -29,7 +27,8 @@ function M.write(kanban, md_path)
 		for j in pairs(list.tasks) do
 			local task = list.tasks[j]
 			if task.title ~= "" then
-				local title = title_head .. "[[" .. string.gsub(title_style, "<title>", task.title) .. "]]"
+				title_head = "- [" .. task.check .. "] "
+				local title = title_head .. task.title
 				f:write("\n" .. title .. "\n")
 				-- Due
 				for k in pairs(task.due) do

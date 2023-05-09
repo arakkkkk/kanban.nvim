@@ -31,11 +31,12 @@ function M.create_blank_task(kanban)
 		title = "",
 		due = {},
 		tag = {},
+		check = " ",
 	}
 	return blank_task
 end
 
-function M.create_window_text(task)
+function M.create_window_text(kanban, task)
 	local contents = { task.title }
 	for i in pairs(task.due) do
 		table.insert(contents, task.due[i])

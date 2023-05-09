@@ -6,6 +6,7 @@ function M.get_ops(options)
 	local ops = {
 		move_position = "top", -- top or bottom
 		add_position = "bottom", -- top or bottom
+		show_checkbox = false,
 		layout = {
 			x_margin = 5,
 			y_margin = 3,
@@ -16,8 +17,6 @@ function M.get_ops(options)
 		markdown = {
 			description_folder = "./tasks/", -- "./"
 			list_head = "## ",
-			title_head = "- [ ] ",
-			title_style = "<title>",
 			due_head = "@",
 			due_style = "{<due>}",
 			tag_head = "#",

@@ -4,15 +4,29 @@ kanban-plugin: basic
 
 ---
 
+## asa
 
-## TODO
+- [ ] fdsaf
 
-## Work in progress
 
-## Done
+## sgasd
+
+- [ ] fdsaf
+- [ ] fdsfdas
+
+
+## Complete
+
+- [ ] fsd
+- [ ] fsda
+
+
+***
 
 ## Archive
 
+- [ ] fsda
+- [ ] fdsaf
 
 %% kanban:settings
 ```
