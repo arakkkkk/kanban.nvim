@@ -33,8 +33,12 @@ function M.read(kanban, md_path)
 			line = string.gsub(line, "^%s+", "")
 			line = string.gsub(line, "%s+$", "")
 
+			is_archived = false
+
 			if string.match(line, "^# .+$") then
 				-- Remove header1
+			if string.match(line, "^***$") then
+
 			elseif string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }
