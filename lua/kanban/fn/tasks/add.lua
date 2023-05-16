@@ -15,16 +15,23 @@ function M.add(kanban, list_num, task, add_position, open_bool)
 	end
 
 	local tasks = target_list.tasks
+	if task.check == " " then
+		border = kanban.ops.layout.uncomplete_border
+	else
+		border = kanban.ops.layout.complete_border
+	end
+
 	task.buf_conf = {
 		relative = "editor",
 		row = 10,
 		col = 10,
 		width = target_list.buf_conf.width - 4,
 		height = kanban.ops.layout.task_height,
-		border = "rounded",
+		border = border,
 		style = "minimal",
 		zindex = 30,
 	}
+
 
 	task.buf_nr = nil
 	task.win_id = nil

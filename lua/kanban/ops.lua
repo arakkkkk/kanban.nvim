@@ -6,13 +6,14 @@ function M.get_ops(options)
 	local ops = {
 		move_position = "top", -- top or bottom
 		add_position = "bottom", -- top or bottom
-		show_checkbox = false,
 		layout = {
 			x_margin = 5,
 			y_margin = 3,
 			list_x_margin = 2,
 			task_y_margin = 2,
 			task_height = 3,
+			uncomplete_border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
+			complete_border = {"✔", "─", "╮", "│", "╯", "─", "╰", "│"}
 		},
 		markdown = {
 			description_folder = "./tasks/", -- "./"

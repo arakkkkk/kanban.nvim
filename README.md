@@ -67,6 +67,7 @@ All keymap are [here](./lua/kanban/keymap.lua).
 | \<leader\>la | Add list.                                      |
 | \<leader\>ld | Delete list.                                   |
 | \<C-o\>      | Add task.                                      |
+| \<C-t\>      | Complete task.                                 |
 | :w\<CR\>     | Save kanban.                                   |
 | q            | Quit.                                          |
 | \<CR\>       | Add task description in another markdown file. |

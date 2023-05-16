@@ -3,6 +3,7 @@ local M = {}
 local ap = "kanban.fn."
 
 M.add = require(ap .. "tasks.add").add
+M.add = require(ap .. "tasks.add").add
 M.close = require(ap .. "tasks.close").close
 M.close_all = require(ap .. "tasks.close_all").close_all
 M.open = require(ap .. "tasks.open").open
@@ -17,6 +18,7 @@ M.autocmd = require(ap .. "tasks.autocmd").autocmd
 M.highlight = require(ap .. "tasks.highlight").highlight
 M.sort = require(ap .. "tasks.sort").sort
 M.filter = require(ap .. "tasks.filter").filter
+M.togglecomplete = require(ap .. "tasks.togglecomplete").togglecomplete
 M.utils = require(ap .. "tasks.utils")
 return M
 

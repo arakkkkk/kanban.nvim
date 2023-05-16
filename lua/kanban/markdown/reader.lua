@@ -37,8 +37,8 @@ function M.read(kanban, md_path)
 
 			if string.match(line, "^# .+$") then
 				-- Remove header1
-			if string.match(line, "^***$") then
-
+			elseif string.match(line, "^***$") then
+				-- pass
 			elseif string.match(line, "^" .. pat_head .. "$") then
 				local list_title = string.gsub(line, pat_head, "%1")
 				list = { title = list_title, tasks = {} }

@@ -4,29 +4,29 @@ kanban-plugin: basic
 
 ---
 
+
 ## asa
 
-- [ ] fdsaf
-
+- [x] fdsaf
 
 ## sgasd
 
-- [ ] fdsaf
-- [ ] fdsfdas
+- [x] fdsaf
 
+- [x] fdsfdas
 
 ## Complete
 
 - [ ] fsd
-- [ ] fsda
 
-
-***
+- [x] fsda
 
 ## Archive
 
 - [ ] fsda
+
 - [ ] fdsaf
+
 
 %% kanban:settings
 ```

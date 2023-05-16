@@ -2,6 +2,7 @@ local M = {}
 function M.del()
 	-- Task
 	vim.api.nvim_del_user_command("KanbanTaskDelete")
+	vim.api.nvim_del_user_command("KanbanTaskToggleComplete")
 	-- Task movement
 	vim.api.nvim_del_user_command("KanbanTakeRight")
 	vim.api.nvim_del_user_command("KanbanTakeLeft")
@@ -33,6 +34,14 @@ function M.create(kanban)
 		end
 		kanban.fn.tasks.delete(kanban)
 	end, {})
+
+	vim.api.nvim_create_user_command("KanbanTaskToggleComplete", function()
+		if not kanban.active then
+			return
+		end
+		kanban.fn.tasks.togglecomplete(kanban)
+	end, {})
+
 
 	-- Task movement
 	vim.api.nvim_create_user_command("KanbanTakeRight", function()
