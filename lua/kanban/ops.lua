@@ -50,7 +50,13 @@ function M.get_ops(options)
 				ops = {},
 			},
 			{
-				name = "TaskFloat",
+				name = "TaskFloat", -- list border
+				ops = {},
+			},
+			{
+				name = "TaskFloatCompleted", -- card border
+					fg = C.grey_1,
+					ctermfg = 4,
 				ops = {},
 			},
 			{
@@ -63,6 +69,14 @@ function M.get_ops(options)
 				name = "ListTitle",
 				ops = {
 					bold = true,
+				},
+			},
+			{
+				name = "TaskCompleted",
+				ops = {
+					fg = C.grey_1,
+					ctermfg = 240,
+					bold = false,
 				},
 			},
 			{
