@@ -42,9 +42,13 @@ With the above settings, you can manage tasks as follows
 ## Usage
 Create first kanban project.
 
-`:KanbanOpen <file_path>`
+`:KanbanCreate <file_path>`
 
-and open kanban to enter `:KanbanOpen <file_path>`
+and open kanban to enter `:KanbanOpen <file_path>`.
+
+See keymap for information on how to create and move tasks.
+
+In a task card, the first line of text is as the task title, the string beginning with `@` is treated as the deadline, and the characters beginning with `#` are treated as tags.
 
 All setup options are [here](./lua/kanban/ops.lua).
 
