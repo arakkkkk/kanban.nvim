@@ -58,9 +58,13 @@ All setup options are [here](./lua/kanban/ops.lua).
 
 ## Format of task cards
 ╭───────────────────────╮
+
 │ Task title            │ First line is **Task title**.
+
 │ #tag                  │ Line beginning with `#` are **tag**.
+
 │ @2023/01/01           │ Line beginning with `@` is **due**.
+
 ╰───────────────────────╯
 
 ### Optional telescope search
