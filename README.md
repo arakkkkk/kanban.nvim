@@ -57,15 +57,10 @@ In a task card, the first line of text is as the task title, the string beginnin
 All setup options are [here](./lua/kanban/ops.lua).
 
 ## Format of task cards
-╭───────────────────────╮
-
-│ Task title            │ First line is **Task title**.
-
-│ #tag                  │ Line beginning with `#` are **tag**.
-
-│ @2023/01/01           │ Line beginning with `@` is **due**.
-
-╰───────────────────────╯
+![img](./doc/img_kanban2.png)
+- First line is **Task title**.
+- Line beginning with `#` are **tag**.
+- Line beginning with `@` is **due**.
 
 ### Optional telescope search
 If you installed telescope.nvim, you can search kanban project files by `KanbanOpen telescope` command.

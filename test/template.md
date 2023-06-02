@@ -7,15 +7,15 @@ kanban-plugin: basic
 
 ## TODO
 
-- [x] [[aaaaraaaaa]]
+- [x] aaaaraaaaa
 @{2022/01/01}
 #tagtag
 
-- [ ] [[aaaaaaaaa]]
+- [ ] aaaaaaaaa
 @{yyyy/mm/dd}
 #tagtag
 
-- [ ] [[aaaaaaaaa]]
+- [ ] aaaaaaaaa
 @{yyyy/mm/dd}
 #tagtag
 
@@ -29,11 +29,11 @@ kanban-plugin: basic
 
 ## Work in progress
 
-- [ ] [[aaaaaaaaa]]
+- [ ] aaaaaaaaa
 @{yyyy/mm/dd}
 #tagtag
 
-- [ ] [[aaaaaaaaa]]
+- [ ] aaaaaaaaa
 @{yyyy/mm/dd}
 #tagtag
 
