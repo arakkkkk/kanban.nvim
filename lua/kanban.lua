@@ -53,7 +53,7 @@ function M.setup(options)
 	M.theme.init(M)
 	require("cmp").setup.filetype({ "kanban" }, {
 		completion = {
-			autocomplete = true,
+			autocomplete = { "TextChanged" },
 		},
 	})
 end
