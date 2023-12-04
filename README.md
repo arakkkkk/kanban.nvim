@@ -76,7 +76,7 @@ All keymap are [here](./lua/kanban/keymap.lua).
 | <C-h/j/k/l>  | Focus left/below/above/right task.             |
 | <S-h/j/k/l>  | Move task to left/below/above/right.           |
 | gg           | Focus top task in the list.                    |
-| g            | Focus borrom task in the list.                 |
+| G            | Focus bottom task in the list.                 |
 | \<leader\>lr | Rename list.                                   |
 | \<leader\>la | Add list.                                      |
 | \<leader\>ld | Delete list.                                   |
