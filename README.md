@@ -10,7 +10,7 @@ Compatible with [obsidian kanban](https://github.com/mgmeyers/obsidian-kanban).
 ## Requirements
 - ripgrep
 
-## Instration
+## Installation
 Using packer
 ```
 use 'arakkkkk/kanban.nvim'
