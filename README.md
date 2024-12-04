@@ -12,13 +12,13 @@ Compatible with [obsidian kanban](https://github.com/mgmeyers/obsidian-kanban).
 
 ## Installation
 Using packer
-```
+```lua
 use 'arakkkkk/kanban.nvim'
 -- Optional
 use 'nvim-telescope/telescope.nvim'
 ```
 and setup
-```
+```lua
 require("kanban").setup({
 	markdown = {
 		description_folder = "./tasks/",  -- Path to save the file corresponding to the task.
@@ -27,7 +27,7 @@ require("kanban").setup({
 })
 ```
 Using lazy.nvim
-```
+```lua
 return {
   "arakkkkk/kanban.nvim",
   -- Optional
