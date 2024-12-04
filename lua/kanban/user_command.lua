@@ -18,6 +18,7 @@ function M.del()
 	vim.api.nvim_del_user_command("KanbanTaskAddBottom")
 	vim.api.nvim_del_user_command("KanbanTaskAddTop")
 	vim.api.nvim_del_user_command("KanbanClose")
+	vim.api.nvim_del_user_command("KanbanSave")
 	vim.api.nvim_del_user_command("KanbanListDelete")
 	vim.api.nvim_del_user_command("KanbanListRename")
 	vim.api.nvim_del_user_command("KanbanListAdd")
@@ -41,7 +42,6 @@ function M.create(kanban)
 		end
 		kanban.fn.tasks.togglecomplete(kanban)
 	end, {})
-
 
 	-- Task movement
 	vim.api.nvim_create_user_command("KanbanTakeRight", function()
@@ -113,21 +113,21 @@ function M.create(kanban)
 			return
 		end
 		kanban.fn.tasks.add(kanban, nil, nil, kanban.ops.add_position, true)
-		vim.cmd[[startinsert]]
+		vim.cmd([[startinsert]])
 	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskAddBottom", function()
 		if not kanban.active then
 			return
 		end
 		kanban.fn.tasks.add(kanban, nil, nil, "bottom", true)
-		vim.cmd[[startinsert]]
+		vim.cmd([[startinsert]])
 	end, {})
 	vim.api.nvim_create_user_command("KanbanTaskAddTop", function()
 		if not kanban.active then
 			return
 		end
 		kanban.fn.tasks.add(kanban, nil, nil, "top", true)
-		vim.cmd[[startinsert]]
+		vim.cmd([[startinsert]])
 	end, {})
 
 	-- close window
@@ -142,6 +142,15 @@ function M.create(kanban)
 		kanban.fn.kwindow.close(kanban)
 		kanban.active = false
 		require("kanban.user_command").del()
+	end, {})
+
+	-- Save
+	vim.api.nvim_create_user_command("KanbanSave", function()
+		if not kanban.active then
+			return
+		end
+		kanban.fn.tasks.save(kanban)
+		kanban.markdown.writer.write(kanban, kanban.kanban_md_path)
 	end, {})
 
 	-- List function

@@ -9,9 +9,9 @@ function M.save(kanban)
 	local due = {}
 	local tag = {}
 	for i = 2, #lines do
-		if string.match(lines[i], "^"..kanban.ops.markdown.due_head .. ".*$") then
+		if string.match(lines[i], "^" .. kanban.ops.markdown.due_head .. ".*$") then
 			table.insert(due, lines[i])
-		elseif string.match(lines[i], "^"..kanban.ops.markdown.tag_head .. ".*$") then
+		elseif string.match(lines[i], "^" .. kanban.ops.markdown.tag_head .. ".*$") then
 			table.insert(tag, lines[i])
 		end
 	end
