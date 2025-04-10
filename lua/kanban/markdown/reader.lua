@@ -13,6 +13,9 @@ function M.read(kanban, md_path)
 	md.lists = {}
 	local list
 	local task
+	local in_frontmatter = false
+	local in_settings = false
+
 	while true do
 		local lines = io.read()
 		if lines == nil then
@@ -33,37 +36,50 @@ function M.read(kanban, md_path)
 			line = string.gsub(line, "^%s+", "")
 			line = string.gsub(line, "%s+$", "")
 
-			is_archived = false
-
-			if string.match(line, "^# .+$") then
-				-- Remove header1
-			elseif string.match(line, "^***$") then
-				-- pass
-			elseif string.match(line, "^" .. pat_head .. "$") then
-				local list_title = string.gsub(line, pat_head, "%1")
-				list = { title = list_title, tasks = {} }
-				table.insert(md.lists, list)
-			elseif string.match(line, "^- %[.%] .+$") then
-				task = kanban.fn.tasks.utils.create_blank_task(kanban)
-				-- Extract title
-				task.title = string.gsub(line, "^- %[.%] ", "")
-			 	task.check	= line:match("^- %[(.)%]")
-				table.insert(list.tasks, task)
-			elseif string.match(line, "^" .. pat_due .. "$") then
-				local due = string.gsub(line, pat_due, due_head .. "%1")
-				table.insert(task.due, due)
-			elseif string.match(line, "^" .. pat_tag .. "$") then
-				local tag = string.gsub(line, pat_tag, tag_head .. "%1")
-				table.insert(task.tag, tag)
-			elseif line == "" then
-				local _ = 1
-			elseif utils.includes(kanban.ops.markdown.header, line) then
-				local _ = 1
-			elseif utils.includes(kanban.ops.markdown.footer, line) then
-				local _ = 1
+			-- フロントマターの処理
+			if line == "---" then
+				in_frontmatter = not in_frontmatter
+			elseif in_frontmatter then
+				-- フロントマター内の場合は次の行へ
+			elseif line == "%% kanban:settings" then
+				in_settings = true
+			elseif in_settings then
+				if line == "%%" then
+					in_settings = false
+				end
 			else
-				vim.api.nvim_err_writeln("Unrecognized line!!     \n" .. line)
-				return false
+				is_archived = false
+
+				if string.match(line, "^# .+$") then
+					-- Remove header1
+				elseif string.match(line, "^***$") then
+					-- pass
+				elseif string.match(line, "^" .. pat_head .. "$") then
+					local list_title = string.gsub(line, pat_head, "%1")
+					list = { title = list_title, tasks = {} }
+					table.insert(md.lists, list)
+				elseif string.match(line, "^- %[.%] .+$") then
+					task = kanban.fn.tasks.utils.create_blank_task(kanban)
+					-- Extract title
+					task.title = string.gsub(line, "^- %[.%] ", "")
+					task.check = line:match("^- %[(.)%]")
+					table.insert(list.tasks, task)
+				elseif string.match(line, "^" .. pat_due .. "$") then
+					local due = string.gsub(line, pat_due, due_head .. "%1")
+					table.insert(task.due, due)
+				elseif string.match(line, "^" .. pat_tag .. "$") then
+					local tag = string.gsub(line, pat_tag, tag_head .. "%1")
+					table.insert(task.tag, tag)
+				elseif line == "" then
+					local _ = 1
+				elseif utils.includes(kanban.ops.markdown.header, line) then
+					local _ = 1
+				elseif utils.includes(kanban.ops.markdown.footer, line) then
+					local _ = 1
+				else
+					vim.api.nvim_err_writeln("Unrecognized line!!     \n" .. line)
+					return false
+				end
 			end
 		end
 	end
