@@ -23,16 +23,7 @@ function M.read(kanban, md_path)
 		end
 
 		for _, line in pairs(utils.split(lines, "<br>")) do
-			local regexp = require("kanban.utils").to_regexp
-			local list_head = kanban.ops.markdown.list_head
-			local title_style = kanban.ops.markdown.title_style
-			local due_head = kanban.ops.markdown.due_head
-			local due_style = kanban.ops.markdown.due_style
-			local tag_head = kanban.ops.markdown.tag_head
-			local tag_style = kanban.ops.markdown.tag_style
-			local pat_head = list_head .. "(.*)"
-			local pat_due = regexp(due_head) .. regexp(due_style)
-			local pat_tag = regexp(tag_head) .. regexp(tag_style)
+			local pat_list = "## (.*)"
 			line = string.gsub(line, "^%s+", "")
 			line = string.gsub(line, "%s+$", "")
 
@@ -48,43 +39,37 @@ function M.read(kanban, md_path)
 					in_settings = false
 				end
 			else
-				is_archived = false
-
 				if string.match(line, "^# .+$") then
 					-- Remove header1
 				elseif string.match(line, "^***$") then
 					-- pass
-				elseif string.match(line, "^" .. pat_head .. "$") then
-					local list_title = string.gsub(line, pat_head, "%1")
+				elseif string.match(line, "^%s*$") then
+					-- blank line
+				elseif string.match(line, "^" .. pat_list .. "$") then
+					-- line is list
+					local list_title = string.gsub(line, pat_list, "%1")
+					-- create new list
 					list = { title = list_title, tasks = {} }
 					table.insert(md.lists, list)
-				elseif string.match(line, "^- %[.%] .+$") then
+				elseif string.match(line, "^- %[.%]") then
 					task = kanban.fn.tasks.utils.create_blank_task(kanban)
-					-- Extract title
-					task.title = string.gsub(line, "^- %[.%] ", "")
-					task.check = line:match("^- %[(.)%]")
 					table.insert(list.tasks, task)
-				elseif string.match(line, "^" .. pat_due .. "$") then
-					local due = string.gsub(line, pat_due, due_head .. "%1")
-					table.insert(task.due, due)
-				elseif string.match(line, "^" .. pat_tag .. "$") then
-					local tag = string.gsub(line, pat_tag, tag_head .. "%1")
-					table.insert(task.tag, tag)
-				elseif line == "" then
-					local _ = 1
-				elseif utils.includes(kanban.ops.markdown.header, line) then
-					local _ = 1
-				elseif utils.includes(kanban.ops.markdown.footer, line) then
-					local _ = 1
+					-- create new task
+					task.check = string.match(line, "^- %[x%]") ~= nil
+					local content = string.match(line, "- %[.%] (.*)") or ""
+					table.insert(task.lines, content)
 				else
-					vim.api.nvim_err_writeln("Unrecognized line!!     \n" .. line)
-					return false
+					-- line is task lines
+					local content = string.match(line, "\t?(.*)")
+					table.insert(task.lines, content)
 				end
 			end
 		end
 	end
 	if #md.lists == 0 then
-		vim.api.nvim_err_writeln("No task data or Not kanban.vim file. \nPlease create kanban.nvim file by :KanbanCreate")
+		vim.api.nvim_err_writeln(
+			"No task data or Not kanban.vim file. \nPlease create kanban.nvim file by :KanbanCreate"
+		)
 		return false
 	end
 	io.close()

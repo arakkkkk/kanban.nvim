@@ -3,6 +3,7 @@ local Utils = {}
 function Utils.to_regexp(regrep)
 	regrep = string.gsub(regrep, "%[", "%%[")
 	regrep = string.gsub(regrep, "%]", "%%]")
+	regrep = string.gsub(regrep, "%-", "%%-")
 	regrep = string.gsub(regrep, "<.*>", "(.*)")
 	return regrep
 end
@@ -60,9 +61,9 @@ function Utils.split(str, seq)
 	return tab
 end
 
-function Utils.includes(tab, str)
-	for i in pairs(tab) do
-		if tab[i] == str then
+function Utils.includes(table, str)
+	for i in pairs(table) do
+		if table[i] == str then
 			return true
 		end
 	end

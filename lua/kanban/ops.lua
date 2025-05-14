@@ -12,16 +12,12 @@ function M.get_ops(options)
 			list_x_margin = 2,
 			task_y_margin = 2,
 			task_height = 3,
-			uncomplete_border = {"╭", "─", "╮", "│", "╯", "─", "╰", "│"},
-			complete_border = {"✔", "─", "╮", "│", "╯", "─", "╰", "│"}
+			uncomplete_border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+			complete_border = { "✔", "─", "╮", "│", "╯", "─", "╰", "│" },
 		},
 		markdown = {
 			description_folder = "./tasks/", -- "./"
-			list_head = "## ",
-			due_head = "@",
-			due_style = "{<due>}",
-			tag_head = "#",
-			tag_style = "<tag>",
+			due_format = "YYYY-MM-DD",
 			header = {
 				"---",
 				"",
@@ -55,8 +51,8 @@ function M.get_ops(options)
 			},
 			{
 				name = "TaskFloatCompleted", -- card border
-					fg = C.grey_1,
-					ctermfg = 4,
+				fg = C.grey_1,
+				ctermfg = 4,
 				ops = {},
 			},
 			{

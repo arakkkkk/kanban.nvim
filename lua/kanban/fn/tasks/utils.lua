@@ -28,21 +28,16 @@ end
 
 function M.create_blank_task(kanban)
 	local blank_task = {
-		title = "",
-		due = {},
-		tag = {},
-		check = " ",
+		lines = {},
+		check = false,
 	}
 	return blank_task
 end
 
 function M.create_window_text(kanban, task)
-	local contents = { task.title }
-	for i in pairs(task.due) do
-		table.insert(contents, task.due[i])
-	end
-	for i in pairs(task.tag) do
-		table.insert(contents, task.tag[i])
+	local contents = {}
+	for i in pairs(task.lines) do
+		table.insert(contents, task.lines[i])
 	end
 	return contents
 end
@@ -57,9 +52,9 @@ end
 
 function M.count_due(line)
 	local t = os.date("*t")
-	local y = string.gsub(line, "^@(%d%d%d%d)/%d%d/%d%d$", "%1")
-	local m = string.gsub(line, "^@%d%d%d%d/(%d%d)/%d%d$", "%1")
-	local d = string.gsub(line, "^@%d%d%d%d/%d%d/(%d%d)$", "%1")
+	local y = string.match(line, "^@(%d%d%d%d).%d%d.%d%d$") or 9999
+	local m = string.match(line, "^@%d%d%d%d.(%d%d).%d%d$") or 12
+	local d = string.match(line, "^@%d%d%d%d.%d%d.(%d%d)$") or 31
 	local due_time = os.time({ year = y, month = m, day = d, hour = 0, min = 0, sec = 0 })
 	local due_days = due_time / (60 * 60 * 24)
 	local now_time = os.time() - t.hour * 3600 - t.min * 60 - t.sec

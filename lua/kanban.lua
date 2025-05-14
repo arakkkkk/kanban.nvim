@@ -9,7 +9,7 @@ function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.keymap = require("kanban.keymap").keymap
 	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {
-		nargs = 1,
+		nargs = "?",
 		complete = function(arg, _, _)
 			local handle = io.popen("rg '\\-+[\\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU ./")
 			if not handle then
@@ -51,11 +51,6 @@ function M.setup(options)
 	})
 
 	M.theme.init(M)
-	require("cmp").setup.filetype({ "kanban" }, {
-		completion = {
-			autocomplete = { "TextChanged" },
-		},
-	})
 end
 
 function M.kanban_close(err, message)
@@ -89,12 +84,21 @@ end
 
 function M.kanban_open(ops)
 	local arg = ops.args
-	if string.match(arg, "^%s*$") or arg == nil then
-		vim.api.nvim_echo({ { "Please set argment [telescope or kanban file path]", "None" } }, false, {})
+
+	-- Check kanban activation
+	if M.active then
+		vim.api.nvim_err_writeln("kanban is already active!!")
 		return
+	else
+		M.active = true
 	end
 
-	if arg == "telescope" then
+	----------------------
+	-- Read markdown from current buffer
+	----------------------
+	if string.match(arg, "^%s*$") or arg == nil then
+		M.kanban_md_path = vim.fn.expand("%:p")
+	elseif arg == "telescope" then
 		local is_telescope_installed = pcall(require, "telescope")
 		if not is_telescope_installed then
 			vim.api.nvim_err_writeln("Telescope.nvim is not installed!!")
@@ -107,16 +111,8 @@ function M.kanban_open(ops)
 		M.kanban_md_path = arg
 	end
 
-	-- Check kanban activation
-	if M.active then
-		vim.api.nvim_err_writeln("kanban is already active!!")
-		return
-	else
-		M.active = true
-	end
-
 	----------------------
-	-- Read markdown
+	-- Read markdown file
 	----------------------
 	M.markdown = require("kanban.markdown")
 	local md = M.markdown.reader.read(M, M.kanban_md_path)
@@ -130,7 +126,6 @@ function M.kanban_open(ops)
 	-----------------------
 	-- init
 	M.items = {}
-	M.items.snip = {}
 	M.items.kwindow = {}
 	M.fn.kwindow.add(M) -- create window panel
 	---- create list panel

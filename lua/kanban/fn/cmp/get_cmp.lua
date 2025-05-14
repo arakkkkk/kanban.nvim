@@ -1,3 +1,6 @@
+-- This file is currently not in use.
+--After migrating this plugin to obsidian.nvim, we will use this file to implement completion in nvim-cmp or blink.cmp
+
 local M = {}
 
 local function get_cmp_due(kanban, line)

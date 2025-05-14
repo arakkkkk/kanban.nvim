@@ -105,33 +105,33 @@ All keymap are [here](./lua/kanban/keymap.lua).
 | q            | Quit.                                          |
 | \<CR\>       | Add task description in another markdown file. |
 
-## Functions
-### Tag complemention
-- Tag is complement by exsisting tag
-### Due complemention
-If it is `2022/11/01`
-- date calculation
-  - `@today` -> `@2022/11/01`
-  - `@2d` -> `@2022/11/03`
-  - `@2w` -> `@2022/11/15`
-  - `@2m` -> `@2022/12/01`
-- year/month omitation
-  - `@/12/03` -> `@2022/12/03`
-  - `@//03` -> `@2022/11/03`
-- set by week
-  - `@su` -> this Sunday
-  - `@nmo` -> next Monday
-  - `@nntu` -> next after next Tuesday
-  - `@nnnwe` -> next after next after next Wednesday
-  - `@nnnn...Th` -> ... Thursday
-
-# Release notes
-- v1.0 
-- v1.1(2023/01/20)
-	- Support telescope.nvim
-	- Command completion by find kanban files
-	- :KanbanCreate command to new kanban project
-- v1.2(yet)
-	- Support completed cards
-	- Support Archived list
-
+<!-- ## Functions -->
+<!-- ### Tag complemention -->
+<!-- - Tag is complement by exsisting tag -->
+<!-- ### Due complemention -->
+<!-- If it is `2022/11/01` -->
+<!-- - date calculation -->
+<!--   - `@today` -> `@2022/11/01` -->
+<!--   - `@2d` -> `@2022/11/03` -->
+<!--   - `@2w` -> `@2022/11/15` -->
+<!--   - `@2m` -> `@2022/12/01` -->
+<!-- - year/month omitation -->
+<!--   - `@/12/03` -> `@2022/12/03` -->
+<!--   - `@//03` -> `@2022/11/03` -->
+<!-- - set by week -->
+<!--   - `@su` -> this Sunday -->
+<!--   - `@nmo` -> next Monday -->
+<!--   - `@nntu` -> next after next Tuesday -->
+<!--   - `@nnnwe` -> next after next after next Wednesday -->
+<!--   - `@nnnn...Th` -> ... Thursday -->
+<!---->
+<!-- # Release notes -->
+<!-- - v1.0  -->
+<!-- - v1.1(2023/01/20) -->
+<!-- 	- Support telescope.nvim -->
+<!-- 	- Command completion by find kanban files -->
+<!-- 	- :KanbanCreate command to new kanban project -->
+<!-- - v1.2(yet) -->
+<!-- 	- Support completed cards -->
+<!-- 	- Support Archived list -->
+<!---->

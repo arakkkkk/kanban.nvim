@@ -1,23 +1,11 @@
 local M = {}
 function M.save(kanban)
+	-- up date kanban object on active task
 	local focus = kanban.fn.tasks.utils.get_focus(kanban)
 	local focused_list = kanban.items.lists[focus.list_num]
 	local task = focused_list.tasks[focus.task_num]
 	local lines = vim.fn.getbufline(task.buf_nr, 1, "$")
 
-	local title = lines[1]
-	local due = {}
-	local tag = {}
-	for i = 2, #lines do
-		if string.match(lines[i], "^" .. kanban.ops.markdown.due_head .. ".*$") then
-			table.insert(due, lines[i])
-		elseif string.match(lines[i], "^" .. kanban.ops.markdown.tag_head .. ".*$") then
-			table.insert(tag, lines[i])
-		end
-	end
-
-	task.title = title
-	task.due = due
-	task.tag = tag
+	task.lines = lines
 end
 return M
