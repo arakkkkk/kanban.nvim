@@ -31,12 +31,12 @@ function M.setup(options)
 			local arg_path = arg:match("(.+)/[^/]*$") or ""
 			local arg_tail = arg:match("[^/]*$")
 			local handle = io.popen("find ./" .. arg_path .. " -name '" .. arg_tail .. "*' -type d")
-			print("find ./" .. arg_path .. " -name '" .. arg_tail .. "' -type d")
+			-- print("find ./" .. arg_path .. " -name '" .. arg_tail .. "' -type d")
 			if not handle then
 				return {}
 			end
 			local io_output = handle:read("*a")
-			print(io_output)
+			-- print(io_output)
 			local paths = {}
 			for line in io_output:gmatch("([^\n]*)\n?") do
 				if line and line ~= "" then
