@@ -90,25 +90,7 @@ Examples:
 * `:Obsidian kanban open task.md`
 * `:Obsidian kanban create task.md`
 
-**Installation**
-```
-	{
-		"arakkkkk/kanban.nvim",
-		config = function()
-			require("kanban").setup({})
-		end,
-	},
-	{
-		"obsidian-nvim/obsidian.nvim",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			...
-		end,
-	},
-```
-* see more at [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim)
+see more at [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim)
 
 
 ### Telescope search
