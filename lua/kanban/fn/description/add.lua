@@ -21,7 +21,7 @@ function M.add(kanban)
 	}
 	local win = vim.api.nvim_open_win(kanban.items.description.buf_nr, true, kanban.items.description.buf_conf)
 	vim.api.nvim_win_set_option(win, "winhighlight", "NormalFloat:KanbanFloat")
-	local current_md_dir = string.gsub(kanban.kanban_md_path, "/[^/]+$", "")
+	local current_md_dir = string.match(kanban.kanban_md_path, "^(.*)/") or "."
 	if vim.fn.isdirectory(vim.fn.expand(current_md_dir .. "/" .. kanban.ops.markdown.description_folder)) == 0 then
 		vim.fn.mkdir(vim.fn.expand(current_md_dir .. "/" .. kanban.ops.markdown.description_folder))
 	end
