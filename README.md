@@ -81,11 +81,38 @@ All setup options are [here](./lua/kanban/ops.lua).
 - Line beginning with `#` are **tag**.
 - Line beginning with `@` is **due**.
 
-### Optional telescope search
-If you installed telescope.nvim, you can search kanban project files by `KanbanOpen telescope` command.
+## Integration
+### Obsidian.nvim
+
+If you are an obsidian.nvim user, you can use this plugin as an Obsidian command.
+* `:Obsidian kanban open task.md`
+* `:Obsidian kanban create task.md`
+
+**Installation**
+```
+	{
+		"arakkkkk/kanban.nvim",
+		config = function()
+			require("kanban").setup({})
+		end,
+	},
+	{
+		"obsidian-nvim/obsidian.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			...
+		end,
+	},
+```
+* see more at [obsidian.nvim](https://github.com/obsidian-nvim/obsidian.nvim)
+
+
+### Telescope search
+If you installed [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim), you can search kanban project files by `KanbanOpen telescope` command.
 
 This command search markdown files by `kanban-plugin: .+` which is same options to Obsidian kanban.
-
 
 ## Kaymaps
 All keymap are [here](./lua/kanban/keymap.lua).
@@ -104,6 +131,8 @@ All keymap are [here](./lua/kanban/keymap.lua).
 | :w\<CR\>     | Save kanban.                                   |
 | q            | Quit.                                          |
 | \<CR\>       | Add task description in another markdown file. |
+
+
 
 <!-- ## Functions -->
 <!-- ### Tag complemention -->

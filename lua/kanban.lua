@@ -8,15 +8,20 @@ M.active = false
 function M.setup(options)
 	M.ops = require("kanban.ops").get_ops(options)
 	M.keymap = require("kanban.keymap").keymap
-	vim.api.nvim_create_user_command("KanbanOpen", M.kanban_open, {
+	vim.api.nvim_create_user_command("KanbanOpen", function(opts)
+		M.kanban_open(opts.fargs[1])
+	end, {
 		nargs = "?",
-		complete = function(arg, _, _)
+		complete = function(_, _, _)
+			local paths = {}
+			if pcall(require, "obsidian") then
+				table.insert(paths, "telescope")
+			end
 			local handle = io.popen("rg '\\-+[\\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU ./")
 			if not handle then
 				return {}
 			end
 			local io_output = handle:read("*a")
-			local paths = {}
 			for line in io_output:gmatch("([^\n]*)\n?") do
 				if line ~= "" then
 					table.insert(paths, line)
@@ -25,7 +30,9 @@ function M.setup(options)
 			return paths
 		end,
 	})
-	vim.api.nvim_create_user_command("KanbanCreate", M.kanban_create, {
+	vim.api.nvim_create_user_command("KanbanCreate", function(opts)
+		M.kanban_create(opts.fargs[1])
+	end, {
 		nargs = 1,
 		complete = function(arg, _, _)
 			local arg_path = arg:match("(.+)/[^/]*$") or ""
@@ -58,18 +65,17 @@ function M.kanban_close(err, message)
 		print(message)
 	end
 	if err then
-		vim.api.nvim_err_writeln(err)
+		vim.notify(err, vim.log.levels.ERROR)
 	end
 	M.active = false
 	require("kanban.user_command").del()
 end
 
-function M.kanban_create(ops)
-	local path = ops.args
+function M.kanban_create(path)
 	path = path:match("%.md$") and path or path .. ".md"
 	local markdown = require("kanban.markdown")
 	if require("kanban.utils").file_exists(path) then
-		vim.api.nvim_err_writeln(path .. " already exists!")
+		vim.notify(path .. " already exists!", vim.log.levels.ERROR)
 		return
 	end
 	M.items = {}
@@ -82,12 +88,10 @@ function M.kanban_create(ops)
 	markdown.writer.write(M, path)
 end
 
-function M.kanban_open(ops)
-	local arg = ops.args
-
+function M.kanban_open(arg)
 	-- Check kanban activation
 	if M.active then
-		vim.api.nvim_err_writeln("kanban is already active!!")
+		vim.notify("kanban is already active!!", vim.log.levels.ERROR)
 		return
 	else
 		M.active = true
@@ -96,12 +100,13 @@ function M.kanban_open(ops)
 	----------------------
 	-- Read markdown from current buffer
 	----------------------
-	if string.match(arg, "^%s*$") or arg == nil then
+	-- When no file is specified, use the current buffer as the target
+	if arg == nil then
 		M.kanban_md_path = vim.fn.expand("%:p")
 	elseif arg == "telescope" then
 		local is_telescope_installed = pcall(require, "telescope")
 		if not is_telescope_installed then
-			vim.api.nvim_err_writeln("Telescope.nvim is not installed!!")
+			vim.notify("Telescope.nvim is not installed!!", vim.log.levels.ERROR)
 			return
 		end
 		local kanban_telescope = require("kanban.integrations.telescope").kanban_telescope
