@@ -85,6 +85,8 @@ All setup options are [here](./lua/kanban/ops.lua).
 ### Obsidian.nvim
 
 If you are an obsidian.nvim user, you can use this plugin as an Obsidian command.
+
+Examples:
 * `:Obsidian kanban open task.md`
 * `:Obsidian kanban create task.md`
 
