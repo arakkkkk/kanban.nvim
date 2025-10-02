@@ -57,13 +57,38 @@ function M.setup(options)
 		end,
 	})
 	vim.api.nvim_create_user_command("KanbanPicker", function()
-		require("kanban.ops").picker(M)
+		M.picker()
 	end, {
 		nargs = 0,
 		desc = "Open a kanban board from a list of available boards",
 	})
 
 	M.theme.init(M)
+end
+
+function M.picker()
+	local files = vim.fn.globpath(M.ops.board_path, "**/*.md", true, true)
+	if vim.tbl_isempty(files) then
+		vim.notify("No kanban boards found in " .. M.ops.board_path, vim.log.levels.WARN)
+		return
+	end
+
+	local filtered_files = vim.tbl_filter(function(file)
+		local filename = vim.fn.fnamemodify(file, ":t")
+		return not vim.startswith(filename, "tasks")
+	end, files)
+
+	vim.ui.select(filtered_files, {
+		prompt = "Select a Kanban board:",
+		format_item = function(item)
+			return vim.fn.fnamemodify(item, ":t")
+		end,
+	}, function(choice)
+		if not choice then
+			return
+		end
+		M.kanban_open(choice)
+	end)
 end
 
 function M.kanban_close(err, message)

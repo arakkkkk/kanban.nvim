@@ -124,24 +124,4 @@ function M.get_ops(options)
 	return ops
 end
 
-function M.picker(kanban)
-	local files = vim.fn.globpath(kanban.ops.board_path, "**/*.md", true, true)
-	if vim.tbl_isempty(files) then
-		vim.notify("No kanban boards found in " .. kanban.ops.board_path, vim.log.levels.WARN)
-		return
-	end
-
-	vim.ui.select(files, {
-		prompt = "Select a Kanban board:",
-		format_item = function(item)
-			return vim.fn.fnamemodify(item, ":t")
-		end,
-	}, function(choice)
-		if not choice then
-			return
-		end
-		require("kanban").kanban_open(choice)
-	end)
-end
-
 return M
