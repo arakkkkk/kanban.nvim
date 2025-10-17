@@ -98,6 +98,48 @@ If you installed [telescope.nvim](https://github.com/nvim-telescope/telescope.nv
 
 This command search markdown files by `kanban-plugin: .+` which is same options to Obsidian kanban.
 
+### Completion (Optional)
+kanban.nvim can provide in-buffer completion for due dates (`@...`) and tags (`#...`) via optional completion engines. The plugin works without any of these; install only if you want completion.
+
+#### What gets completed
+- `@` due tokens are expanded to dates: `@today`, `@2d`, `@1w`, `@2m`, `@1y`, `@/MM/DD`, `@//DD`, weekdays `@su..@sa`, and next-week variants like `@nmo`, `@nwe`, etc. Candidates insert the concrete date like `@2025/09/07`.
+- `#` tags are suggested from existing task tags found in the current Kanban board (unique, case-insensitive match).
+
+#### nvim-cmp
+- Install: [hrsh7th/nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+- Auto setup: If `nvim-cmp` is installed, kanban.nvim automatically registers a source named `kanban` and enables it for `filetype=kanban`. No extra config is required.
+- Manual tweak (optional):
+```lua
+-- Example: change sources order for kanban buffers
+require('cmp').setup.filetype('kanban', {
+  sources = require('cmp').config.sources({
+    { name = 'kanban' },
+    { name = 'buffer' },
+    { name = 'path' },
+  })
+})
+```
+
+#### blink.cmp
+- Install: [saghen/blink.cmp](https://github.com/saghen/blink.cmp)
+- Add the provider in your blink.cmp setup:
+```lua
+require('blink.cmp').setup({
+  sources = {
+    default = { 'lsp', 'path', 'buffer', 'kanban' },
+    providers = {
+      kanban = {
+        name = 'kanban',
+        module = 'kanban.fn.cmp.blink.cmp',
+        score_offset = 15, -- optional: bump priority
+        opts = {},         -- reserved for future options
+      },
+    },
+  },
+})
+```
+The provider is active only when `filetype=kanban` and replaces the token under the cursor using textEdit for precise insertion.
+
 ## Kaymaps
 All keymap are [here](./lua/kanban/keymap.lua).
 

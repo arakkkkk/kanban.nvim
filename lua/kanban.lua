@@ -14,7 +14,7 @@ function M.setup(options)
 		nargs = "?",
 		complete = function(_, _, _)
 			local paths = {}
-			if pcall(require, "obsidian") then
+			if pcall(require, "telescope") then
 				table.insert(paths, "telescope")
 			end
 			local handle = io.popen("rg '\\-+[\\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU ./")
@@ -137,7 +137,8 @@ function M.kanban_open(arg)
 	----------------------
 	-- When no file is specified, use the current buffer as the target
 	if arg == nil then
-		M.kanban_md_path = vim.fn.expand("%:p")
+		vim.notify("KanbanOpen requires 1 argument.", vim.log.levels.ERROR)
+		return
 	elseif arg == "telescope" then
 		local is_telescope_installed = pcall(require, "telescope")
 		if not is_telescope_installed then
