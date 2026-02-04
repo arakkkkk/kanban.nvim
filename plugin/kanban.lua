@@ -9,7 +9,8 @@ if vim.g.loaded_kanban == 1 then
 end
 vim.g.loaded_kanban = 1
 
-if pcall(require, "obsidian") then
+-- Wrap in pcall to handle lazy-loaded obsidian that hasn't been configured yet
+pcall(function()
 	require("obsidian").register_command("kanban", {
 		nargs = "+",
 		note_action = true,
@@ -17,7 +18,7 @@ if pcall(require, "obsidian") then
 			return { "open", "create" }
 		end,
 	})
-end
+end)
 
 -- Auto integrate with nvim-cmp when available
 local function try_setup_cmp()
