@@ -60,8 +60,10 @@ function M.read(kanban, md_path)
 					table.insert(task.lines, content)
 				else
 					-- line is task lines
-					local content = string.match(line, "\t?(.*)")
-					table.insert(task.lines, content)
+					if task then
+						local content = string.match(line, "\t?(.*)")
+						table.insert(task.lines, content)
+					end
 				end
 			end
 		end

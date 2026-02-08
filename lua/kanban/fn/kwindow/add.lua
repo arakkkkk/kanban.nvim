@@ -3,7 +3,9 @@ local M = {}
 function M.add(kanban)
 	-- create kanban panel
 	kanban.items.kwindow.buf_nr = vim.api.nvim_create_buf(false, "nomodeline")
-	vim.api.nvim_buf_set_lines(kanban.items.kwindow.buf_nr, 0, -1, true, { "", "  Kanban.nvim" })
+	local board_name = vim.fn.fnamemodify(kanban.kanban_md_path, ":t:r")
+	board_name = string.upper(board_name)
+	vim.api.nvim_buf_set_lines(kanban.items.kwindow.buf_nr, 0, -1, true, { "", "  " .. board_name })
 	kanban.items.kwindow.buf_conf = {
 		relative = "editor",
 		row = kanban.ops.layout.y_margin,
@@ -12,8 +14,8 @@ function M.add(kanban)
 		height = vim.fn.winheight(0) - kanban.ops.layout.y_margin * 2,
 		-- border = "rounded",
 		-- border = { "╔", "═", "╗", "║", "╝", "═", "╚", "║" },
-		border = { "x", "═", "x", "║", "x", "═", "x", "║" },
-		-- border = { "┳", "━", "┳", "┃", "┫", "━", "┣", "┃" },
+		-- border = { "x", "═", "x", "║", "x", "═", "x", "║" },
+		border = { "┳", "━", "┳", "┃", "┫", "━", "┣", "┃" },
 		style = "minimal",
 		zindex = 10,
 	}

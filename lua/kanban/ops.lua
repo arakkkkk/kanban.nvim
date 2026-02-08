@@ -6,6 +6,7 @@ function M.get_ops(options)
 	local ops = {
 		move_position = "top", -- top or bottom
 		add_position = "bottom", -- top or bottom
+		board_path = vim.fn.stdpath("data") .. "/kanban/",
 		layout = {
 			x_margin = 5,
 			y_margin = 3,

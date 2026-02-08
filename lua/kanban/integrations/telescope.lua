@@ -1,16 +1,17 @@
-M = {}
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
+local M = {}
 local actions = require("telescope.actions")
-local conf = require("telescope.config").values
 local action_state = require("telescope.actions.state")
 
 M.kanban_telescope = function(opts)
-	local handle = io.popen("rg '\\-+[\n\\s]+kanban-plugin: .+[\\n\\s]+\\-+' -lU ./")
+	local handle = io.popen("rg '\-+[
+\s]+kanban-plugin: .+[\n\s]+\-+' -lU ./")
 	assert(handle)
 	local io_output = handle:read("*a")
 	local paths = {}
-	for line in io_output:gmatch("([^\n]*)\n?") do
+
+	for line in io_output:gmatch("([^
+]*)
+?") do
 		if line ~= "" then
 			table.insert(paths, line)
 		end
@@ -18,8 +19,11 @@ M.kanban_telescope = function(opts)
 	handle:close()
 
 	opts = opts or {}
+	local pickers = require("telescope.pickers")
+	local finders = require("telescope.finders")
+	local conf = require("telescope.config").values
 	pickers
-		.new(opts, {
+		:new(opts, {
 			prompt_title = "Kanban.nvim",
 			finder = finders.new_table({
 				results = paths,
