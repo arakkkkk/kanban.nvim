@@ -79,12 +79,16 @@ function M.kanban_create(path)
 		return
 	end
 	M.items = {}
-	M.items.lists = {
-		{ title = "TODO", tasks = {} },
-		{ title = "Work in progress", tasks = {} },
-		{ title = "Done", tasks = {} },
-		{ title = "Archive", tasks = {} },
-	}
+	if M.ops.markdown.default_lists then
+		M.items.lists = M.ops.markdown.default_lists
+	else
+		M.items.lists = {
+			{ title = "TODO", tasks = {} },
+			{ title = "Work in progress", tasks = {} },
+			{ title = "Done", tasks = {} },
+			{ title = "Archive", tasks = {} },
+		}
+	end
 	markdown.writer.write(M, path)
 end
 
