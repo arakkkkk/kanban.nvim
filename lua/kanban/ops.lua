@@ -35,6 +35,7 @@ function M.get_ops(options)
 				"```",
 				"%%",
 			},
+			default_lists = nil
 		},
 		hl = {
 			{

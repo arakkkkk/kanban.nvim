@@ -79,12 +79,47 @@ function M.kanban_create(path)
 		return
 	end
 	M.items = {}
-	M.items.lists = {
+	local preset_list = {
 		{ title = "TODO", tasks = {} },
 		{ title = "Work in progress", tasks = {} },
 		{ title = "Done", tasks = {} },
 		{ title = "Archive", tasks = {} },
 	}
+	if M.ops.markdown.default_lists then
+		local err = nil
+		local formatted_list = nil
+		-- Check the format of the lists
+		-- Returns all valid entries in the proper format in the first return variable
+		-- Returns any errors as an array and ignores them, or if the input is completely
+		-- wrong it will return as a string and error out
+		formatted_list, err = require("kanban.utils").check_lists(M.ops.markdown.default_lists)
+		if type(err) == "string" then
+			-- The error is a string if the default_lists parameter is not a table
+			-- Raise an error, do not create a file
+			vim.notify(err, vim.log.levels.ERROR)
+			return
+		else
+			-- If some of the inputs are incorrect, raise a warning for each incorrect entry with the index
+			-- Create the file, excluding the bad values
+			for i, _ in pairs(err) do
+				local msg = ("Improper input for default_lists at index " .. tostring(i))
+				vim.notify(msg, vim.log.levels.WARN)
+			end
+		end
+		-- Count number of valid entries
+		local count = 0
+		for _ in pairs(formatted_list) do count = count + 1 end
+		if count < 1 then
+			-- If no valid entries for default_list, count will be zero
+			-- Raise an error, do not create a file
+			vim.notify("No valid entries in default_lists", vim.log.levels.ERROR)
+			return
+		end
+		M.items.lists = formatted_list
+	else
+		-- If default_list is not specified by the user, use the preset one
+		M.items.lists = preset_list
+	end
 	markdown.writer.write(M, path)
 end
 

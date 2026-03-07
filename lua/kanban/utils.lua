@@ -77,4 +77,46 @@ function Utils.file_exists(path)
 	end
 	return fh ~= nil
 end
+
+---Check the user provided default_lists for any errors. 
+---Return both a properly formatted list of valid entries and, separately, any invalid entries.
+---
+---@param default_lists string[] | {title: string, tasks: table?}[] 
+---@return {title: string, tasks: table?}[]
+---@return table | string
+function Utils.check_lists(default_lists)
+	if type(default_lists) ~= "table" then
+		-- If default_lists is not a table, 
+		return {}, string.format(
+			"default_lists is type %s not table",
+			tostring(type(default_lists))
+		)
+	end
+	local formatted_entries = {}
+	local bad_entries = {}
+	for i, v in ipairs(default_lists) do
+		if type(v) == "string" then
+			formatted_entries[i] = {title = v, tasks={}}
+		elseif type(v) == "table" then
+			if not v["title"] then
+				-- Invalid entry as no title present
+				bad_entries[i] = v
+			else
+				if not v["tasks"] then
+					-- Title present but no tasks
+					local entry = v
+					entry["tasks"] = {}
+					formatted_entries[i] = entry
+				else
+					-- Tasks are present
+					-- Don't currently check for validity of tasks (TODO?)
+					formatted_entries[i] = v
+				end
+			end
+		else
+			bad_entries[i] = v
+		end
+	end
+	return formatted_entries, bad_entries
+end
 return Utils
